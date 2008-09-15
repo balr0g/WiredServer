@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Touch log file
+touch /Library/Wired2.0/wired.log
+
+# Set owner to that in prefs
+OWNER=$(/Library/Wired2.0/wiredctl config | grep "^user = " | cut -d "=" -f2)
+
+if [ -z "$OWNER" ]; then
+	OWNER=wired
+fi
+
+GROUP=$(/Library/Wired2.0/wiredctl config | grep "^group = " | cut -d "=" -f2)
+
+if [ -z "$GROUP" ]; then
+	GROUP=daemon
+fi
+
+chown $OWNER:$GROUP /Library/Wired2.0 /Library/Wired2.0/*
+
+# Set TMPDIR so that AuthorizationExecuteWithPrivileges() works
+export TMPDIR=/tmp
+
+# Open System Preferences
+/usr/bin/osascript <<EOF
+tell application "System Preferences"
+	activate
+	set current pane to pane "com.zanka.WiredServerP7"
+end tell
+EOF
+
+exit 0

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Match these in postupgrade
+PRESERVE="etc/wired.conf etc/certificate.pem banlist groups news users"
+
+for i in ${PRESERVE}; do
+	if [ -e "/Library/Wired2.0/${i}" ]; then
+		cp -p "/Library/Wired2.0/${i}" "/Library/Wired2.0/${i}~"
+	fi
+done
+
+exit 0
