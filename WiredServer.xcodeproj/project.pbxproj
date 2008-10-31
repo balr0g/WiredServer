@@ -146,15 +146,22 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 7712BA960E5C1726001C4210 /* WiredFoundation */;
+			remoteGlobalIDString = 7712BA960E5C1726001C4210;
 			remoteInfo = WiredFoundation;
 		};
 		A5B083360EBA6D9800DA90DD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 7712BB670E5C1964001C4210 /* WiredAppKit */;
+			remoteGlobalIDString = 7712BB670E5C1964001C4210;
 			remoteInfo = WiredAppKit;
+		};
+		A5B084360EBA859700DA90DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A5C23CFF0E9AC2AB00A81F49 /* libwired.a */;
+			remoteInfo = libwired;
 		};
 		A5FEE2EF0B7877D300199A37 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -431,6 +438,7 @@
 				A5829D870E7370FA00FBAA6D /* libWiredFoundation.a */,
 				A5829D890E7370FA00FBAA6D /* libWiredAppKit.a */,
 				A5829D8B0E7370FA00FBAA6D /* libWiredNetworking.a */,
+				A5B084370EBA859700DA90DD /* libwired.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -561,6 +569,13 @@
 			remoteRef = A5A2A5A80CD4E79C00969CEF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		A5B084370EBA859700DA90DD /* libwired.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwired.a;
+			remoteRef = A5B084360EBA859700DA90DD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -610,7 +625,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sudo rm -rf \"$PROJECT_TEMP_DIR/Package\"\nmkdir -p \"$PROJECT_TEMP_DIR/Package\"\n\ncp -Rp Package/* \"$PROJECT_TEMP_DIR/Package\" || exit 1\n\nsh install.sh || exit 1\n\nfind \"$PROJECT_TEMP_DIR/Package\" -name .svn -print0 | xargs -0 sudo rm -rf\n\nrm -rf \"$BUILT_PRODUCTS_DIR/WiredServer.pkg\"\n/Developer/Applications/Utilities/PackageMaker.app/Contents/MacOS/PackageMaker -build -v -ds -p \"$BUILT_PRODUCTS_DIR/WiredServer.pkg\" -f \"$PROJECT_TEMP_DIR/Package/Contents\" -r \"$PROJECT_TEMP_DIR/Package/Resources\" -i \"$PROJECT_TEMP_DIR/Package/Info.plist\" -d \"$PROJECT_TEMP_DIR/Package/Resources/English.lproj/Description.plist\" || exit 1\n";
+			shellScript = "sudo rm -rf \"$PROJECT_TEMP_DIR/Package\"\nmkdir -p \"$PROJECT_TEMP_DIR/Package\"\n\ncp -Rp Package/* \"$PROJECT_TEMP_DIR/Package\" || exit 1\n\nsh install.sh || exit 1\n\nfind \"$PROJECT_TEMP_DIR/Package\" -name .svn -print0 | xargs -0 sudo rm -rf\n\nrm -rf \"$BUILT_PRODUCTS_DIR/WiredServer2.0.pkg\"\n/Developer/Applications/Utilities/PackageMaker.app/Contents/MacOS/PackageMaker -build -v -ds -p \"$BUILT_PRODUCTS_DIR/WiredServer2.0.pkg\" -f \"$PROJECT_TEMP_DIR/Package/Contents\" -r \"$PROJECT_TEMP_DIR/Package/Resources\" -i \"$PROJECT_TEMP_DIR/Package/Info.plist\" -d \"$PROJECT_TEMP_DIR/Package/Resources/English.lproj/Description.plist\" || exit 1\n";
 		};
 		A5992EB5072A77F900E67617 /* Run Script (Version) */ = {
 			isa = PBXShellScriptBuildPhase;
