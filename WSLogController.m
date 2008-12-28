@@ -45,7 +45,7 @@ static WSLogController		*sharedLogController;
 @implementation WSLogController(Private)
 
 - (void)_flush {
-	[_buffer removeSurroundingWhitespace];
+	[_buffer trimCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	[[[_textView textStorage] mutableString] appendString:_buffer];
 	[_buffer setString:@""];
 	

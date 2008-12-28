@@ -102,7 +102,8 @@ static WSStatusController			*sharedStatusController;
 		string = [NSString stringWithData:data encoding:NSUTF8StringEncoding];
 		
 		if(string && [string length] > 0) {
-			[_versionTextField setStringValue:[string stringByRemovingSurroundingWhitespace]];
+			[_versionTextField setStringValue:
+				[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
 			_available = YES;
 			
 			[[NSNotificationCenter defaultCenter]

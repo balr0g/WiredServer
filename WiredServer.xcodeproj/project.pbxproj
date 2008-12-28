@@ -160,7 +160,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = A5C23CFF0E9AC2AB00A81F49 /* libwired.a */;
+			remoteGlobalIDString = A5C23CFF0E9AC2AB00A81F49;
 			remoteInfo = libwired;
 		};
 		A5FEE2EF0B7877D300199A37 /* PBXContainerItemProxy */ = {
