@@ -54,7 +54,6 @@
 		7767F6870F1654EF000AA7B5 /* GrayDrop.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 7767F6860F1654EF000AA7B5 /* GrayDrop.tiff */; };
 		7767F9EC0F165DCA000AA7B5 /* WPLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767F9EB0F165DCA000AA7B5 /* WPLogManager.m */; };
 		7767FA8E0F166553000AA7B5 /* WiredServer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7767FA8D0F166553000AA7B5 /* WiredServer.icns */; };
-		7767FA9F0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7767FA9E0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist */; };
 		7767FBEC0F167B0C000AA7B5 /* WPConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767FBEB0F167B0C000AA7B5 /* WPConfigManager.m */; };
 		A57761720F168F6300C659DB /* WPAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A57761710F168F6300C659DB /* WPAccountManager.m */; };
 		A57769890F16A61600C659DB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77E850190E4C606D0011688C /* Localizable.strings */; };
@@ -183,7 +182,6 @@
 		7767F9EA0F165DCA000AA7B5 /* WPLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPLogManager.h; sourceTree = "<group>"; };
 		7767F9EB0F165DCA000AA7B5 /* WPLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPLogManager.m; sourceTree = "<group>"; };
 		7767FA8D0F166553000AA7B5 /* WiredServer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = WiredServer.icns; sourceTree = "<group>"; };
-		7767FA9E0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.zankasoftware.WiredServer.plist; sourceTree = "<group>"; };
 		7767FBEA0F167B0C000AA7B5 /* WPConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPConfigManager.h; sourceTree = "<group>"; };
 		7767FBEB0F167B0C000AA7B5 /* WPConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPConfigManager.m; sourceTree = "<group>"; };
 		77E850180E4C606D0011688C /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -312,7 +310,6 @@
 				77266A170F1632EE00F93725 /* PreferencePane.xib */,
 				A5FEE2FF0B78787900199A37 /* install.sh */,
 				77266C220F16474D00F93725 /* uninstall.sh */,
-				7767FA9E0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist */,
 				7767FA8D0F166553000AA7B5 /* WiredServer.icns */,
 				A5A3493A07298A1600A16E9A /* WiredServer.tiff */,
 				7767F6860F1654EF000AA7B5 /* GrayDrop.tiff */,
@@ -497,7 +494,6 @@
 				77266A190F1632EE00F93725 /* PreferencePane.xib in Resources */,
 				77266B360F163F7E00F93725 /* install.sh in Resources */,
 				77266C230F16474D00F93725 /* uninstall.sh in Resources */,
-				7767FA9F0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist in Resources */,
 				7767FA8E0F166553000AA7B5 /* WiredServer.icns in Resources */,
 				77266A1D0F16330500F93725 /* WiredServer.tiff in Resources */,
 				7767F6870F1654EF000AA7B5 /* GrayDrop.tiff in Resources */,
@@ -580,7 +576,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Zip\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$BUILD_DIR/WiredServer.zip\"\nzip -ry \"$BUILD_DIR/WiredServer.zip\" \"Wired2.0.prefPane\" || exit 1\n";
+			shellScript = "# Zip\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$BUILD_DIR/WiredServer.zip\"\nzip -ry \"$BUILD_DIR/WiredServer.zip\" \"WiredServer2.0.prefPane\" || exit 1\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

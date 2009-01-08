@@ -1,47 +1,81 @@
 #!/bin/sh
 
 SOURCE="$1"
+LIBRARY="$2"
 
-install -m 775 -d "/Library/Wired2.0" || exit 1
-install -m 755 -d "/Library/Wired2.0/etc" || exit 1
-install -m 755 -d "/Library/Wired2.0/files" || exit 1
+install -m 775 -d "$LIBRARY/Wired" || exit 1
+install -m 755 -d "$LIBRARY/Wired/etc" || exit 1
+install -m 755 -d "$LIBRARY/Wired/files" || exit 1
 
-if [ ! -f "/Library/Wired2.0/banlist" ]; then
-	install -m 644 "$SOURCE/Wired2.0/banlist" "/Library/Wired2.0" || exit 1
+if [ ! -f "$LIBRARY/Wired/banlist" ]; then
+	install -m 644 "$SOURCE/Wired/banlist" "$LIBRARY/Wired" || exit 1
 fi
 
-if [ ! -f "/Library/Wired2.0/etc/wired.conf" ]; then
-	install -m 644 "$SOURCE/Wired2.0/etc/wired.conf" "/Library/Wired2.0/etc" || exit 1
+if [ ! -f "$LIBRARY/Wired/etc/wired.conf" ]; then
+	install -m 644 "$SOURCE/Wired/etc/wired.conf" "$LIBRARY/Wired/etc" || exit 1
 fi
+
+if [ ! -f "$LIBRARY/Wired/groups" ]; then
+	install -m 644 "$SOURCE/Wired/groups" "$LIBRARY/Wired" || exit 1
+fi
+
+if [ ! -f "$LIBRARY/Wired/news" ]; then
+	install -m 644 "$SOURCE/Wired/news" "$LIBRARY/Wired" || exit 1
+fi
+
+if [ ! -f "$LIBRARY/Wired/users" ]; then
+	install -m 644 "$SOURCE/Wired/users" "$LIBRARY/Wired" || exit 1
+fi
+
+install -m 755 "$SOURCE/Wired/wired" "$LIBRARY/Wired" || exit 1
+install -m 644 "$SOURCE/Wired/wired.xml" "$LIBRARY/Wired" || exit 1
+install -m 755 "$SOURCE/Wired/wiredctl" "$LIBRARY/Wired" || exit 1
+
+echo "-L $LIBRARY/Wired/wired.log -i 1000" > "$LIBRARY/Wired/etc/wired.flags"
+touch "$LIBRARY/Wired/wired.log"
+
+install -m 755 -d "$LIBRARY/LaunchDaemons" || exit 1
+
+cat <<EOF >"$LIBRARY/LaunchDaemons/com.zankasoftware.WiredServer.plist"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Disabled</key>
+	<true/>
+	<key>Label</key>
+	<string>com.zankasoftware.WiredServer</string>
+	<key>OnDemand</key>
+	<false/>
+	<key>Program</key>
+	<string>$LIBRARY/Wired/wired</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>$LIBRARY/Wired/wired</string>
+		<string>-d</string>
+		<string>$LIBRARY/Wired</string>
+		<string>-X</string>
+		<string>-L</string>
+		<string>$LIBRARY/Wired/wired.log</string>
+		<string>-i</string>
+		<string>1000</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+</dict>
+</plist>
+EOF
+
+# copy stuff from /Library/Wired
 
 export GROUP=$(id -gn)
+export LIBRARY
 
-perl -i -pe 's,^port = 2000$,port = 4871,' "/Library/Wired2.0/etc/wired.conf" || exit 1
-perl -i -pe 's,^files = files$,files = $ENV{"HOME"}/Public,' "/Library/Wired2.0/etc/wired.conf" || exit 1
-perl -i -pe 's,^user = .+$,user = $ENV{"USER"},' "/Library/Wired2.0/etc/wired.conf" || exit 1
-perl -i -pe 's,^group = .+$,group = $ENV{"GROUP"},' "/Library/Wired2.0/etc/wired.conf" || exit 1
+perl -i -pe 's,^port = 2000$,port = 4871,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+perl -i -pe 's,^files = files$,files = $ENV{"HOME"}/Public,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+perl -i -pe 's,^user = .+$,user = $ENV{"USER"},' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+perl -i -pe 's,^group = .+$,group = $ENV{"GROUP"},' "$LIBRARY/Wired/etc/wired.conf" || exit 1
 
-if [ ! -f "/Library/Wired2.0/groups" ]; then
-	install -m 644 "$SOURCE/Wired2.0/groups" "/Library/Wired2.0" || exit 1
-fi
-
-if [ ! -f "/Library/Wired2.0/news" ]; then
-	install -m 644 "$SOURCE/Wired2.0/news" "/Library/Wired2.0" || exit 1
-fi
-
-if [ ! -f "/Library/Wired2.0/users" ]; then
-	install -m 644 "$SOURCE/Wired2.0/users" "/Library/Wired2.0" || exit 1
-fi
-
-install -m 755 "$SOURCE/Wired2.0/wired" "/Library/Wired2.0" || exit 1
-install -m 644 "$SOURCE/Wired2.0/wired.xml" "/Library/Wired2.0" || exit 1
-install -m 755 "$SOURCE/Wired2.0/wiredctl" "/Library/Wired2.0" || exit 1
-
-touch "/Library/Wired2.0/wired.log"
-
-echo "-L /Library/Wired2.0/wired.log -i 1000" > "/Library/Wired2.0/etc/wired.flags"
-
-install -m 755 -d "$HOME/Library/LaunchDaemons" || exit 1
-install -m 644 "$SOURCE/com.zankasoftware.WiredServer.plist" "$HOME/Library/LaunchDaemons" || exit 1
+perl -i -pe 's,/Library/Wired,$ENV{"LIBRARY"}/Wired,' "$LIBRARY/Wired/wiredctl" || exit 1
 
 exit 0

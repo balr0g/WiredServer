@@ -38,8 +38,6 @@
 	BOOL										_running;
 }
 
-- (id)initWithRootPath:(NSString *)rootPath;
-
 - (NSString *)pathForFile:(NSString *)file;
 
 - (BOOL)isInstalled;

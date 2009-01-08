@@ -29,6 +29,7 @@
 #import "WPError.h"
 #import "WPWiredManager.h"
 
+#define WPLibraryPath							@"~/Library"
 #define WPWiredLaunchDaemonPlistPath			@"~/Library/LaunchDaemons/com.zankasoftware.WiredServer.plist"
 
 @interface WPWiredManager(Private)
@@ -134,10 +135,10 @@
 
 @implementation WPWiredManager
 
-- (id)initWithRootPath:(NSString *)rootPath {
+- (id)init {
 	self = [super init];
 	
-	_rootPath = [rootPath retain];
+	_rootPath = [[[WPLibraryPath stringByExpandingTildeInPath] stringByAppendingPathComponent:@"Wired"] retain];
 	
 	_statusTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0
 													 target:self
@@ -212,7 +213,7 @@
 
 
 - (NSString *)packagedVersion {
-	return [self _versionForWiredAtPath:[[[self bundle] resourcePath] stringByAppendingPathComponent:@"Wired2.0/wired"]];
+	return [self _versionForWiredAtPath:[[[self bundle] resourcePath] stringByAppendingPathComponent:@"Wired/wired"]];
 }
 
 
@@ -251,7 +252,10 @@
 	
 	task = [[NSTask alloc] init];
 	[task setLaunchPath:[[self bundle] pathForResource:@"install" ofType:@"sh"]];
-	[task setArguments:[NSArray arrayWithObject:[[self bundle] resourcePath]]];
+	[task setArguments:[NSArray arrayWithObjects:
+		[[self bundle] resourcePath],
+		[WPLibraryPath stringByExpandingTildeInPath],
+		NULL]];
 	[task setStandardOutput:[NSPipe pipe]];
 	[task setStandardError:[task standardOutput]];
 	[task launch];
@@ -284,6 +288,7 @@
 	
 	task = [[NSTask alloc] init];
 	[task setLaunchPath:[[self bundle] pathForResource:@"uninstall" ofType:@"sh"]];
+	[task setArguments:[NSArray arrayWithObject:[WPLibraryPath stringByExpandingTildeInPath]]];
 	[task setStandardOutput:[NSPipe pipe]];
 	[task setStandardError:[task standardOutput]];
 	[task launch];

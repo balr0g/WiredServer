@@ -155,7 +155,7 @@
 @implementation WPPreferencePane
 
 - (void)mainViewDidLoad {
-	_wiredManager	= [[WPWiredManager alloc] initWithRootPath:@"/Library/Wired2.0"];
+	_wiredManager	= [[WPWiredManager alloc] init];
 	_accountManager	= [[WPAccountManager alloc] initWithUsersPath:[_wiredManager pathForFile:@"users"]
 													   groupsPath:[_wiredManager pathForFile:@"groups"]];
 	_configManager	= [[WPConfigManager alloc] initWithConfigPath:[_wiredManager pathForFile:@"etc/wired.conf"]];
