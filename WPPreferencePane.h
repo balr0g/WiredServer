@@ -72,6 +72,7 @@
 	
 	WIDateFormatter						*_dateFormatter;
 	NSDate								*_installDate;
+	NSDictionary						*_logAttributes;
 }
 
 - (IBAction)install:(id)sender;
