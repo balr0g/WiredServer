@@ -1,6 +1,0 @@
-{
-  Description     = "Wired server";
-  Provides        = ("Wired");
-  Requires        = ("Network", "Disks", "Resolver");
-  OrderPreference = "Last";
-}

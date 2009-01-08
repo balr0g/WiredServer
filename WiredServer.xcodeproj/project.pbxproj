@@ -7,19 +7,6 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		A50335AD0864C98900CE6911 /* Package */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = A50335B40864C9AC00CE6911 /* Build configuration list for PBXAggregateTarget "Package" */;
-			buildPhases = (
-				A50335AC0864C98900CE6911 /* Run Script (Package) */,
-			);
-			dependencies = (
-				A519E5E30978287D002A9A5C /* PBXTargetDependency */,
-				A5FEE2F00B7877D300199A37 /* PBXTargetDependency */,
-			);
-			name = Package;
-			productName = "Wired Server";
-		};
 		A5D97273078E375B00CD982E /* Localization */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = A5BE6CF50864B5A000DA5C89 /* Build configuration list for PBXAggregateTarget "Localization" */;
@@ -38,7 +25,7 @@
 				A5D97283078E387200CD982E /* Run Script (Zip) */,
 			);
 			dependencies = (
-				A50335E50864CC6600CE6911 /* PBXTargetDependency */,
+				A57769820F16A5EA00C659DB /* PBXTargetDependency */,
 			);
 			name = Distribution;
 			productName = Packaging;
@@ -57,35 +44,49 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		778C0237072F900E00F29BC7 /* Plus.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 778C0235072F900E00F29BC7 /* Plus.tiff */; };
-		778C0238072F900E00F29BC7 /* Minus.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 778C0236072F900E00F29BC7 /* Minus.tiff */; };
-		778C043C0730DC8200F29BC7 /* WSLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778C043A0730DC8200F29BC7 /* WSLogController.m */; };
-		778C045A0730E69A00F29BC7 /* WSAccountsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778C04580730E69A00F29BC7 /* WSAccountsController.m */; };
-		778C04710730F7A300F29BC7 /* WSConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778C046F0730F7A300F29BC7 /* WSConfigController.m */; };
-		778C04760730F89500F29BC7 /* WSStatusController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778C04740730F89500F29BC7 /* WSStatusController.m */; };
-		77B2B1B708680D3B005E1B8F /* Wired2.0.prefPane in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5A348450729839E00A16E9A /* Wired2.0.prefPane */; };
-		77C6D5BA072CF3BA008F6164 /* Group.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 77C6D5B8072CF3BA008F6164 /* Group.tiff */; };
-		77C6D5BB072CF3BA008F6164 /* User.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 77C6D5B9072CF3BA008F6164 /* User.tiff */; };
-		77E8501B0E4C606D0011688C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77E850170E4C606D0011688C /* InfoPlist.strings */; };
-		77E8501C0E4C606D0011688C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77E850190E4C606D0011688C /* Localizable.strings */; };
-		77E8501F0E4C60770011688C /* Wired.nib in Resources */ = {isa = PBXBuildFile; fileRef = 77E8501D0E4C60770011688C /* Wired.nib */; };
-		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
-		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
-		A540687805CDC46100068FBB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A540687705CDC46100068FBB /* Security.framework */; };
-		A5992BF20729917600E67617 /* WSConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A5992BF00729917600E67617 /* WSConfig.m */; };
-		A5A348FD0729868F00A16E9A /* WSSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A348FB0729868F00A16E9A /* WSSettings.m */; };
-		A5A3493007298A0800A16E9A /* WSPaneController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A3492C07298A0800A16E9A /* WSPaneController.m */; };
-		A5A3493F07298A1600A16E9A /* Error.tiff in Resources */ = {isa = PBXBuildFile; fileRef = A5A3493907298A1600A16E9A /* Error.tiff */; };
-		A5A3494007298A1600A16E9A /* Wired.tiff in Resources */ = {isa = PBXBuildFile; fileRef = A5A3493A07298A1600A16E9A /* Wired.tiff */; };
-		A5A3494207298A1600A16E9A /* OK.tiff in Resources */ = {isa = PBXBuildFile; fileRef = A5A3493C07298A1600A16E9A /* OK.tiff */; };
-		A5B083430EBA6DCF00DA90DD /* WiredFoundation.framework in Copy Files (Frameworks) */ = {isa = PBXBuildFile; fileRef = 773F4A7C0E5D9A2F001A753B /* WiredFoundation.framework */; };
-		A5B083440EBA6DCF00DA90DD /* WiredAppKit.framework in Copy Files (Frameworks) */ = {isa = PBXBuildFile; fileRef = 773F4A7E0E5D9A2F001A753B /* WiredAppKit.framework */; };
-		A5B083460EBA6DDF00DA90DD /* WiredFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 773F4A7C0E5D9A2F001A753B /* WiredFoundation.framework */; };
-		A5B083470EBA6DDF00DA90DD /* WiredAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 773F4A7E0E5D9A2F001A753B /* WiredAppKit.framework */; };
-		A5E4A9640794799900FA127F /* WSDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E4A9610794792600FA127F /* WSDashboardController.m */; };
+		772666EF0F16316900F93725 /* Wired2.0.prefPane in Copy Files (PreferencePanes) */ = {isa = PBXBuildFile; fileRef = 772666DD0F1630F100F93725 /* Wired2.0.prefPane */; };
+		772666FD0F1631BC00F93725 /* WPPreferencePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 772666FC0F1631BC00F93725 /* WPPreferencePane.m */; };
+		772669E50F16322D00F93725 /* WiredFoundation.framework in Copy Files (Frameworks) */ = {isa = PBXBuildFile; fileRef = 773F4A7C0E5D9A2F001A753B /* WiredFoundation.framework */; };
+		772669E60F16322D00F93725 /* WiredAppKit.framework in Copy Files (Frameworks) */ = {isa = PBXBuildFile; fileRef = 773F4A7E0E5D9A2F001A753B /* WiredAppKit.framework */; };
+		772669EA0F16324200F93725 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		772669ED0F16324600F93725 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
+		77266A190F1632EE00F93725 /* PreferencePane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77266A170F1632EE00F93725 /* PreferencePane.xib */; };
+		77266A1C0F16330400F93725 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77E850170E4C606D0011688C /* InfoPlist.strings */; };
+		77266A1D0F16330500F93725 /* Wired.tiff in Resources */ = {isa = PBXBuildFile; fileRef = A5A3493A07298A1600A16E9A /* Wired.tiff */; };
+		77266A580F1634DA00F93725 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77266A4C0F16346600F93725 /* Sparkle.framework */; };
+		77266A620F1634EC00F93725 /* WiredFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 773F4A7C0E5D9A2F001A753B /* WiredFoundation.framework */; };
+		77266A630F1634EC00F93725 /* WiredAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 773F4A7E0E5D9A2F001A753B /* WiredAppKit.framework */; };
+		77266A660F1634FD00F93725 /* Sparkle.framework in Copy Files (Frameworks) */ = {isa = PBXBuildFile; fileRef = 77266A4C0F16346600F93725 /* Sparkle.framework */; };
+		77266AB50F16379700F93725 /* WPWiredManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 77266AB40F16379700F93725 /* WPWiredManager.m */; };
+		77266B360F163F7E00F93725 /* install.sh in Resources */ = {isa = PBXBuildFile; fileRef = A5FEE2FF0B78787900199A37 /* install.sh */; };
+		77266B860F16423500F93725 /* WPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 77266B840F16423500F93725 /* WPError.m */; };
+		77266C230F16474D00F93725 /* uninstall.sh in Resources */ = {isa = PBXBuildFile; fileRef = 77266C220F16474D00F93725 /* uninstall.sh */; };
+		7767F5FF0F16525B000AA7B5 /* GreenDrop.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 7767F5FD0F16525B000AA7B5 /* GreenDrop.tiff */; };
+		7767F6000F16525B000AA7B5 /* RedDrop.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 7767F5FE0F16525B000AA7B5 /* RedDrop.tiff */; };
+		7767F6870F1654EF000AA7B5 /* GrayDrop.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 7767F6860F1654EF000AA7B5 /* GrayDrop.tiff */; };
+		7767F9EC0F165DCA000AA7B5 /* WPLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767F9EB0F165DCA000AA7B5 /* WPLogManager.m */; };
+		7767FA8E0F166553000AA7B5 /* Wired.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7767FA8D0F166553000AA7B5 /* Wired.icns */; };
+		7767FA9F0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7767FA9E0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist */; };
+		7767FBEC0F167B0C000AA7B5 /* WPConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767FBEB0F167B0C000AA7B5 /* WPConfigManager.m */; };
+		A57761720F168F6300C659DB /* WPAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A57761710F168F6300C659DB /* WPAccountManager.m */; };
+		A57769890F16A61600C659DB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77E850190E4C606D0011688C /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		772669D10F1631FD00F93725 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7712BA960E5C1726001C4210;
+			remoteInfo = WiredFoundation;
+		};
+		772669D30F1631FF00F93725 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7712BB670E5C1964001C4210;
+			remoteInfo = WiredAppKit;
+		};
 		773F4A7B0E5D9A2F001A753B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */;
@@ -100,19 +101,19 @@
 			remoteGlobalIDString = 7712BC030E5C1964001C4210;
 			remoteInfo = WiredAppKit;
 		};
-		A50335E40864CC6600CE6911 /* PBXContainerItemProxy */ = {
+		A57769810F16A5EA00C659DB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A50335AD0864C98900CE6911;
-			remoteInfo = "Wired Server";
-		};
-		A519E5E20978287D002A9A5C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8D202CE80486D31800D8A456;
+			remoteGlobalIDString = 772666DC0F1630F100F93725 /* Wired Preference Pane */;
 			remoteInfo = "Wired Preference Pane";
+		};
+		A57769850F16A5FF00C659DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5FEE2820B7870E000199A37 /* wired */;
+			remoteInfo = wired;
 		};
 		A5829D860E7370FA00FBAA6D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -142,20 +143,6 @@
 			remoteGlobalIDString = 774897900CC8A63200E95A83;
 			remoteInfo = "Wired Networking";
 		};
-		A5B083340EBA6D9800DA90DD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 7712BA960E5C1726001C4210;
-			remoteInfo = WiredFoundation;
-		};
-		A5B083360EBA6D9800DA90DD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 7712BB670E5C1964001C4210;
-			remoteInfo = WiredAppKit;
-		};
 		A5B084360EBA859700DA90DD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */;
@@ -163,34 +150,29 @@
 			remoteGlobalIDString = A5C23CFF0E9AC2AB00A81F49;
 			remoteInfo = libwired;
 		};
-		A5FEE2EF0B7877D300199A37 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A5FEE2820B7870E000199A37;
-			remoteInfo = wired;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		77B2B1B308680D31005E1B8F /* CopyFiles */ = {
+		772666E90F16315F00F93725 /* Copy Files (PreferencePanes) */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /Library/PreferencePanes;
 			dstSubfolderSpec = 0;
 			files = (
-				77B2B1B708680D3B005E1B8F /* Wired2.0.prefPane in CopyFiles */,
+				772666EF0F16316900F93725 /* Wired2.0.prefPane in Copy Files (PreferencePanes) */,
 			);
+			name = "Copy Files (PreferencePanes)";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A5D96D9F078DE16400CD982E /* Copy Files (Frameworks) */ = {
+		77266A0C0F16328600F93725 /* Copy Files (Frameworks) */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A5B083430EBA6DCF00DA90DD /* WiredFoundation.framework in Copy Files (Frameworks) */,
-				A5B083440EBA6DCF00DA90DD /* WiredAppKit.framework in Copy Files (Frameworks) */,
+				77266A660F1634FD00F93725 /* Sparkle.framework in Copy Files (Frameworks) */,
+				772669E50F16322D00F93725 /* WiredFoundation.framework in Copy Files (Frameworks) */,
+				772669E60F16322D00F93725 /* WiredAppKit.framework in Copy Files (Frameworks) */,
 			);
 			name = "Copy Files (Frameworks)";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,67 +183,53 @@
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		778C0235072F900E00F29BC7 /* Plus.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Plus.tiff; sourceTree = "<group>"; };
-		778C0236072F900E00F29BC7 /* Minus.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Minus.tiff; sourceTree = "<group>"; };
-		778C04390730DC8200F29BC7 /* WSLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSLogController.h; sourceTree = "<group>"; };
-		778C043A0730DC8200F29BC7 /* WSLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSLogController.m; sourceTree = "<group>"; };
-		778C04570730E69A00F29BC7 /* WSAccountsController.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = WSAccountsController.h; sourceTree = "<group>"; };
-		778C04580730E69A00F29BC7 /* WSAccountsController.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = WSAccountsController.m; sourceTree = "<group>"; };
-		778C046E0730F7A300F29BC7 /* WSConfigController.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = WSConfigController.h; sourceTree = "<group>"; };
-		778C046F0730F7A300F29BC7 /* WSConfigController.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = WSConfigController.m; sourceTree = "<group>"; };
-		778C04740730F89500F29BC7 /* WSStatusController.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = WSStatusController.m; sourceTree = "<group>"; };
-		778C04750730F89500F29BC7 /* WSStatusController.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = WSStatusController.h; sourceTree = "<group>"; };
-		77A9DE7A08695F35006BF5B0 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = Package/Resources/English.lproj/ReadMe.rtf; sourceTree = "<group>"; };
-		77A9DE7C08695F3F006BF5B0 /* English */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.plist.xml; name = English; path = Package/Resources/English.lproj/Description.plist; sourceTree = "<group>"; };
-		77C6D5B8072CF3BA008F6164 /* Group.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Group.tiff; sourceTree = "<group>"; };
-		77C6D5B9072CF3BA008F6164 /* User.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = User.tiff; sourceTree = "<group>"; };
+		772666DD0F1630F100F93725 /* Wired2.0.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Wired2.0.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
+		772666FB0F1631BC00F93725 /* WPPreferencePane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPPreferencePane.h; sourceTree = "<group>"; };
+		772666FC0F1631BC00F93725 /* WPPreferencePane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPPreferencePane.m; sourceTree = "<group>"; };
+		77266A180F1632EE00F93725 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PreferencePane.xib; sourceTree = "<group>"; };
+		77266A4C0F16346600F93725 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		77266AB30F16379700F93725 /* WPWiredManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPWiredManager.h; sourceTree = "<group>"; };
+		77266AB40F16379700F93725 /* WPWiredManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPWiredManager.m; sourceTree = "<group>"; };
+		77266B840F16423500F93725 /* WPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPError.m; sourceTree = "<group>"; };
+		77266B850F16423500F93725 /* WPError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPError.h; sourceTree = "<group>"; };
+		77266C220F16474D00F93725 /* uninstall.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = uninstall.sh; sourceTree = "<group>"; };
+		7767F5FD0F16525B000AA7B5 /* GreenDrop.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GreenDrop.tiff; sourceTree = "<group>"; };
+		7767F5FE0F16525B000AA7B5 /* RedDrop.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = RedDrop.tiff; sourceTree = "<group>"; };
+		7767F6860F1654EF000AA7B5 /* GrayDrop.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GrayDrop.tiff; sourceTree = "<group>"; };
+		7767F9EA0F165DCA000AA7B5 /* WPLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPLogManager.h; sourceTree = "<group>"; };
+		7767F9EB0F165DCA000AA7B5 /* WPLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPLogManager.m; sourceTree = "<group>"; };
+		7767FA8D0F166553000AA7B5 /* Wired.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Wired.icns; sourceTree = "<group>"; };
+		7767FA9E0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.zankasoftware.WiredServer.plist; sourceTree = "<group>"; };
+		7767FBEA0F167B0C000AA7B5 /* WPConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPConfigManager.h; sourceTree = "<group>"; };
+		7767FBEB0F167B0C000AA7B5 /* WPConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPConfigManager.m; sourceTree = "<group>"; };
 		77E850180E4C606D0011688C /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		77E8501A0E4C606D0011688C /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		77E8501E0E4C60770011688C /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Wired.nib; sourceTree = "<group>"; };
-		A503353B0864C0DE00CE6911 /* Wired */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.script.sh; name = Wired; path = StartupItems/Wired/Wired; sourceTree = "<group>"; };
-		A503353C0864C0DE00CE6911 /* StartupParameters.plist */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.plist; name = StartupParameters.plist; path = StartupItems/Wired/StartupParameters.plist; sourceTree = "<group>"; };
-		A503353F0864C0DE00CE6911 /* English */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xml; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A503354A0864C15D00CE6911 /* wired.sh */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.script.sh; path = wired.sh; sourceTree = "<group>"; };
-		A50336990865AA5E00CE6911 /* postflight */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.script.sh; name = postflight; path = Package/Resources/postflight; sourceTree = "<group>"; };
-		A503369A0865AA5E00CE6911 /* postupgrade */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.script.sh; name = postupgrade; path = Package/Resources/postupgrade; sourceTree = "<group>"; };
-		A503369B0865AA5E00CE6911 /* postinstall */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.script.sh; name = postinstall; path = Package/Resources/postinstall; sourceTree = "<group>"; };
-		A503369C0865AA5E00CE6911 /* preinstall */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.script.sh; name = preinstall; path = Package/Resources/preinstall; sourceTree = "<group>"; };
-		A503369D0865AA5E00CE6911 /* preupgrade */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.script.sh; name = preupgrade; path = Package/Resources/preupgrade; sourceTree = "<group>"; };
 		A519E5E609782F18002A9A5C /* wired */ = {isa = PBXFileReference; lastKnownFileType = folder; path = wired; sourceTree = "<group>"; };
 		A540687705CDC46100068FBB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
+		A57761700F168F6300C659DB /* WPAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPAccountManager.h; sourceTree = "<group>"; };
+		A57761710F168F6300C659DB /* WPAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPAccountManager.m; sourceTree = "<group>"; };
 		A58841E10BF39E7F00AA20E8 /* WiredAdditions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WiredAdditions; sourceTree = "<group>"; };
-		A5992BEF0729917600E67617 /* WSConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSConfig.h; sourceTree = "<group>"; };
-		A5992BF00729917600E67617 /* WSConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSConfig.m; sourceTree = "<group>"; };
-		A5A348450729839E00A16E9A /* Wired2.0.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Wired2.0.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A348A2072984E000A16E9A /* prefix.pch */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = prefix.pch; sourceTree = "<group>"; };
-		A5A348FA0729868F00A16E9A /* WSSettings.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = WSSettings.h; sourceTree = "<group>"; };
-		A5A348FB0729868F00A16E9A /* WSSettings.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = WSSettings.m; sourceTree = "<group>"; };
-		A5A3492C07298A0800A16E9A /* WSPaneController.m */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.objc; path = WSPaneController.m; sourceTree = "<group>"; };
-		A5A3492D07298A0800A16E9A /* WSPaneController.h */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = WSPaneController.h; sourceTree = "<group>"; };
 		A5A3493807298A1600A16E9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A5A3493907298A1600A16E9A /* Error.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Error.tiff; sourceTree = "<group>"; };
 		A5A3493A07298A1600A16E9A /* Wired.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Wired.tiff; sourceTree = "<group>"; };
-		A5A3493C07298A1600A16E9A /* OK.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = OK.tiff; sourceTree = "<group>"; };
 		A5BE6D1A0864B5FB00DA5C89 /* WiredServer.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = WiredServer.xcconfig; sourceTree = "<group>"; };
 		A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WiredAdditions.xcodeproj; path = WiredAdditions/WiredAdditions.xcodeproj; sourceTree = SOURCE_ROOT; };
-		A5D972E6078F017100CD982E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.plist.xml; name = Info.plist; path = Package/Info.plist; sourceTree = "<group>"; };
-		A5E4A9600794792600FA127F /* WSDashboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSDashboardController.h; sourceTree = "<group>"; };
-		A5E4A9610794792600FA127F /* WSDashboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSDashboardController.m; sourceTree = "<group>"; };
 		A5E4AAE30794812C00FA127F /* WiredAdditions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WiredAdditions.framework; path = WiredAdditions/build/WiredAdditions.framework; sourceTree = SOURCE_ROOT; };
 		A5FEE2FF0B78787900199A37 /* install.sh */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.script.sh; path = install.sh; sourceTree = "<group>"; };
 		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8D202CF20486D31800D8A456 /* Frameworks */ = {
+		772666DB0F1630F100F93725 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */,
-				8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */,
-				A540687805CDC46100068FBB /* Security.framework in Frameworks */,
-				A5B083460EBA6DDF00DA90DD /* WiredFoundation.framework in Frameworks */,
-				A5B083470EBA6DDF00DA90DD /* WiredAppKit.framework in Frameworks */,
+				772669EA0F16324200F93725 /* Cocoa.framework in Frameworks */,
+				772669ED0F16324600F93725 /* PreferencePanes.framework in Frameworks */,
+				77266A580F1634DA00F93725 /* Sparkle.framework in Frameworks */,
+				77266A620F1634EC00F93725 /* WiredFoundation.framework in Frameworks */,
+				77266A630F1634EC00F93725 /* WiredAppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,11 +239,9 @@
 		089C166AFE841209C02AAC07 /* Wired Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				A5A3485D072983EC00A16E9A /* Wired Preference Pane */,
-				A50335320864C0C600CE6911 /* Wired Startup Item */,
+				772666F90F16318600F93725 /* Wired */,
 				A5BE6D190864B5E300DA5C89 /* Config */,
 				A5BE6D160864B5DD00DA5C89 /* Scripts */,
-				A5D972E3078F016100CD982E /* Package */,
 				089C1671FE841209C02AAC07 /* Frameworks */,
 				A5D96C85078DD96400CD982E /* Subprojects */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
@@ -315,45 +281,60 @@
 		19C28FB8FE9D52D311CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A5A348450729839E00A16E9A /* Wired2.0.prefPane */,
+				772666DD0F1630F100F93725 /* Wired2.0.prefPane */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		77A9DE2908695DAD006BF5B0 /* Resources */ = {
+		772666F90F16318600F93725 /* Wired */ = {
 			isa = PBXGroup;
 			children = (
-				77A9DE7B08695F3F006BF5B0 /* Description.plist */,
-				A50336990865AA5E00CE6911 /* postflight */,
-				A503369B0865AA5E00CE6911 /* postinstall */,
-				A503369A0865AA5E00CE6911 /* postupgrade */,
-				A503369C0865AA5E00CE6911 /* preinstall */,
-				A503369D0865AA5E00CE6911 /* preupgrade */,
-				77A9DE7908695F35006BF5B0 /* ReadMe.rtf */,
+				772666FA0F16319900F93725 /* Classes */,
+				77266A0D0F16328F00F93725 /* Resources */,
+				77266A3F0F16339D00F93725 /* Sources */,
+			);
+			name = Wired;
+			sourceTree = "<group>";
+		};
+		772666FA0F16319900F93725 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A57761710F168F6300C659DB /* WPAccountManager.m */,
+				A57761700F168F6300C659DB /* WPAccountManager.h */,
+				7767FBEB0F167B0C000AA7B5 /* WPConfigManager.m */,
+				7767FBEA0F167B0C000AA7B5 /* WPConfigManager.h */,
+				77266B840F16423500F93725 /* WPError.m */,
+				77266B850F16423500F93725 /* WPError.h */,
+				7767F9EB0F165DCA000AA7B5 /* WPLogManager.m */,
+				7767F9EA0F165DCA000AA7B5 /* WPLogManager.h */,
+				772666FC0F1631BC00F93725 /* WPPreferencePane.m */,
+				772666FB0F1631BC00F93725 /* WPPreferencePane.h */,
+				77266AB40F16379700F93725 /* WPWiredManager.m */,
+				77266AB30F16379700F93725 /* WPWiredManager.h */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		77266A0D0F16328F00F93725 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A5A3493807298A1600A16E9A /* Info.plist */,
+				77E850170E4C606D0011688C /* InfoPlist.strings */,
+				77E850190E4C606D0011688C /* Localizable.strings */,
+				77266A170F1632EE00F93725 /* PreferencePane.xib */,
+				A5FEE2FF0B78787900199A37 /* install.sh */,
+				77266C220F16474D00F93725 /* uninstall.sh */,
+				7767FA9E0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist */,
+				A5A3493A07298A1600A16E9A /* Wired.tiff */,
+				7767FA8D0F166553000AA7B5 /* Wired.icns */,
+				7767F6860F1654EF000AA7B5 /* GrayDrop.tiff */,
+				7767F5FD0F16525B000AA7B5 /* GreenDrop.tiff */,
+				7767F5FE0F16525B000AA7B5 /* RedDrop.tiff */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		A50335320864C0C600CE6911 /* Wired Startup Item */ = {
-			isa = PBXGroup;
-			children = (
-				A503353B0864C0DE00CE6911 /* Wired */,
-				A503353C0864C0DE00CE6911 /* StartupParameters.plist */,
-				A503353D0864C0DE00CE6911 /* Resources */,
-			);
-			name = "Wired Startup Item";
-			sourceTree = "<group>";
-		};
-		A503353D0864C0DE00CE6911 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				A503353E0864C0DE00CE6911 /* Localizable.strings */,
-			);
-			name = Resources;
-			path = StartupItems/Wired/Resources;
-			sourceTree = "<group>";
-		};
-		A5992E90072A75A300E67617 /* Sources */ = {
+		77266A3F0F16339D00F93725 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				A5A348A2072984E000A16E9A /* prefix.pch */,
@@ -361,61 +342,9 @@
 			name = Sources;
 			sourceTree = "<group>";
 		};
-		A5A3485D072983EC00A16E9A /* Wired Preference Pane */ = {
-			isa = PBXGroup;
-			children = (
-				A5A349A607298E1B00A16E9A /* Classes */,
-				A5A349A707298E2400A16E9A /* Resources */,
-				A5992E90072A75A300E67617 /* Sources */,
-			);
-			name = "Wired Preference Pane";
-			sourceTree = "<group>";
-		};
-		A5A349A607298E1B00A16E9A /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				778C04580730E69A00F29BC7 /* WSAccountsController.m */,
-				778C04570730E69A00F29BC7 /* WSAccountsController.h */,
-				A5992BF00729917600E67617 /* WSConfig.m */,
-				A5992BEF0729917600E67617 /* WSConfig.h */,
-				778C046F0730F7A300F29BC7 /* WSConfigController.m */,
-				778C046E0730F7A300F29BC7 /* WSConfigController.h */,
-				A5E4A9610794792600FA127F /* WSDashboardController.m */,
-				A5E4A9600794792600FA127F /* WSDashboardController.h */,
-				778C043A0730DC8200F29BC7 /* WSLogController.m */,
-				778C04390730DC8200F29BC7 /* WSLogController.h */,
-				A5A3492C07298A0800A16E9A /* WSPaneController.m */,
-				A5A3492D07298A0800A16E9A /* WSPaneController.h */,
-				A5A348FB0729868F00A16E9A /* WSSettings.m */,
-				A5A348FA0729868F00A16E9A /* WSSettings.h */,
-				778C04740730F89500F29BC7 /* WSStatusController.m */,
-				778C04750730F89500F29BC7 /* WSStatusController.h */,
-			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
-		A5A349A707298E2400A16E9A /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				A5A3493807298A1600A16E9A /* Info.plist */,
-				77E850170E4C606D0011688C /* InfoPlist.strings */,
-				77E850190E4C606D0011688C /* Localizable.strings */,
-				77E8501D0E4C60770011688C /* Wired.nib */,
-				A5A3493A07298A1600A16E9A /* Wired.tiff */,
-				A5A3493907298A1600A16E9A /* Error.tiff */,
-				77C6D5B8072CF3BA008F6164 /* Group.tiff */,
-				778C0236072F900E00F29BC7 /* Minus.tiff */,
-				A5A3493C07298A1600A16E9A /* OK.tiff */,
-				778C0235072F900E00F29BC7 /* Plus.tiff */,
-				77C6D5B9072CF3BA008F6164 /* User.tiff */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		A5BE6D160864B5DD00DA5C89 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				A5FEE2FF0B78787900199A37 /* install.sh */,
 				A503354A0864C15D00CE6911 /* wired.sh */,
 			);
 			name = Scripts;
@@ -449,44 +378,37 @@
 				A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */,
 				A58841E10BF39E7F00AA20E8 /* WiredAdditions */,
 				A519E5E609782F18002A9A5C /* wired */,
+				77266A4C0F16346600F93725 /* Sparkle.framework */,
 			);
 			name = Subprojects;
-			sourceTree = "<group>";
-		};
-		A5D972E3078F016100CD982E /* Package */ = {
-			isa = PBXGroup;
-			children = (
-				A5D972E6078F017100CD982E /* Info.plist */,
-				77A9DE2908695DAD006BF5B0 /* Resources */,
-			);
-			name = Package;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D202CE80486D31800D8A456 /* Wired Preference Pane */ = {
+		772666DC0F1630F100F93725 /* WiredPreferencePane */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A5BE6CEB0864B5A000DA5C89 /* Build configuration list for PBXNativeTarget "Wired Preference Pane" */;
+			buildConfigurationList = 772666E20F1630F200F93725 /* Build configuration list for PBXNativeTarget "WiredPreferencePane" */;
 			buildPhases = (
-				A5D96D9F078DE16400CD982E /* Copy Files (Frameworks) */,
-				8D202CEC0486D31800D8A456 /* Resources */,
-				8D202CF00486D31800D8A456 /* Sources */,
-				8D202CF20486D31800D8A456 /* Frameworks */,
-				77F203F80E5C5DCF0089C164 /* Run Script (Linking) */,
-				A5992EB5072A77F900E67617 /* Run Script (Version) */,
-				77B2B1B308680D31005E1B8F /* CopyFiles */,
+				77266A0C0F16328600F93725 /* Copy Files (Frameworks) */,
+				772666D90F1630F100F93725 /* Resources */,
+				772666DA0F1630F100F93725 /* Sources */,
+				772666DB0F1630F100F93725 /* Frameworks */,
+				77266B0D0F163B8800F93725 /* Run Script (wired) */,
+				772669F50F16325300F93725 /* Run Script (Linking) */,
+				772669F70F16326500F93725 /* Run Script (Version) */,
+				772666E90F16315F00F93725 /* Copy Files (PreferencePanes) */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A5B083350EBA6D9800DA90DD /* PBXTargetDependency */,
-				A5B083370EBA6D9800DA90DD /* PBXTargetDependency */,
+				772669D20F1631FD00F93725 /* PBXTargetDependency */,
+				772669D40F1631FF00F93725 /* PBXTargetDependency */,
+				A57769860F16A5FF00C659DB /* PBXTargetDependency */,
 			);
-			name = "Wired Preference Pane";
-			productInstallPath = "$(HOME)/Library/PreferencePanes";
-			productName = "Wired Preferences";
-			productReference = A5A348450729839E00A16E9A /* Wired2.0.prefPane */;
+			name = WiredPreferencePane;
+			productName = Wired;
+			productReference = 772666DD0F1630F100F93725 /* Wired2.0.prefPane */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -517,9 +439,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				8D202CE80486D31800D8A456 /* Wired Preference Pane */,
+				772666DC0F1630F100F93725 /* WiredPreferencePane */,
 				A5FEE2820B7870E000199A37 /* wired */,
-				A50335AD0864C98900CE6911 /* Package */,
 				A5D97273078E375B00CD982E /* Localization */,
 				A5D97284078E387200CD982E /* Distribution */,
 			);
@@ -579,27 +500,28 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
-		8D202CEC0486D31800D8A456 /* Resources */ = {
+		772666D90F1630F100F93725 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5A3493F07298A1600A16E9A /* Error.tiff in Resources */,
-				A5A3494207298A1600A16E9A /* OK.tiff in Resources */,
-				A5A3494007298A1600A16E9A /* Wired.tiff in Resources */,
-				77C6D5BA072CF3BA008F6164 /* Group.tiff in Resources */,
-				77C6D5BB072CF3BA008F6164 /* User.tiff in Resources */,
-				778C0237072F900E00F29BC7 /* Plus.tiff in Resources */,
-				778C0238072F900E00F29BC7 /* Minus.tiff in Resources */,
-				77E8501B0E4C606D0011688C /* InfoPlist.strings in Resources */,
-				77E8501C0E4C606D0011688C /* Localizable.strings in Resources */,
-				77E8501F0E4C60770011688C /* Wired.nib in Resources */,
+				77266A190F1632EE00F93725 /* PreferencePane.xib in Resources */,
+				77266A1C0F16330400F93725 /* InfoPlist.strings in Resources */,
+				77266A1D0F16330500F93725 /* Wired.tiff in Resources */,
+				77266B360F163F7E00F93725 /* install.sh in Resources */,
+				77266C230F16474D00F93725 /* uninstall.sh in Resources */,
+				7767F5FF0F16525B000AA7B5 /* GreenDrop.tiff in Resources */,
+				7767F6000F16525B000AA7B5 /* RedDrop.tiff in Resources */,
+				7767F6870F1654EF000AA7B5 /* GrayDrop.tiff in Resources */,
+				7767FA8E0F166553000AA7B5 /* Wired.icns in Resources */,
+				7767FA9F0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist in Resources */,
+				A57769890F16A61600C659DB /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		77F203F80E5C5DCF0089C164 /* Run Script (Linking) */ = {
+		772669F50F16325300F93725 /* Run Script (Linking) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -611,23 +533,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "install_name_tool -id @loader_path/../Frameworks/WiredFoundation.framework/Versions/A/WiredFoundation \\\n                      $BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/WiredFoundation.framework/WiredFoundation\ninstall_name_tool -id @loader_path/../Frameworks/WiredAppKit.framework/Versions/A/WiredAppKit \\\n                      $BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/WiredAppKit.framework/WiredAppKit\n\ninstall_name_tool -change @executable_path/../Frameworks/WiredFoundation.framework/Versions/A/WiredFoundation \\\n                          @loader_path/../../../../Frameworks/WiredFoundation.framework/Versions/A/WiredFoundation \\\n                          $BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/WiredAppKit.framework/WiredAppKit\n\ninstall_name_tool -change @executable_path/../Frameworks/WiredFoundation.framework/Versions/A/WiredFoundation \\\n                          @loader_path/../Frameworks/WiredFoundation.framework/Versions/A/WiredFoundation \\\n                          $BUILT_PRODUCTS_DIR/$EXECUTABLE_PATH\n\ninstall_name_tool -change @executable_path/../Frameworks/WiredAppKit.framework/Versions/A/WiredAppKit \\\n                          @loader_path/../Frameworks/WiredAppKit.framework/Versions/A/WiredAppKit \\\n                          $BUILT_PRODUCTS_DIR/$EXECUTABLE_PATH\n";
+			shellScript = "install_name_tool -id @loader_path/../Frameworks/WiredFoundation.framework/Versions/A/WiredFoundation \\\n                      $BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/WiredFoundation.framework/WiredFoundation\ninstall_name_tool -id @loader_path/../Frameworks/WiredAppKit.framework/Versions/A/WiredAppKit \\\n                      $BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/WiredAppKit.framework/WiredAppKit\n\ninstall_name_tool -change @executable_path/../Frameworks/WiredFoundation.framework/Versions/A/WiredFoundation \\\n                          @loader_path/../../../../Frameworks/WiredFoundation.framework/Versions/A/WiredFoundation \\\n                          $BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/WiredAppKit.framework/WiredAppKit\n\ninstall_name_tool -change @executable_path/../Frameworks/WiredFoundation.framework/Versions/A/WiredFoundation \\\n                          @loader_path/../Frameworks/WiredFoundation.framework/Versions/A/WiredFoundation \\\n                          $BUILT_PRODUCTS_DIR/$EXECUTABLE_PATH\n\ninstall_name_tool -change @executable_path/../Frameworks/WiredAppKit.framework/Versions/A/WiredAppKit \\\n                          @loader_path/../Frameworks/WiredAppKit.framework/Versions/A/WiredAppKit \\\n                          $BUILT_PRODUCTS_DIR/$EXECUTABLE_PATH";
+			showEnvVarsInLog = 0;
 		};
-		A50335AC0864C98900CE6911 /* Run Script (Package) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script (Package)";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "sudo rm -rf \"$PROJECT_TEMP_DIR/Package\"\nmkdir -p \"$PROJECT_TEMP_DIR/Package\"\n\ncp -Rp Package/* \"$PROJECT_TEMP_DIR/Package\" || exit 1\n\nsh install.sh || exit 1\n\nfind \"$PROJECT_TEMP_DIR/Package\" -name .svn -print0 | xargs -0 sudo rm -rf\n\nrm -rf \"$BUILT_PRODUCTS_DIR/WiredServer2.0.pkg\"\n/Developer/Applications/Utilities/PackageMaker.app/Contents/MacOS/PackageMaker -build -v -ds -p \"$BUILT_PRODUCTS_DIR/WiredServer2.0.pkg\" -f \"$PROJECT_TEMP_DIR/Package/Contents\" -r \"$PROJECT_TEMP_DIR/Package/Resources\" -i \"$PROJECT_TEMP_DIR/Package/Info.plist\" -d \"$PROJECT_TEMP_DIR/Package/Resources/English.lproj/Description.plist\" || exit 1\n";
-		};
-		A5992EB5072A77F900E67617 /* Run Script (Version) */ = {
+		772669F70F16326500F93725 /* Run Script (Version) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -639,7 +548,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "perl WiredAdditions/version.pl";
+			shellScript = "perl WiredAdditions/version.pl\n";
+			showEnvVarsInLog = 0;
+		};
+		77266B0D0F163B8800F93725 /* Run Script (wired) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script (wired)";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh wired.sh || exit 1";
 		};
 		A5D97272078E375B00CD982E /* Run Script (Localize) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -653,7 +577,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -f \"PreferencePane/English.lproj/Localizable.strings\"\nfind . -name \"*.[mc]\" | xargs genstrings -s WSLS -q -o \"PreferencePane/English.lproj\"\n";
+			shellScript = "rm -f \"English.lproj/Localizable.strings\"\nfind . -name \"*.[mc]\" | xargs genstrings -s WPLS -q -o \"English.lproj\"\n";
 		};
 		A5D97283078E387200CD982E /* Run Script (Zip) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -667,7 +591,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Zip\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$BUILD_DIR/WiredServer.zip\"\nzip -ry \"$BUILD_DIR/WiredServer.zip\" \"WiredServer2.0.pkg\" || exit 1\n";
+			shellScript = "# Zip\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$BUILD_DIR/WiredServer.zip\"\nzip -ry \"$BUILD_DIR/WiredServer.zip\" \"Wired2.0.prefPane\" || exit 1\n";
 		};
 		A5FEE2810B7870E000199A37 /* Run Script (wired) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -682,70 +606,56 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "sh wired.sh || exit 1\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8D202CF00486D31800D8A456 /* Sources */ = {
+		772666DA0F1630F100F93725 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				778C045A0730E69A00F29BC7 /* WSAccountsController.m in Sources */,
-				A5992BF20729917600E67617 /* WSConfig.m in Sources */,
-				778C04710730F7A300F29BC7 /* WSConfigController.m in Sources */,
-				A5E4A9640794799900FA127F /* WSDashboardController.m in Sources */,
-				778C043C0730DC8200F29BC7 /* WSLogController.m in Sources */,
-				A5A3493007298A0800A16E9A /* WSPaneController.m in Sources */,
-				A5A348FD0729868F00A16E9A /* WSSettings.m in Sources */,
-				778C04760730F89500F29BC7 /* WSStatusController.m in Sources */,
+				772666FD0F1631BC00F93725 /* WPPreferencePane.m in Sources */,
+				77266AB50F16379700F93725 /* WPWiredManager.m in Sources */,
+				77266B860F16423500F93725 /* WPError.m in Sources */,
+				7767F9EC0F165DCA000AA7B5 /* WPLogManager.m in Sources */,
+				7767FBEC0F167B0C000AA7B5 /* WPConfigManager.m in Sources */,
+				A57761720F168F6300C659DB /* WPAccountManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A50335E50864CC6600CE6911 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A50335AD0864C98900CE6911 /* Package */;
-			targetProxy = A50335E40864CC6600CE6911 /* PBXContainerItemProxy */;
-		};
-		A519E5E30978287D002A9A5C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8D202CE80486D31800D8A456 /* Wired Preference Pane */;
-			targetProxy = A519E5E20978287D002A9A5C /* PBXContainerItemProxy */;
-		};
-		A5B083350EBA6D9800DA90DD /* PBXTargetDependency */ = {
+		772669D20F1631FD00F93725 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = WiredFoundation;
-			targetProxy = A5B083340EBA6D9800DA90DD /* PBXContainerItemProxy */;
+			targetProxy = 772669D10F1631FD00F93725 /* PBXContainerItemProxy */;
 		};
-		A5B083370EBA6D9800DA90DD /* PBXTargetDependency */ = {
+		772669D40F1631FF00F93725 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = WiredAppKit;
-			targetProxy = A5B083360EBA6D9800DA90DD /* PBXContainerItemProxy */;
+			targetProxy = 772669D30F1631FF00F93725 /* PBXContainerItemProxy */;
 		};
-		A5FEE2F00B7877D300199A37 /* PBXTargetDependency */ = {
+		A57769820F16A5EA00C659DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 772666DC0F1630F100F93725 /* WiredPreferencePane */;
+			targetProxy = A57769810F16A5EA00C659DB /* PBXContainerItemProxy */;
+		};
+		A57769860F16A5FF00C659DB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A5FEE2820B7870E000199A37 /* wired */;
-			targetProxy = A5FEE2EF0B7877D300199A37 /* PBXContainerItemProxy */;
+			targetProxy = A57769850F16A5FF00C659DB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		77A9DE7908695F35006BF5B0 /* ReadMe.rtf */ = {
+		77266A170F1632EE00F93725 /* PreferencePane.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				77A9DE7A08695F35006BF5B0 /* English */,
+				77266A180F1632EE00F93725 /* English */,
 			);
-			name = ReadMe.rtf;
-			sourceTree = "<group>";
-		};
-		77A9DE7B08695F3F006BF5B0 /* Description.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				77A9DE7C08695F3F006BF5B0 /* English */,
-			);
-			name = Description.plist;
+			name = PreferencePane.xib;
 			sourceTree = "<group>";
 		};
 		77E850170E4C606D0011688C /* InfoPlist.strings */ = {
@@ -764,30 +674,31 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		77E8501D0E4C60770011688C /* Wired.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				77E8501E0E4C60770011688C /* English */,
-			);
-			name = Wired.nib;
-			sourceTree = "<group>";
-		};
-		A503353E0864C0DE00CE6911 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A503353F0864C0DE00CE6911 /* English */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		77437A160A371CD300588CD7 /* Test/Universal */ = {
+		772666DF0F1630F200F93725 /* Debug/Native */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A5BE6D1A0864B5FB00DA5C89 /* WiredServer.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)\"",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = Wired2.0;
+				WRAPPER_EXTENSION = prefPane;
+			};
+			name = Debug/Native;
+		};
+		772666E00F1630F200F93725 /* Test/Universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)\"",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = prefix.pch;
 				INFOPLIST_FILE = Info.plist;
@@ -796,12 +707,20 @@
 			};
 			name = Test/Universal;
 		};
-		77437A170A371CD300588CD7 /* Test/Universal */ = {
+		772666E10F1630F200F93725 /* Release/Universal */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = Package;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)\"",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = Wired2.0;
+				WRAPPER_EXTENSION = prefPane;
 			};
-			name = Test/Universal;
+			name = Release/Universal;
 		};
 		77437A180A371CD300588CD7 /* Test/Universal */ = {
 			isa = XCBuildConfiguration;
@@ -823,49 +742,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = TEST;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = WPConfigurationTest;
 			};
 			name = Test/Universal;
-		};
-		A50335B50864C9AC00CE6911 /* Debug/Native */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = Package;
-			};
-			name = Debug/Native;
-		};
-		A50335B70864C9AC00CE6911 /* Release/Universal */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = Package;
-			};
-			name = Release/Universal;
-		};
-		A5BE6CEC0864B5A000DA5C89 /* Debug/Native */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A5BE6D1A0864B5FB00DA5C89 /* WiredServer.xcconfig */;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)\"";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = prefix.pch;
-				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = Wired2.0;
-				WRAPPER_EXTENSION = prefPane;
-			};
-			name = Debug/Native;
-		};
-		A5BE6CEE0864B5A000DA5C89 /* Release/Universal */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A5BE6D1A0864B5FB00DA5C89 /* WiredServer.xcconfig */;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)\"";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = prefix.pch;
-				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = Wired2.0;
-				WRAPPER_EXTENSION = prefPane;
-			};
-			name = Release/Universal;
 		};
 		A5BE6CF60864B5A000DA5C89 /* Debug/Native */ = {
 			isa = XCBuildConfiguration;
@@ -900,8 +780,9 @@
 			baseConfigurationReference = A5BE6D1A0864B5FB00DA5C89 /* WiredServer.xcconfig */;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_PREPROCESSOR_DEFINITIONS = WPConfigurationDebug;
 			};
 			name = Debug/Native;
 		};
@@ -910,8 +791,9 @@
 			baseConfigurationReference = A5BE6D1A0864B5FB00DA5C89 /* WiredServer.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = RELEASE;
+				GCC_PREPROCESSOR_DEFINITIONS = WPConfigurationRelease;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 			};
 			name = Release/Universal;
@@ -940,22 +822,12 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A50335B40864C9AC00CE6911 /* Build configuration list for PBXAggregateTarget "Package" */ = {
+		772666E20F1630F200F93725 /* Build configuration list for PBXNativeTarget "WiredPreferencePane" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A50335B50864C9AC00CE6911 /* Debug/Native */,
-				77437A170A371CD300588CD7 /* Test/Universal */,
-				A50335B70864C9AC00CE6911 /* Release/Universal */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug/Native;
-		};
-		A5BE6CEB0864B5A000DA5C89 /* Build configuration list for PBXNativeTarget "Wired Preference Pane" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A5BE6CEC0864B5A000DA5C89 /* Debug/Native */,
-				77437A160A371CD300588CD7 /* Test/Universal */,
-				A5BE6CEE0864B5A000DA5C89 /* Release/Universal */,
+				772666DF0F1630F200F93725 /* Debug/Native */,
+				772666E00F1630F200F93725 /* Test/Universal */,
+				772666E10F1630F200F93725 /* Release/Universal */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug/Native;

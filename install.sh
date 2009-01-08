@@ -1,37 +1,42 @@
 #!/bin/sh
 
-mkdir -p "$PROJECT_TEMP_DIR/Package/Contents/Library/PreferencePanes"
-mkdir -p "$PROJECT_TEMP_DIR/Package/Contents/Library/StartupItems"
-mkdir -p "$PROJECT_TEMP_DIR/Package/Contents/Library/Wired"
+SOURCE="$1"
 
-for i in $ARCHS; do
-	WIRED_BINARIES="$PROJECT_TEMP_DIR/run/$i/wired/wired $WIRED_BINARIES"
-	MASTER="$i"
-done
+install -m 775 -d "/Library/Wired2.0" || exit 1
+install -m 755 -d "/Library/Wired2.0/etc" || exit 1
+install -m 755 -d "/Library/Wired2.0/files" || exit 1
 
-cp "$PROJECT_TEMP_DIR/run/$MASTER/wired/wired" "/tmp/wired.$MASTER"
-lipo -create $WIRED_BINARIES -output "/tmp/wired.universal" || exit 1
-cp "/tmp/wired.universal" "$PROJECT_TEMP_DIR/run/$MASTER/wired/wired"
+if [ ! -f "/Library/Wired2.0/banlist" ]; then
+	install -m 644 "$SOURCE/Wired2.0/banlist" "/Library/Wired2.0" || exit 1
+fi
 
-sudo make -f "$PROJECT_TEMP_DIR/make/$MASTER/Makefile" install-only || exit 1
+if [ ! -f "/Library/Wired2.0/etc/wired.conf" ]; then
+	install -m 644 "$SOURCE/Wired2.0/etc/wired.conf" "/Library/Wired2.0/etc" || exit 1
+	
+	perl -i -pe 's,files = files,files = $ENV{"HOME"}/Public,' "/Library/Wired2.0/etc/wired.conf" || exit 1
+fi
 
-cp "/tmp/wired.$MASTER" "$PROJECT_TEMP_DIR/run/$MASTER/wired/wired"
+if [ ! -f "/Library/Wired2.0/groups" ]; then
+	install -m 644 "$SOURCE/Wired2.0/groups" "/Library/Wired2.0" || exit 1
+fi
 
-cp -Rp "$BUILT_PRODUCTS_DIR/Wired2.0.prefPane" "$PROJECT_TEMP_DIR/Package/Contents/Library/PreferencePanes/"
-cp -Rp "StartupItems/Wired" "$PROJECT_TEMP_DIR/Package/Contents/Library/StartupItems/"
+if [ ! -f "/Library/Wired2.0/news" ]; then
+	install -m 644 "$SOURCE/Wired2.0/news" "/Library/Wired2.0" || exit 1
+fi
 
-sudo chmod 1775 "$PROJECT_TEMP_DIR/Package/Contents"
-sudo chown root:wheel "$PROJECT_TEMP_DIR/Package/Contents"
+if [ ! -f "/Library/Wired2.0/users" ]; then
+	install -m 644 "$SOURCE/Wired2.0/users" "/Library/Wired2.0" || exit 1
+fi
 
-sudo chmod 775 "$PROJECT_TEMP_DIR/Package/Contents/Library"
-sudo chown root:admin "$PROJECT_TEMP_DIR/Package/Contents/Library"
+install -m 755 "$SOURCE/Wired2.0/wired" "/Library/Wired2.0" || exit 1
+install -m 644 "$SOURCE/Wired2.0/wired.xml" "/Library/Wired2.0" || exit 1
+install -m 755 "$SOURCE/Wired2.0/wiredctl" "/Library/Wired2.0" || exit 1
 
-find "$PROJECT_TEMP_DIR/Package/Contents/Library/PreferencePanes" \( -type d -o -perm +111 \) -print0 | sudo xargs -0 chmod 775
-find "$PROJECT_TEMP_DIR/Package/Contents/Library/PreferencePanes" \( -type f -a ! -perm +111 \) -print0 | sudo xargs -0 chmod 664
-sudo chmod 775 "$PROJECT_TEMP_DIR/Package/Contents/Library/PreferencePanes"
-sudo chown -R root:admin "$PROJECT_TEMP_DIR/Package/Contents/Library/PreferencePanes"
+touch "/Library/Wired2.0/wired.log"
 
-sudo chown -R root:wheel "$PROJECT_TEMP_DIR/Package/Contents/Library/StartupItems"
+echo "-L /Library/Wired2.0/wired.log -i 1000" > "/Library/Wired2.0/etc/wired.flags"
 
-sudo chmod 755 "$PROJECT_TEMP_DIR/Package/Contents/usr" "$PROJECT_TEMP_DIR/Package/Contents/usr/local"
-sudo chown root:wheel "$PROJECT_TEMP_DIR/Package/Contents/usr" "$PROJECT_TEMP_DIR/Package/Contents/usr/local"
+install -m 755 -d "$HOME/Library/LaunchDaemons" || exit 1
+install -m 644 "$SOURCE/com.zankasoftware.WiredServer.plist" "$HOME/Library/LaunchDaemons" || exit 1
+
+exit 0

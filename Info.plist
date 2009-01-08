@@ -19,12 +19,12 @@
 	<key>CFBundleVersion</key>
 	<string>CFBundleVersionKey</string>
 	<key>NSMainNibFile</key>
-	<string>Wired</string>
+	<string>PreferencePane</string>
 	<key>NSPrefPaneIconFile</key>
 	<string>Wired.tiff</string>
 	<key>NSPrefPaneIconLabel</key>
 	<string>Wired 2.0</string>
 	<key>NSPrincipalClass</key>
-	<string>WPWired</string>
+	<string>WPPreferencePane</string>
 </dict>
 </plist>

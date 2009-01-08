@@ -1,0 +1,489 @@
+/* $Id$ */
+
+/*
+ *  Copyright (c) 2003-2009 Axel Andersson
+ *  All rights reserved.
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions
+ *  are met:
+ *  1. Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *  2. Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+#import "WPAccountManager.h"
+#import "WPConfigManager.h"
+#import "WPLogManager.h"
+#import "WPPreferencePane.h"
+#import "WPWiredManager.h"
+
+@interface WPPreferencePane(Private)
+
+- (void)_updateInstallationStatus;
+- (void)_updateRunningStatus;
+- (void)_updateSettings;
+
+@end
+
+
+@implementation WPPreferencePane(Private)
+
+- (void)_updateInstallationStatus {
+	NSString		*version;
+	
+	version = [_wiredManager installedVersion];
+	
+	if(version)
+		[_versionTextField setStringValue:version];
+	else
+		[_versionTextField setStringValue:WPLS(@"Wired is not installed", @"Installed version notice")];
+	
+	if([_wiredManager isInstalled]) {
+		[_installButton setTitle:WPLS(@"Uninstall", @"Uninstall button title")];
+		[_installButton setAction:@selector(uninstall:)];
+	} else {
+		[_installButton setTitle:WPLS(@"Install", @"Install button title")];
+		[_installButton setAction:@selector(install:)];
+	}
+}
+
+
+
+- (void)_updateRunningStatus {
+	NSString		*status;
+	
+	if(![_wiredManager isInstalled]) {
+		status = WPLS(@"Wired not found", @"Server status");
+	}
+	else if(![_wiredManager isRunning]) {
+		status = WPLS(@"Wired is not running", @"Server status");
+	}
+	else if(_installDate && [_installDate compare:[_wiredManager launchDate]] == NSOrderedDescending) {
+		status = [NSSWF:WPLS(@"A previous version of Wired is running since %@", @"Server status"),
+			[_dateFormatter stringFromDate:[_wiredManager launchDate]]];
+	}
+	else {
+		status = [NSSWF:WPLS(@"Wired is running since %@", @"Server status"),
+			[_dateFormatter stringFromDate:[_wiredManager launchDate]]];
+	}
+	
+	[_statusTextField setStringValue:status];
+	
+	if(![_wiredManager isInstalled]) {
+		[_statusImageView setImage:_grayDropImage];
+		
+		[_startButton setTitle:WPLS(@"Start", @"Start button")];
+		[_startButton setEnabled:NO];
+	}
+	else if(![_wiredManager isRunning]) {
+		[_statusImageView setImage:_redDropImage];
+
+		[_startButton setTitle:WPLS(@"Start", @"Start button")];
+		[_startButton setEnabled:YES];
+		[_startButton setAction:@selector(start:)];
+	}
+	else {
+		[_statusImageView setImage:_greenDropImage];
+
+		[_startButton setTitle:WPLS(@"Stop", @"Stop button")];
+		[_startButton setEnabled:YES];
+		[_startButton setAction:@selector(stop:)];
+	}
+	
+	[_launchAutomaticallyButton setState:[_wiredManager launchesAutomatically]];
+}
+
+
+
+- (void)_updateSettings {
+	NSImage			*image;
+	NSString		*string, *password;
+	
+	string = [_configManager stringForConfigWithName:@"files"];
+	
+	if(string) {
+		image = [[NSWorkspace sharedWorkspace] iconForFile:string];
+		
+		[image setSize:NSMakeSize(16.0, 16.0)];
+		
+		[_filesMenuItem setTitle:[[NSFileManager defaultManager] displayNameAtPath:string]];
+		[_filesMenuItem setImage:image];
+		[_filesMenuItem setRepresentedObject:string];
+	}
+	
+	string = [_configManager stringForConfigWithName:@"port"];
+	
+	if(string)
+		[_portTextField setStringValue:string];
+	
+	[_portStatusImageView setImage:_grayDropImage];
+	[_portStatusTextField setStringValue:WPLS(@"Port status unknown", @"Port status")];
+	
+	if([_accountManager hasUserAccountWithName:@"admin" password:&password]) {
+		if([password length] > 0) {
+			[_accountStatusImageView setImage:_greenDropImage];
+			[_accountStatusTextField setStringValue:WPLS(@"Account with name \u201cadmin\u201d has a password set", @"Account status")];
+		} else {
+			[_accountStatusImageView setImage:_redDropImage];
+			[_accountStatusTextField setStringValue:WPLS(@"Account with name \u201cadmin\u201d has no password set", @"Account status")];
+		}
+	} else {
+		[_accountStatusImageView setImage:_grayDropImage];
+		[_accountStatusTextField setStringValue:WPLS(@"No account with name \u201cadmin\u201d found", @"Account status")];
+	}
+}
+
+@end
+
+
+
+@implementation WPPreferencePane
+
+- (void)mainViewDidLoad {
+	_wiredManager	= [[WPWiredManager alloc] initWithRootPath:@"/Library/Wired2.0"];
+	_accountManager	= [[WPAccountManager alloc] initWithUsersPath:[_wiredManager pathForFile:@"users"]
+													   groupsPath:[_wiredManager pathForFile:@"groups"]];
+	_configManager	= [[WPConfigManager alloc] initWithConfigPath:[_wiredManager pathForFile:@"etc/wired.conf"]];
+	_logManager		= [[WPLogManager alloc] initWithLogPath:[_wiredManager pathForFile:@"wired.log"]];
+	
+	_updater = [[SUUpdater updaterForBundle:[self bundle]] retain];
+	[_updater setDelegate:self];
+	[_updater setSendsSystemProfile:YES];
+	[_updater setAutomaticallyChecksForUpdates:NO];
+	
+#ifdef WPConfigurationRelease
+	[_updater setFeedURL:[NSURL URLWithString:@"http://www.zankasoftware.com/sparkle/sparkle.pl?file=wiredserverp7.xml"]];
+#else
+	[_updater setFeedURL:[NSURL URLWithString:@"http://www.zankasoftware.com/sparkle/sparkle.pl?file=wiredserverp7-nightly.xml"]];
+#endif
+	
+	_greenDropImage	= [[NSImage alloc] initWithContentsOfFile:[[self bundle] pathForResource:@"GreenDrop" ofType:@"tiff"]];
+	_redDropImage	= [[NSImage alloc] initWithContentsOfFile:[[self bundle] pathForResource:@"RedDrop" ofType:@"tiff"]];
+	_grayDropImage	= [[NSImage alloc] initWithContentsOfFile:[[self bundle] pathForResource:@"GrayDrop" ofType:@"tiff"]];
+
+	_dateFormatter = [[WIDateFormatter alloc] init];
+	[_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+	[_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+	[_dateFormatter setNaturalLanguageStyle:WIDateFormatterNormalNaturalLanguageStyle];
+	
+	[[NSNotificationCenter defaultCenter]
+		addObserver:self
+		   selector:@selector(wiredStatusDidChange:)
+			   name:WPWiredStatusDidChangeNotification];
+	
+	[[NSNotificationCenter defaultCenter]
+		addObserver:self
+		   selector:@selector(logLinesDidChange:)
+			   name:WPLogLinesDidChangeNotification];
+}
+
+
+
+- (void)willSelect {
+	if(![_wiredManager isInstalled] || ![[_wiredManager installedVersion] isEqualToString:[_wiredManager packagedVersion]])
+		[self install:self];
+	
+	[self _updateInstallationStatus];
+	[self _updateRunningStatus];
+	[self _updateSettings];
+	
+	[_updater resetUpdateCycle];
+	[_updater checkForUpdatesInBackground];
+	
+	[_logManager startReadingFromLog];
+}
+
+
+
+- (void)willUnselect {
+}
+
+
+
+#pragma mark -
+
+- (void)wiredStatusDidChange:(NSNotification *)notification {
+	[self _updateRunningStatus];
+}
+
+
+
+- (void)logLinesDidChange:(NSNotification *)notification {
+	[_logTableView reloadData];
+	[_logTableView scrollRowToVisible:[[_logManager logLines] count] - 1];
+}
+
+
+
+- (BOOL)updaterShouldPromptForPermissionToCheckForUpdates:(SUUpdater *)updater {
+	return NO;
+}
+
+
+
+#pragma mark -
+
+- (IBAction)install:(id)sender {
+	WPError		*error;
+	
+	[_progressIndicator startAnimation:self];
+	
+	if([_wiredManager installWithError:&error]) {
+		[_installDate release];
+		_installDate = [[NSDate date] retain];
+		
+		[_logManager startReadingFromLog];
+	} else {
+		[[error alert] beginSheetModalForWindow:[sender window]];
+	}
+	
+	[self _updateInstallationStatus];
+	[self _updateRunningStatus];
+
+	[_progressIndicator stopAnimation:self];
+}
+
+
+
+- (IBAction)uninstall:(id)sender {
+	WPError		*error;
+	
+	[_progressIndicator startAnimation:self];
+	
+	if([_wiredManager uninstallWithError:&error])
+		[_logManager stopReadingFromLog];
+	else
+		[[error alert] beginSheetModalForWindow:[sender window]];
+	
+	[self _updateInstallationStatus];
+	[self _updateRunningStatus];
+
+	[_progressIndicator stopAnimation:self];
+}
+
+
+
+- (IBAction)checkForUpdate:(id)sender {
+	[_updater checkForUpdates:sender];
+}
+
+
+
+#pragma mark -
+
+- (IBAction)start:(id)sender {
+	WPError		*error;
+	
+	if(![_wiredManager startWithError:&error])
+		[[error alert] beginSheetModalForWindow:[sender window]];
+	
+	[self _updateRunningStatus];
+}
+
+
+
+- (IBAction)stop:(id)sender {
+	WPError		*error;
+	
+	if(![_wiredManager stopWithError:&error])
+		[[error alert] beginSheetModalForWindow:[sender window]];
+	
+	[self _updateRunningStatus];
+}
+
+
+
+- (IBAction)launchAutomatically:(id)sender {
+	[_wiredManager setLaunchesAutomatically:[_launchAutomaticallyButton state]];
+	
+	[self _updateRunningStatus];
+}
+
+
+
+#pragma mark -
+
+- (IBAction)openLog:(id)sender {
+	[[NSWorkspace sharedWorkspace] openFile:[_wiredManager pathForFile:@"wired.log"]];
+}
+
+
+
+#pragma mark -
+
+- (IBAction)other:(id)sender {
+	NSOpenPanel		*openPanel;
+	
+	openPanel = [NSOpenPanel openPanel];
+	[openPanel setCanChooseFiles:NO];
+	[openPanel setCanChooseDirectories:YES];
+	[openPanel setTitle:WPLS(@"Select Files", @"Files dialog title")];
+	[openPanel setPrompt:WPLS(@"Select", @"Files dialog button title")];
+	[openPanel beginSheetForDirectory:[_filesMenuItem representedObject]
+								 file:NULL
+					   modalForWindow:[_filesPopUpButton window]
+						modalDelegate:self
+					   didEndSelector:@selector(otherOpenPanelDidEnd:returnCode:contextInfo:)
+						  contextInfo:NULL];
+}
+
+
+- (void)otherOpenPanelDidEnd:(NSOpenPanel *)openPanel returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+	WPError		*error;
+	
+	if(returnCode == NSOKButton) {
+		if(![_configManager setString:[openPanel filename] forConfigWithName:@"files" andWriteWithError:&error])
+			[[error alert] beginSheetModalForWindow:[_filesPopUpButton window]];
+		
+		[self _updateSettings];
+	}
+	
+	[_filesPopUpButton selectItem:_filesMenuItem];
+}
+
+
+
+#pragma mark -
+
+- (IBAction)port:(id)sender {
+	WPError		*error;
+	
+	if(![_configManager setString:[_portTextField stringValue] forConfigWithName:@"port" andWriteWithError:&error])
+		[[error alert] beginSheetModalForWindow:[sender window]];
+	
+	[self _updateSettings];
+}
+
+
+
+- (IBAction)automaticallyMapPort:(id)sender {
+}
+
+
+
+#pragma mark -
+
+- (IBAction)setPasswordForAdmin:(id)sender {
+	[_newPasswordTextField setStringValue:@""];
+	[_verifyPasswordTextField setStringValue:@""];
+
+	[_passwordPanel makeFirstResponder:_newPasswordTextField];
+
+	[NSApp beginSheet:_passwordPanel
+	   modalForWindow:[sender window]
+		modalDelegate:self
+	   didEndSelector:@selector(setPasswordForAdminPanelDidEnd:returnCode:contextInfo:)
+		  contextInfo:NULL];
+}
+
+
+
+- (void)setPasswordForAdminPanelDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+	WPError		*error;
+	
+	[_passwordPanel close];
+
+	if(returnCode == NSOKButton) {
+		if(![_accountManager setPassword:[_newPasswordTextField stringValue]
+				  forUserAccountWithName:@"admin"
+					   andWriteWithError:&error]) {
+			[[error alert] beginSheetModalForWindow:[_setPasswordForAdminButton window]];
+		}
+		
+		[self _updateSettings];
+	}
+}
+
+
+
+- (IBAction)createNewAdminUser:(id)sender {
+	[_newPasswordTextField setStringValue:@""];
+	[_verifyPasswordTextField setStringValue:@""];
+	
+	[_passwordPanel makeFirstResponder:_newPasswordTextField];
+	
+	[NSApp beginSheet:_passwordPanel
+	   modalForWindow:[sender window]
+		modalDelegate:self
+	   didEndSelector:@selector(createNewAdminUserPanelDidEnd:returnCode:contextInfo:)
+		  contextInfo:NULL];
+}
+
+
+
+- (void)createNewAdminUserPanelDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+	WPError		*error;
+	
+	[_passwordPanel close];
+
+	if(returnCode == NSOKButton) {
+		if(![_accountManager createNewAdminUserAccountWithName:@"admin"
+													  password:[_newPasswordTextField stringValue]
+											 andWriteWithError:&error]) {
+			[[error alert] beginSheetModalForWindow:[_setPasswordForAdminButton window]];
+		}
+		
+		[self _updateSettings];
+	}
+}
+
+
+
+- (IBAction)submitPasswordSheet:(id)sender {
+	NSString		*newPassword, *verifyPassword;
+	
+	newPassword		= [_newPasswordTextField stringValue];
+	verifyPassword	= [_verifyPasswordTextField stringValue];
+	
+	if([newPassword length] > 0 && [newPassword isEqualToString:verifyPassword])
+		[self submitSheet:sender];
+	else
+		NSBeep();
+}
+
+
+
+#pragma mark -
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+	return [[_logManager logLines] count];
+}
+
+
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+	return [NSAttributedString attributedStringWithString:[[_logManager logLines] objectAtIndex:row]];
+}
+
+
+
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
+	NSSize			size;
+	NSUInteger		rows = 0;
+	
+	size = [[[_logManager logLines] objectAtIndex:row] sizeWithAttributes:NULL];
+	
+	while(size.width > [_logTableColumn width]) {
+		size.width -= [_logTableColumn width];
+		rows++;
+	}
+	
+	return [tableView rowHeight] + (rows * 12.0);
+}
+
+@end

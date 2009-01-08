@@ -1,0 +1,376 @@
+/* $Id$ */
+
+/*
+ *  Copyright (c) 2009 Axel Andersson
+ *  All rights reserved.
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions
+ *  are met:
+ *  1. Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *  2. Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+#import "WPError.h"
+#import "WPWiredManager.h"
+
+#define WPWiredLaunchDaemonPlistPath			@"~/Library/LaunchDaemons/com.zankasoftware.WiredServer.plist"
+
+@interface WPWiredManager(Private)
+
+- (NSString *)_versionForWiredAtPath:(NSString *)path;
+
+- (BOOL)_reloadPidFile;
+- (BOOL)_reloadStatusFile;
+
+@end
+
+
+@implementation WPWiredManager(Private)
+
+- (NSString *)_versionForWiredAtPath:(NSString *)path {
+	NSTask			*task;
+	NSString		*string;
+	NSData			*data;
+	
+	if(![[NSFileManager defaultManager] isExecutableFileAtPath:path])
+		return NULL;
+	
+	task = [[NSTask alloc] init];
+	[task setLaunchPath:path];
+	[task setArguments:[NSArray arrayWithObject:@"-v"]];
+	[task setStandardOutput:[NSPipe pipe]];
+	[task setStandardError:[task standardOutput]];
+	[task launch];
+	[task waitUntilExit];
+	
+	data = [[[task standardOutput] fileHandleForReading] readDataToEndOfFile];
+	
+	if(data && [data length] > 0) {
+		string = [NSString stringWithData:data encoding:NSUTF8StringEncoding];
+		
+		if(string && [string length] > 0)
+			return [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	}
+	
+	return NULL;
+}
+
+
+
+- (BOOL)_reloadPidFile {
+	NSString		*string, *command;
+	BOOL			running = NO;
+	
+	string = [NSString stringWithContentsOfFile:[self pathForFile:@"wired.pid"]];
+	
+	if(string) {
+		command = [[NSWorkspace sharedWorkspace] commandForProcessIdentifier:[string unsignedIntValue]];
+		
+		if([command isEqualToString:@"wired"])
+			running = YES;
+		else
+			[[NSFileManager defaultManager] removeFileAtPath:[self pathForFile:@"wired.pid"] handler:NULL];
+	}
+	
+	if(running != _running) {
+		_running = running;
+		
+		return YES;
+	}
+	
+	return NO;
+}
+
+
+
+- (BOOL)_reloadStatusFile {
+	NSString		*string;
+	NSArray			*status;
+	NSDate			*date;
+	
+	string = [NSString stringWithContentsOfFile:[self pathForFile:@"wired.status"]];
+	
+	if(status) {
+		status = [string componentsSeparatedByString:@" "];
+		date = [NSDate dateWithTimeIntervalSince1970:[[status objectAtIndex:0] intValue]];
+		
+		if(!_launchDate || ![date isEqualToDate:_launchDate]) {
+			[_launchDate release];
+			_launchDate = [date retain];
+			
+			return YES;
+		}
+	} else {
+		if(_launchDate) {
+			[_launchDate release];
+			_launchDate = NULL;
+			
+			return YES;
+		}
+	}
+	
+	return NO;
+}
+
+@end
+
+
+
+@implementation WPWiredManager
+
+- (id)initWithRootPath:(NSString *)rootPath {
+	self = [super init];
+	
+	_rootPath = [rootPath retain];
+	
+	_statusTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0
+													 target:self
+												   selector:@selector(statusTimer:)
+												   userInfo:NULL
+													repeats:YES] retain];
+	
+	return self;
+}
+
+
+
+- (void)dealloc {
+	[_rootPath release];
+	
+	[super dealloc];
+}
+
+
+
+#pragma mark -
+
+- (void)statusTimer:(NSTimer *)timer {
+	BOOL		notify = NO;
+	
+	if([self _reloadPidFile])
+		notify = YES;
+	
+	if([self isRunning]) {
+		if([self _reloadStatusFile])
+			notify = YES;
+	}
+
+	if(notify)
+		[[NSNotificationCenter defaultCenter] postNotificationName:WPWiredStatusDidChangeNotification object:self];
+}
+
+
+
+#pragma mark -
+
+- (NSString *)pathForFile:(NSString *)file {
+	return [_rootPath stringByAppendingPathComponent:file];
+}
+
+
+
+#pragma mark -
+
+- (BOOL)isInstalled {
+	return [[NSFileManager defaultManager] isExecutableFileAtPath:[self pathForFile:@"wired"]];
+}
+
+
+
+- (BOOL)isRunning {
+	return _running;
+}
+
+
+
+- (NSDate *)launchDate {
+	return _launchDate;
+}
+
+
+
+- (NSString *)installedVersion {
+	return [self _versionForWiredAtPath:[self pathForFile:@"wired"]];
+}
+
+
+
+- (NSString *)packagedVersion {
+	return [self _versionForWiredAtPath:[[[self bundle] resourcePath] stringByAppendingPathComponent:@"Wired2.0/wired"]];
+}
+
+
+
+#pragma mark -
+
+- (void)setLaunchesAutomatically:(BOOL)launchesAutomatically {
+	NSMutableDictionary		*dictionary;
+	
+	dictionary = [[[NSDictionary dictionaryWithContentsOfFile:
+		[WPWiredLaunchDaemonPlistPath stringByExpandingTildeInPath]] mutableCopy] autorelease];
+	
+	[dictionary setBool:launchesAutomatically forKey:@"RunAtLoad"];
+	
+	[dictionary writeToFile:[WPWiredLaunchDaemonPlistPath stringByExpandingTildeInPath] atomically:YES];
+}
+
+
+
+- (BOOL)launchesAutomatically {
+	NSDictionary		*dictionary;
+	
+	dictionary = [NSDictionary dictionaryWithContentsOfFile:[WPWiredLaunchDaemonPlistPath stringByExpandingTildeInPath]];
+	
+	return [dictionary boolForKey:@"RunAtLoad"];
+}
+
+
+
+#pragma mark -
+
+- (BOOL)installWithError:(WPError **)error {
+	NSTask			*task;
+	NSString		*string, *reason;
+	NSData			*data;
+	
+	task = [[NSTask alloc] init];
+	[task setLaunchPath:[[self bundle] pathForResource:@"install" ofType:@"sh"]];
+	[task setArguments:[NSArray arrayWithObject:[[self bundle] resourcePath]]];
+	[task setStandardOutput:[NSPipe pipe]];
+	[task setStandardError:[task standardOutput]];
+	[task launch];
+	[task waitUntilExit];
+	
+	if([task terminationStatus] == 0)
+		return YES;
+	
+	reason = @"";
+	data = [[[task standardOutput] fileHandleForReading] readDataToEndOfFile];
+	
+	if(data && [data length] > 0) {
+		string = [NSString stringWithData:data encoding:NSUTF8StringEncoding];
+		
+		if(string && [string length] > 0)
+			reason = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	}
+
+	*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneInstallFailed argument:reason];
+
+	return NO;
+}
+
+
+
+- (BOOL)uninstallWithError:(WPError **)error {
+	NSTask			*task;
+	NSString		*string, *reason;
+	NSData			*data;
+	
+	task = [[NSTask alloc] init];
+	[task setLaunchPath:[[self bundle] pathForResource:@"uninstall" ofType:@"sh"]];
+	[task setStandardOutput:[NSPipe pipe]];
+	[task setStandardError:[task standardOutput]];
+	[task launch];
+	[task waitUntilExit];
+	
+	if([task terminationStatus] == 0)
+		return YES;
+	
+	reason = @"";
+	data = [[[task standardOutput] fileHandleForReading] readDataToEndOfFile];
+	
+	if(data && [data length] > 0) {
+		string = [NSString stringWithData:data encoding:NSUTF8StringEncoding];
+		
+		if(string && [string length] > 0)
+			reason = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	}
+	
+	*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneUninstallFailed argument:reason];
+	
+	return NO;
+}
+
+
+
+- (BOOL)startWithError:(WPError **)error {
+	NSTask			*task;
+	NSString		*string, *reason;
+	NSData			*data;
+	
+	task = [[NSTask alloc] init];
+	[task setLaunchPath:@"/bin/launchctl"];
+	[task setArguments:[NSArray arrayWithObjects:@"load", @"-w", [WPWiredLaunchDaemonPlistPath stringByExpandingTildeInPath], NULL]];
+	[task setStandardOutput:[NSPipe pipe]];
+	[task setStandardError:[task standardOutput]];
+	[task launch];
+	[task waitUntilExit];
+	
+	if([task terminationStatus] == 0)
+		return YES;
+	
+	reason = @"";
+	data = [[[task standardOutput] fileHandleForReading] readDataToEndOfFile];
+	
+	if(data && [data length] > 0) {
+		string = [NSString stringWithData:data encoding:NSUTF8StringEncoding];
+		
+		if(string && [string length] > 0)
+			reason = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	}
+	
+	*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneStartFailed argument:reason];
+	
+	return NO;
+}
+
+
+
+- (BOOL)stopWithError:(WPError **)error {
+	NSTask			*task;
+	NSString		*string, *reason;
+	NSData			*data;
+	
+	task = [[NSTask alloc] init];
+	[task setLaunchPath:@"/bin/launchctl"];
+	[task setArguments:[NSArray arrayWithObjects:@"unload", @"-w", [WPWiredLaunchDaemonPlistPath stringByExpandingTildeInPath], NULL]];
+	[task setStandardOutput:[NSPipe pipe]];
+	[task setStandardError:[task standardOutput]];
+	[task launch];
+	[task waitUntilExit];
+	
+	if([task terminationStatus] == 0)
+		return YES;
+	
+	reason = @"";
+	data = [[[task standardOutput] fileHandleForReading] readDataToEndOfFile];
+	
+	if(data && [data length] > 0) {
+		string = [NSString stringWithData:data encoding:NSUTF8StringEncoding];
+		
+		if(string && [string length] > 0)
+			reason = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	}
+	
+	*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneStopFailed argument:reason];
+	
+	return NO;
+}
+
+@end
