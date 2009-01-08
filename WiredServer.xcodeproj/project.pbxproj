@@ -58,6 +58,7 @@
 		7767FBEC0F167B0C000AA7B5 /* WPConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767FBEB0F167B0C000AA7B5 /* WPConfigManager.m */; };
 		A57761720F168F6300C659DB /* WPAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A57761710F168F6300C659DB /* WPAccountManager.m */; };
 		A57769890F16A61600C659DB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77E850190E4C606D0011688C /* Localizable.strings */; };
+		A5B164F60F16BC8E00D4AD1D /* Wired2.0.prefPane in Copy Files (PreferencePanes */ = {isa = PBXBuildFile; fileRef = 772666DD0F1630F100F93725 /* Wired2.0.prefPane */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,17 @@
 				772669E60F16322D00F93725 /* WiredAppKit.framework in Copy Files (Frameworks) */,
 			);
 			name = "Copy Files (Frameworks)";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5B165830F16BC9600D4AD1D /* Copy Files (PreferencePanes */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "~/Library/PreferencePanes";
+			dstSubfolderSpec = 0;
+			files = (
+				A5B164F60F16BC8E00D4AD1D /* Wired2.0.prefPane in Copy Files (PreferencePanes */,
+			);
+			name = "Copy Files (PreferencePanes";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -367,6 +379,7 @@
 				77266B0D0F163B8800F93725 /* Run Script (wired) */,
 				772669F50F16325300F93725 /* Run Script (Linking) */,
 				772669F70F16326500F93725 /* Run Script (Version) */,
+				A5B165830F16BC9600D4AD1D /* Copy Files (PreferencePanes */,
 			);
 			buildRules = (
 			);
@@ -531,6 +544,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "sh wired.sh || exit 1";
+			showEnvVarsInLog = 0;
 		};
 		A5D97272078E375B00CD982E /* Run Script (Localize) */ = {
 			isa = PBXShellScriptBuildPhase;
