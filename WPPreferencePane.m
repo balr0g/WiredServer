@@ -181,6 +181,11 @@
 	[_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 	[_dateFormatter setNaturalLanguageStyle:WIDateFormatterNormalNaturalLanguageStyle];
 	
+	_logAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:
+		[NSFont fontWithName:@"Monaco" size:9.0],
+			NSFontAttributeName,
+		NULL];
+	
 	[[NSNotificationCenter defaultCenter]
 		addObserver:self
 		   selector:@selector(wiredStatusDidChange:)
@@ -467,7 +472,8 @@
 
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-	return [NSAttributedString attributedStringWithString:[[_logManager logLines] objectAtIndex:row]];
+	return [NSAttributedString attributedStringWithString:[[_logManager logLines] objectAtIndex:row]
+											   attributes:_logAttributes];
 }
 
 
@@ -476,7 +482,7 @@
 	NSSize			size;
 	NSUInteger		rows = 0;
 	
-	size = [[[_logManager logLines] objectAtIndex:row] sizeWithAttributes:NULL];
+	size = [[[_logManager logLines] objectAtIndex:row] sizeWithAttributes:_logAttributes];
 	
 	while(size.width > [_logTableColumn width]) {
 		size.width -= [_logTableColumn width];
