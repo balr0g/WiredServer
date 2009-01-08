@@ -53,6 +53,7 @@
 	IBOutlet NSTextField				*_accountStatusTextField;
 	IBOutlet NSImageView				*_accountStatusImageView;
 	IBOutlet NSButton					*_setPasswordForAdminButton;
+	IBOutlet NSButton					*_createNewAdminUserButton;
 	
 	IBOutlet NSPanel					*_passwordPanel;
 	IBOutlet NSSecureTextField			*_newPasswordTextField;

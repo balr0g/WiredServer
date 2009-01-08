@@ -239,7 +239,7 @@
 		089C166AFE841209C02AAC07 /* Wired Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				772666F90F16318600F93725 /* Wired */,
+				772666F90F16318600F93725 /* Wired Preference Pane */,
 				A5BE6D190864B5E300DA5C89 /* Config */,
 				A5BE6D160864B5DD00DA5C89 /* Scripts */,
 				089C1671FE841209C02AAC07 /* Frameworks */,
@@ -286,14 +286,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		772666F90F16318600F93725 /* Wired */ = {
+		772666F90F16318600F93725 /* Wired Preference Pane */ = {
 			isa = PBXGroup;
 			children = (
 				772666FA0F16319900F93725 /* Classes */,
 				77266A0D0F16328F00F93725 /* Resources */,
 				77266A3F0F16339D00F93725 /* Sources */,
 			);
-			name = Wired;
+			name = "Wired Preference Pane";
 			sourceTree = "<group>";
 		};
 		772666FA0F16319900F93725 /* Classes */ = {

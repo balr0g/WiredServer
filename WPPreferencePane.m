@@ -249,7 +249,7 @@
 		
 		[_logManager startReadingFromLog];
 	} else {
-		[[error alert] beginSheetModalForWindow:[sender window]];
+		[[error alert] beginSheetModalForWindow:[_installButton window]];
 	}
 	
 	[self _updateInstallationStatus];
@@ -268,7 +268,7 @@
 	if([_wiredManager uninstallWithError:&error])
 		[_logManager stopReadingFromLog];
 	else
-		[[error alert] beginSheetModalForWindow:[sender window]];
+		[[error alert] beginSheetModalForWindow:[_installButton window]];
 	
 	[self _updateInstallationStatus];
 	[self _updateRunningStatus];
@@ -290,7 +290,7 @@
 	WPError		*error;
 	
 	if(![_wiredManager startWithError:&error])
-		[[error alert] beginSheetModalForWindow:[sender window]];
+		[[error alert] beginSheetModalForWindow:[_startButton window]];
 	
 	[self _updateRunningStatus];
 }
@@ -301,7 +301,7 @@
 	WPError		*error;
 	
 	if(![_wiredManager stopWithError:&error])
-		[[error alert] beginSheetModalForWindow:[sender window]];
+		[[error alert] beginSheetModalForWindow:[_startButton window]];
 	
 	[self _updateRunningStatus];
 }
@@ -364,7 +364,7 @@
 	WPError		*error;
 	
 	if(![_configManager setString:[_portTextField stringValue] forConfigWithName:@"port" andWriteWithError:&error])
-		[[error alert] beginSheetModalForWindow:[sender window]];
+		[[error alert] beginSheetModalForWindow:[_portTextField window]];
 	
 	[self _updateSettings];
 }
@@ -385,7 +385,7 @@
 	[_passwordPanel makeFirstResponder:_newPasswordTextField];
 
 	[NSApp beginSheet:_passwordPanel
-	   modalForWindow:[sender window]
+	   modalForWindow:[_setPasswordForAdminButton window]
 		modalDelegate:self
 	   didEndSelector:@selector(setPasswordForAdminPanelDidEnd:returnCode:contextInfo:)
 		  contextInfo:NULL];
@@ -418,7 +418,7 @@
 	[_passwordPanel makeFirstResponder:_newPasswordTextField];
 	
 	[NSApp beginSheet:_passwordPanel
-	   modalForWindow:[sender window]
+	   modalForWindow:[_createNewAdminUserButton window]
 		modalDelegate:self
 	   didEndSelector:@selector(createNewAdminUserPanelDidEnd:returnCode:contextInfo:)
 		  contextInfo:NULL];

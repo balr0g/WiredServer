@@ -795,8 +795,7 @@
 				<string type="base64-UTF8" key="NSWindowTitle">PDxkbyBub3QgbG9jYWxpemU+Pg</string>
 				<string key="NSWindowClass">NSPanel</string>
 				<nil key="NSViewClass"/>
-				<string key="NSWindowContentMaxSize">{100000, 134}</string>
-				<string key="NSWindowContentMinSize">{0, 134}</string>
+				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<object class="NSView" key="NSWindowView" id="364827739">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
@@ -921,8 +920,7 @@
 					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
-				<string key="NSMinSize">{0, 156}</string>
-				<string key="NSMaxSize">{100000, 156}</string>
+				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -1247,6 +1245,14 @@
 						<reference key="destination" ref="325730820"/>
 					</object>
 					<int key="connectionID">147</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_createNewAdminUserButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="964527142"/>
+					</object>
+					<int key="connectionID">148</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2004,8 +2010,8 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{100, 740}, {449, 134}}</string>
 					<reference ref="6"/>
-					<boolean value="YES" id="5"/>
-					<reference ref="5"/>
+					<reference ref="6"/>
+					<reference ref="6"/>
 					<string>{100000, 134}</string>
 					<string>{0, 134}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2100,7 +2106,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">147</int>
+			<int key="maxID">148</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2150,6 +2156,7 @@
 							<string>_accountStatusImageView</string>
 							<string>_accountStatusTextField</string>
 							<string>_automaticallyMapPortButton</string>
+							<string>_createNewAdminUserButton</string>
 							<string>_filesMenuItem</string>
 							<string>_filesPopUpButton</string>
 							<string>_installButton</string>
@@ -2174,6 +2181,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSImageView</string>
 							<string>NSTextField</string>
+							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSMenuItem</string>
 							<string>NSPopUpButton</string>
