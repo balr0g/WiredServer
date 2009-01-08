@@ -59,7 +59,7 @@
 		A57761720F168F6300C659DB /* WPAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A57761710F168F6300C659DB /* WPAccountManager.m */; };
 		A57769890F16A61600C659DB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77E850190E4C606D0011688C /* Localizable.strings */; };
 		A5B164F60F16BC8E00D4AD1D /* Wired2.0.prefPane in Copy Files (PreferencePanes */ = {isa = PBXBuildFile; fileRef = 772666DD0F1630F100F93725 /* Wired2.0.prefPane */; };
-		A5B165AD0F16BF5D00D4AD1D /* ReleaseNotes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A5B165AC0F16BF5D00D4AD1D /* ReleaseNotes.rtf */; };
+		A5B165B60F16BFD000D4AD1D /* ReleaseNotes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A5B165B40F16BFD000D4AD1D /* ReleaseNotes.rtf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,7 +196,7 @@
 		A5A348A2072984E000A16E9A /* prefix.pch */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = prefix.pch; sourceTree = "<group>"; };
 		A5A3493807298A1600A16E9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5A3493A07298A1600A16E9A /* Wired.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Wired.tiff; sourceTree = "<group>"; };
-		A5B165AC0F16BF5D00D4AD1D /* ReleaseNotes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = ReleaseNotes.rtf; sourceTree = "<group>"; };
+		A5B165B50F16BFD000D4AD1D /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/ReleaseNotes.rtf; sourceTree = "<group>"; };
 		A5BE6D1A0864B5FB00DA5C89 /* WiredServer.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = WiredServer.xcconfig; sourceTree = "<group>"; };
 		A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WiredAdditions.xcodeproj; path = WiredAdditions/WiredAdditions.xcodeproj; sourceTree = SOURCE_ROOT; };
 		A5E4AAE30794812C00FA127F /* WiredAdditions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WiredAdditions.framework; path = WiredAdditions/build/WiredAdditions.framework; sourceTree = SOURCE_ROOT; };
@@ -305,7 +305,7 @@
 				A5A3493807298A1600A16E9A /* Info.plist */,
 				77E850170E4C606D0011688C /* InfoPlist.strings */,
 				77E850190E4C606D0011688C /* Localizable.strings */,
-				A5B165AC0F16BF5D00D4AD1D /* ReleaseNotes.rtf */,
+				A5B165B40F16BFD000D4AD1D /* ReleaseNotes.rtf */,
 				77266A170F1632EE00F93725 /* PreferencePane.xib */,
 				A5FEE2FF0B78787900199A37 /* install.sh */,
 				77266C220F16474D00F93725 /* uninstall.sh */,
@@ -489,8 +489,8 @@
 			files = (
 				77266A1C0F16330400F93725 /* InfoPlist.strings in Resources */,
 				A57769890F16A61600C659DB /* Localizable.strings in Resources */,
+				A5B165B60F16BFD000D4AD1D /* ReleaseNotes.rtf in Resources */,
 				77266A190F1632EE00F93725 /* PreferencePane.xib in Resources */,
-				A5B165AD0F16BF5D00D4AD1D /* ReleaseNotes.rtf in Resources */,
 				77266B360F163F7E00F93725 /* install.sh in Resources */,
 				77266C230F16474D00F93725 /* uninstall.sh in Resources */,
 				7767FA9F0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist in Resources */,
@@ -637,6 +637,14 @@
 				77E8501A0E4C606D0011688C /* English */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		A5B165B40F16BFD000D4AD1D /* ReleaseNotes.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5B165B50F16BFD000D4AD1D /* English */,
+			);
+			name = ReleaseNotes.rtf;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
