@@ -30,21 +30,9 @@
 			name = Distribution;
 			productName = Packaging;
 		};
-		A5FEE2820B7870E000199A37 /* wired */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = A5FEE2880B7870F400199A37 /* Build configuration list for PBXAggregateTarget "wired" */;
-			buildPhases = (
-				A5FEE2810B7870E000199A37 /* Run Script (wired) */,
-			);
-			dependencies = (
-			);
-			name = wired;
-			productName = "Wired Server";
-		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		772666EF0F16316900F93725 /* Wired2.0.prefPane in Copy Files (PreferencePanes) */ = {isa = PBXBuildFile; fileRef = 772666DD0F1630F100F93725 /* Wired2.0.prefPane */; };
 		772666FD0F1631BC00F93725 /* WPPreferencePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 772666FC0F1631BC00F93725 /* WPPreferencePane.m */; };
 		772669E50F16322D00F93725 /* WiredFoundation.framework in Copy Files (Frameworks) */ = {isa = PBXBuildFile; fileRef = 773F4A7C0E5D9A2F001A753B /* WiredFoundation.framework */; };
 		772669E60F16322D00F93725 /* WiredAppKit.framework in Copy Files (Frameworks) */ = {isa = PBXBuildFile; fileRef = 773F4A7E0E5D9A2F001A753B /* WiredAppKit.framework */; };
@@ -108,13 +96,6 @@
 			remoteGlobalIDString = 772666DC0F1630F100F93725;
 			remoteInfo = "Wired Preference Pane";
 		};
-		A57769850F16A5FF00C659DB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A5FEE2820B7870E000199A37;
-			remoteInfo = wired;
-		};
 		A5829D860E7370FA00FBAA6D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */;
@@ -153,17 +134,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		772666E90F16315F00F93725 /* Copy Files (PreferencePanes) */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /Library/PreferencePanes;
-			dstSubfolderSpec = 0;
-			files = (
-				772666EF0F16316900F93725 /* Wired2.0.prefPane in Copy Files (PreferencePanes) */,
-			);
-			name = "Copy Files (PreferencePanes)";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		77266A0C0F16328600F93725 /* Copy Files (Frameworks) */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -397,14 +367,12 @@
 				77266B0D0F163B8800F93725 /* Run Script (wired) */,
 				772669F50F16325300F93725 /* Run Script (Linking) */,
 				772669F70F16326500F93725 /* Run Script (Version) */,
-				772666E90F16315F00F93725 /* Copy Files (PreferencePanes) */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				772669D20F1631FD00F93725 /* PBXTargetDependency */,
 				772669D40F1631FF00F93725 /* PBXTargetDependency */,
-				A57769860F16A5FF00C659DB /* PBXTargetDependency */,
 			);
 			name = WiredPreferencePane;
 			productName = Wired;
@@ -440,7 +408,6 @@
 			projectRoot = "";
 			targets = (
 				772666DC0F1630F100F93725 /* WiredPreferencePane */,
-				A5FEE2820B7870E000199A37 /* wired */,
 				A5D97273078E375B00CD982E /* Localization */,
 				A5D97284078E387200CD982E /* Distribution */,
 			);
@@ -593,21 +560,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# Zip\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$BUILD_DIR/WiredServer.zip\"\nzip -ry \"$BUILD_DIR/WiredServer.zip\" \"Wired2.0.prefPane\" || exit 1\n";
 		};
-		A5FEE2810B7870E000199A37 /* Run Script (wired) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script (wired)";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "sh wired.sh || exit 1\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -641,11 +593,6 @@
 			isa = PBXTargetDependency;
 			target = 772666DC0F1630F100F93725 /* WiredPreferencePane */;
 			targetProxy = A57769810F16A5EA00C659DB /* PBXContainerItemProxy */;
-		};
-		A57769860F16A5FF00C659DB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A5FEE2820B7870E000199A37 /* wired */;
-			targetProxy = A57769850F16A5FF00C659DB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -798,27 +745,6 @@
 			};
 			name = Release/Universal;
 		};
-		A5FEE2890B7870F400199A37 /* Debug/Native */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = wired;
-			};
-			name = Debug/Native;
-		};
-		A5FEE28A0B7870F400199A37 /* Test/Universal */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = wired;
-			};
-			name = Test/Universal;
-		};
-		A5FEE28B0B7870F400199A37 /* Release/Universal */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = wired;
-			};
-			name = Release/Universal;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -858,16 +784,6 @@
 				A5BE6D000864B5A000DA5C89 /* Debug/Native */,
 				77437A1A0A371CD300588CD7 /* Test/Universal */,
 				A5BE6D020864B5A000DA5C89 /* Release/Universal */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug/Native;
-		};
-		A5FEE2880B7870F400199A37 /* Build configuration list for PBXAggregateTarget "wired" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A5FEE2890B7870F400199A37 /* Debug/Native */,
-				A5FEE28A0B7870F400199A37 /* Test/Universal */,
-				A5FEE28B0B7870F400199A37 /* Release/Universal */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug/Native;

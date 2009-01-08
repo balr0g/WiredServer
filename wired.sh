@@ -14,7 +14,7 @@ WIRED_GROUP=$(id -gn)
 BUILD=$("$SRCROOT/wired/config.guess")
 
 for i in $ARCHS; do
-	if [ ! -f "$PROJECT_TEMP_DIR/make/$i/Makefile" -o ! -f "$TARGET_TEMP_DIR/configured" ]; then
+	if [ ! -f "$TARGET_TEMP_DIR/make/$i/Makefile" -o ! -f "$TARGET_TEMP_DIR/configured" ]; then
 		HOST="$i-apple-darwin$(uname -r)"
 		ARCH_CFLAGS="$CFLAGS"
 		ARCH_CPPFLAGS="$CPPFLAGS"
@@ -31,33 +31,38 @@ for i in $ARCHS; do
 		ARCH_CPPFLAGS="$ARCH_CPPFLAGS -isysroot $SDKROOT -mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET"
 
 		cd "$SRCROOT/wired"
-		CC="$ARCH_CC" CFLAGS="$ARCH_CFLAGS" CPPFLAGS="$ARCH_CPPFLAGS -I$PROJECT_TEMP_DIR/make/$i" ./configure --build="$BUILD" --host="$HOST" --enable-warnings --srcdir="$SRCROOT/wired" --with-objdir="$OBJECT_FILE_DIR/$i" --with-rundir="$PROJECT_TEMP_DIR/run/$i/wired" --prefix="$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH" --with-fake-prefix="/Library" --with-wireddir="Wired2.0" --with-user="$WIRED_USER" --with-group="$WIRED_GROUP" --without-libwired || exit 1
+		CC="$ARCH_CC" CFLAGS="$ARCH_CFLAGS" CPPFLAGS="$ARCH_CPPFLAGS -I$TARGET_TEMP_DIR/make/$i" ./configure --build="$BUILD" --host="$HOST" --enable-warnings --srcdir="$SRCROOT/wired" --with-objdir="$OBJECT_FILE_DIR/$i" --with-rundir="$TARGET_TEMP_DIR/run/$i/wired" --prefix="$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH" --with-fake-prefix="/Library" --with-wireddir="Wired2.0" --with-user="$WIRED_USER" --with-group="$WIRED_GROUP" --without-libwired || exit 1
 		
-		mkdir -p "$PROJECT_TEMP_DIR/make/$i/libwired" "$PROJECT_TEMP_DIR/run/$i" "$BUILT_PRODUCTS_DIR"
-		mv config.h Makefile "$PROJECT_TEMP_DIR/make/$i/"
-		cp -r run "$PROJECT_TEMP_DIR/run/$i/wired"
+		mkdir -p "$TARGET_TEMP_DIR/make/$i/libwired" "$TARGET_TEMP_DIR/run/$i" "$BUILT_PRODUCTS_DIR"
+		mv config.h Makefile "$TARGET_TEMP_DIR/make/$i/"
 
 		cd "$SRCROOT/wired/libwired"
-		CC="$ARCH_CC" CFLAGS="$ARCH_CFLAGS" CPPFLAGS="$ARCH_CPPFLAGS -I$PROJECT_TEMP_DIR/make/$i/libwired" ./configure --build="$BUILD" --host="$HOST" --enable-warnings --enable-ssl --enable-pthreads --enable-libxml2 --enable-p7 --srcdir="$SRCROOT/wired/libwired" --with-objdir="$OBJECT_FILE_DIR/$i" --with-rundir="$PROJECT_TEMP_DIR/run/$i/wired/libwired" || exit 1
-		mv config.h Makefile "$PROJECT_TEMP_DIR/make/$i/libwired"
-		cp -r run "$PROJECT_TEMP_DIR/run/$i/wired/libwired"
+		CC="$ARCH_CC" CFLAGS="$ARCH_CFLAGS" CPPFLAGS="$ARCH_CPPFLAGS -I$TARGET_TEMP_DIR/make/$i/libwired" ./configure --build="$BUILD" --host="$HOST" --enable-warnings --enable-ssl --enable-pthreads --enable-libxml2 --enable-p7 --srcdir="$SRCROOT/wired/libwired" --with-objdir="$OBJECT_FILE_DIR/$i" --with-rundir="$TARGET_TEMP_DIR/run/$i/wired/libwired" || exit 1
+
+		mv config.h Makefile "$TARGET_TEMP_DIR/make/$i/libwired"
 		
 		touch "$TARGET_TEMP_DIR/configured"
 	fi
 	
-	cd "$PROJECT_TEMP_DIR/make/$i"
-	make -f "$PROJECT_TEMP_DIR/make/$i/Makefile" || exit 1
+	cd "$TARGET_TEMP_DIR/make/$i"
+	make -f "$TARGET_TEMP_DIR/make/$i/Makefile" || exit 1
 done
 
 for i in $ARCHS; do
-	WIRED_BINARIES="$PROJECT_TEMP_DIR/run/$i/wired/wired $WIRED_BINARIES"
+	WIRED_BINARIES="$TARGET_TEMP_DIR/run/$i/wired/wired $WIRED_BINARIES"
 	MASTER="$i"
 done
 
-cp "$PROJECT_TEMP_DIR/run/$MASTER/wired/wired" "/tmp/wired.$MASTER"
+cp "$TARGET_TEMP_DIR/run/$MASTER/wired/wired" "/tmp/wired.$MASTER"
 lipo -create $WIRED_BINARIES -output "/tmp/wired.universal" || exit 1
-cp "/tmp/wired.universal" "$PROJECT_TEMP_DIR/run/$MASTER/wired/wired"
+cp "/tmp/wired.universal" "$TARGET_TEMP_DIR/run/$MASTER/wired/wired"
 
-make -f "$PROJECT_TEMP_DIR/make/$MASTER/Makefile" install-wired || exit 1
+for i in banlist groups news users wired.xml; do
+	cp "$SRCROOT/wired/run/$i" "$TARGET_TEMP_DIR/run/$MASTER/wired"
+done
 
-cp "/tmp/wired.$MASTER" "$PROJECT_TEMP_DIR/run/$MASTER/wired/wired"
+make -f "$TARGET_TEMP_DIR/make/$MASTER/Makefile" install-wired || exit 1
+
+cp "/tmp/wired.$MASTER" "$TARGET_TEMP_DIR/run/$MASTER/wired/wired"
+
+find "$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH" -name .svn -print0 | xargs -0 sudo rm -rf
