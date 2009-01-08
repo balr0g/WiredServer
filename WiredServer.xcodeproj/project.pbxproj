@@ -105,14 +105,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 772666DC0F1630F100F93725 /* Wired Preference Pane */;
+			remoteGlobalIDString = 772666DC0F1630F100F93725;
 			remoteInfo = "Wired Preference Pane";
 		};
 		A57769850F16A5FF00C659DB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A5FEE2820B7870E000199A37 /* wired */;
+			remoteGlobalIDString = A5FEE2820B7870E000199A37;
 			remoteInfo = wired;
 		};
 		A5829D860E7370FA00FBAA6D /* PBXContainerItemProxy */ = {

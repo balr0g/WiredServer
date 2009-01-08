@@ -32,7 +32,7 @@ for i in $ARCHS; do
 		ARCH_CPPFLAGS="$ARCH_CPPFLAGS -isysroot $SDKROOT -mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET"
 
 		cd "$SRCROOT/wired"
-		CC="$ARCH_CC" CFLAGS="$ARCH_CFLAGS" CPPFLAGS="$ARCH_CPPFLAGS -I$PROJECT_TEMP_DIR/make/$i" ./configure --build="$BUILD" --host="$HOST" --enable-warnings --srcdir="$SRCROOT/wired" --with-objdir="$OBJECT_FILE_DIR/$i" --with-rundir="$PROJECT_TEMP_DIR/run/$i/wired" --prefix="$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH" --with-fake-prefix="/Library" --with-wireddir="Wired2.0" --mandir="$PROJECT_TEMP_DIR/Package/Contents/usr/local/man" --with-user="$WIRED_USER" --with-group="$WIRED_GROUP" --without-libwired || exit 1
+		CC="$ARCH_CC" CFLAGS="$ARCH_CFLAGS" CPPFLAGS="$ARCH_CPPFLAGS -I$PROJECT_TEMP_DIR/make/$i" ./configure --build="$BUILD" --host="$HOST" --enable-warnings --srcdir="$SRCROOT/wired" --with-objdir="$OBJECT_FILE_DIR/$i" --with-rundir="$PROJECT_TEMP_DIR/run/$i/wired" --prefix="$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH" --with-fake-prefix="/Library" --with-wireddir="Wired2.0" --with-user="$WIRED_USER" --with-group="$WIRED_GROUP" --without-libwired || exit 1
 		
 		mkdir -p "$PROJECT_TEMP_DIR/make/$i/libwired" "$PROJECT_TEMP_DIR/run/$i" "$BUILT_PRODUCTS_DIR"
 		mv config.h Makefile "$PROJECT_TEMP_DIR/make/$i/"
@@ -48,17 +48,17 @@ for i in $ARCHS; do
 	
 	cd "$PROJECT_TEMP_DIR/make/$i"
 	make -f "$PROJECT_TEMP_DIR/make/$i/Makefile" || exit 1
-
-	for i in $ARCHS; do
-		WIRED_BINARIES="$PROJECT_TEMP_DIR/run/$i/wired/wired $WIRED_BINARIES"
-		MASTER="$i"
-	done
-
-	cp "$PROJECT_TEMP_DIR/run/$MASTER/wired/wired" "/tmp/wired.$MASTER"
-	lipo -create $WIRED_BINARIES -output "/tmp/wired.universal" || exit 1
-	cp "/tmp/wired.universal" "$PROJECT_TEMP_DIR/run/$MASTER/wired/wired"
-
-	make -f "$PROJECT_TEMP_DIR/make/$MASTER/Makefile" install-only || exit 1
-
-	cp "/tmp/wired.$MASTER" "$PROJECT_TEMP_DIR/run/$MASTER/wired/wired"
 done
+
+for i in $ARCHS; do
+	WIRED_BINARIES="$PROJECT_TEMP_DIR/run/$i/wired/wired $WIRED_BINARIES"
+	MASTER="$i"
+done
+
+cp "$PROJECT_TEMP_DIR/run/$MASTER/wired/wired" "/tmp/wired.$MASTER"
+lipo -create $WIRED_BINARIES -output "/tmp/wired.universal" || exit 1
+cp "/tmp/wired.universal" "$PROJECT_TEMP_DIR/run/$MASTER/wired/wired"
+
+make -f "$PROJECT_TEMP_DIR/make/$MASTER/Makefile" install-wired || exit 1
+
+cp "/tmp/wired.$MASTER" "$PROJECT_TEMP_DIR/run/$MASTER/wired/wired"
