@@ -1,6 +1,5 @@
 #!/bin/sh
 
-PATH="/opt/local/bin:/usr/local/bin:/usr/bin:/bin"
 CFLAGS="-gdwarf-2"
 
 if echo $CONFIGURATION | grep -q Debug; then
