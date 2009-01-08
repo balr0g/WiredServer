@@ -40,7 +40,7 @@
 		772669ED0F16324600F93725 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
 		77266A190F1632EE00F93725 /* PreferencePane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77266A170F1632EE00F93725 /* PreferencePane.xib */; };
 		77266A1C0F16330400F93725 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77E850170E4C606D0011688C /* InfoPlist.strings */; };
-		77266A1D0F16330500F93725 /* Wired.tiff in Resources */ = {isa = PBXBuildFile; fileRef = A5A3493A07298A1600A16E9A /* Wired.tiff */; };
+		77266A1D0F16330500F93725 /* WiredServer.tiff in Resources */ = {isa = PBXBuildFile; fileRef = A5A3493A07298A1600A16E9A /* WiredServer.tiff */; };
 		77266A580F1634DA00F93725 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77266A4C0F16346600F93725 /* Sparkle.framework */; };
 		77266A620F1634EC00F93725 /* WiredFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 773F4A7C0E5D9A2F001A753B /* WiredFoundation.framework */; };
 		77266A630F1634EC00F93725 /* WiredAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 773F4A7E0E5D9A2F001A753B /* WiredAppKit.framework */; };
@@ -53,12 +53,12 @@
 		7767F6000F16525B000AA7B5 /* RedDrop.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 7767F5FE0F16525B000AA7B5 /* RedDrop.tiff */; };
 		7767F6870F1654EF000AA7B5 /* GrayDrop.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 7767F6860F1654EF000AA7B5 /* GrayDrop.tiff */; };
 		7767F9EC0F165DCA000AA7B5 /* WPLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767F9EB0F165DCA000AA7B5 /* WPLogManager.m */; };
-		7767FA8E0F166553000AA7B5 /* Wired.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7767FA8D0F166553000AA7B5 /* Wired.icns */; };
+		7767FA8E0F166553000AA7B5 /* WiredServer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7767FA8D0F166553000AA7B5 /* WiredServer.icns */; };
 		7767FA9F0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7767FA9E0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist */; };
 		7767FBEC0F167B0C000AA7B5 /* WPConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767FBEB0F167B0C000AA7B5 /* WPConfigManager.m */; };
 		A57761720F168F6300C659DB /* WPAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A57761710F168F6300C659DB /* WPAccountManager.m */; };
 		A57769890F16A61600C659DB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77E850190E4C606D0011688C /* Localizable.strings */; };
-		A5B164F60F16BC8E00D4AD1D /* Wired2.0.prefPane in Copy Files (PreferencePanes */ = {isa = PBXBuildFile; fileRef = 772666DD0F1630F100F93725 /* Wired2.0.prefPane */; };
+		A5B164F60F16BC8E00D4AD1D /* WiredServer2.0.prefPane in Copy Files (PreferencePanes */ = {isa = PBXBuildFile; fileRef = 772666DD0F1630F100F93725 /* WiredServer2.0.prefPane */; };
 		A5B165B60F16BFD000D4AD1D /* ReleaseNotes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A5B165B40F16BFD000D4AD1D /* ReleaseNotes.rtf */; };
 		A5B1688D0F16C02F00D4AD1D /* SUPublicDSAKeyFile.pem in Resources */ = {isa = PBXBuildFile; fileRef = A5B1688C0F16C02F00D4AD1D /* SUPublicDSAKeyFile.pem */; };
 /* End PBXBuildFile section */
@@ -156,7 +156,7 @@
 			dstPath = "~/Library/PreferencePanes";
 			dstSubfolderSpec = 0;
 			files = (
-				A5B164F60F16BC8E00D4AD1D /* Wired2.0.prefPane in Copy Files (PreferencePanes */,
+				A5B164F60F16BC8E00D4AD1D /* WiredServer2.0.prefPane in Copy Files (PreferencePanes */,
 			);
 			name = "Copy Files (PreferencePanes";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,7 +167,7 @@
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		772666DD0F1630F100F93725 /* Wired2.0.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Wired2.0.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
+		772666DD0F1630F100F93725 /* WiredServer2.0.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WiredServer2.0.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		772666FB0F1631BC00F93725 /* WPPreferencePane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPPreferencePane.h; sourceTree = "<group>"; };
 		772666FC0F1631BC00F93725 /* WPPreferencePane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPPreferencePane.m; sourceTree = "<group>"; };
 		77266A180F1632EE00F93725 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PreferencePane.xib; sourceTree = "<group>"; };
@@ -182,7 +182,7 @@
 		7767F6860F1654EF000AA7B5 /* GrayDrop.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GrayDrop.tiff; sourceTree = "<group>"; };
 		7767F9EA0F165DCA000AA7B5 /* WPLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPLogManager.h; sourceTree = "<group>"; };
 		7767F9EB0F165DCA000AA7B5 /* WPLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPLogManager.m; sourceTree = "<group>"; };
-		7767FA8D0F166553000AA7B5 /* Wired.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Wired.icns; sourceTree = "<group>"; };
+		7767FA8D0F166553000AA7B5 /* WiredServer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = WiredServer.icns; sourceTree = "<group>"; };
 		7767FA9E0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.zankasoftware.WiredServer.plist; sourceTree = "<group>"; };
 		7767FBEA0F167B0C000AA7B5 /* WPConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPConfigManager.h; sourceTree = "<group>"; };
 		7767FBEB0F167B0C000AA7B5 /* WPConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPConfigManager.m; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 		A58841E10BF39E7F00AA20E8 /* WiredAdditions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WiredAdditions; sourceTree = "<group>"; };
 		A5A348A2072984E000A16E9A /* prefix.pch */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.c.h; path = prefix.pch; sourceTree = "<group>"; };
 		A5A3493807298A1600A16E9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A5A3493A07298A1600A16E9A /* Wired.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Wired.tiff; sourceTree = "<group>"; };
+		A5A3493A07298A1600A16E9A /* WiredServer.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = WiredServer.tiff; sourceTree = "<group>"; };
 		A5B165B50F16BFD000D4AD1D /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/ReleaseNotes.rtf; sourceTree = "<group>"; };
 		A5B1688C0F16C02F00D4AD1D /* SUPublicDSAKeyFile.pem */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text; path = SUPublicDSAKeyFile.pem; sourceTree = "<group>"; };
 		A5BE6D1A0864B5FB00DA5C89 /* WiredServer.xcconfig */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.xcconfig; path = WiredServer.xcconfig; sourceTree = "<group>"; };
@@ -267,7 +267,7 @@
 		19C28FB8FE9D52D311CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				772666DD0F1630F100F93725 /* Wired2.0.prefPane */,
+				772666DD0F1630F100F93725 /* WiredServer2.0.prefPane */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -313,8 +313,8 @@
 				A5FEE2FF0B78787900199A37 /* install.sh */,
 				77266C220F16474D00F93725 /* uninstall.sh */,
 				7767FA9E0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist */,
-				7767FA8D0F166553000AA7B5 /* Wired.icns */,
-				A5A3493A07298A1600A16E9A /* Wired.tiff */,
+				7767FA8D0F166553000AA7B5 /* WiredServer.icns */,
+				A5A3493A07298A1600A16E9A /* WiredServer.tiff */,
 				7767F6860F1654EF000AA7B5 /* GrayDrop.tiff */,
 				7767F5FD0F16525B000AA7B5 /* GreenDrop.tiff */,
 				7767F5FE0F16525B000AA7B5 /* RedDrop.tiff */,
@@ -395,7 +395,7 @@
 			);
 			name = WiredPreferencePane;
 			productName = Wired;
-			productReference = 772666DD0F1630F100F93725 /* Wired2.0.prefPane */;
+			productReference = 772666DD0F1630F100F93725 /* WiredServer2.0.prefPane */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -498,8 +498,8 @@
 				77266B360F163F7E00F93725 /* install.sh in Resources */,
 				77266C230F16474D00F93725 /* uninstall.sh in Resources */,
 				7767FA9F0F16683B000AA7B5 /* com.zankasoftware.WiredServer.plist in Resources */,
-				7767FA8E0F166553000AA7B5 /* Wired.icns in Resources */,
-				77266A1D0F16330500F93725 /* Wired.tiff in Resources */,
+				7767FA8E0F166553000AA7B5 /* WiredServer.icns in Resources */,
+				77266A1D0F16330500F93725 /* WiredServer.tiff in Resources */,
 				7767F6870F1654EF000AA7B5 /* GrayDrop.tiff in Resources */,
 				7767F5FF0F16525B000AA7B5 /* GreenDrop.tiff in Resources */,
 				7767F6000F16525B000AA7B5 /* RedDrop.tiff in Resources */,
@@ -664,7 +664,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = Wired2.0;
+				PRODUCT_NAME = WiredServer2.0;
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Debug/Native;
@@ -679,7 +679,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = Wired2.0;
+				PRODUCT_NAME = WiredServer2.0;
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Test/Universal;
@@ -694,7 +694,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = Wired2.0;
+				PRODUCT_NAME = WiredServer2.0;
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Release/Universal;

@@ -16,10 +16,10 @@ fi
 
 export GROUP=$(id -gn)
 
-perl -i -pe 's,port = 2000,port = 4871,' "/Library/Wired2.0/etc/wired.conf" || exit 1
-perl -i -pe 's,files = files,files = $ENV{"HOME"}/Public,' "/Library/Wired2.0/etc/wired.conf" || exit 1
-perl -i -pe 's,user = .+?,user = $ENV{"USER"},' "/Library/Wired2.0/etc/wired.conf" || exit 1
-perl -i -pe 's,group = .+?,group = $ENV{"GROUP"},' "/Library/Wired2.0/etc/wired.conf" || exit 1
+perl -i -pe 's,^port = 2000$,port = 4871,' "/Library/Wired2.0/etc/wired.conf" || exit 1
+perl -i -pe 's,^files = files$,files = $ENV{"HOME"}/Public,' "/Library/Wired2.0/etc/wired.conf" || exit 1
+perl -i -pe 's,^user = .+$,user = $ENV{"USER"},' "/Library/Wired2.0/etc/wired.conf" || exit 1
+perl -i -pe 's,^group = .+$,group = $ENV{"GROUP"},' "/Library/Wired2.0/etc/wired.conf" || exit 1
 
 if [ ! -f "/Library/Wired2.0/groups" ]; then
 	install -m 644 "$SOURCE/Wired2.0/groups" "/Library/Wired2.0" || exit 1
