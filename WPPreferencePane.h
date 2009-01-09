@@ -49,6 +49,7 @@
 	IBOutlet NSTextField				*_portTextField;
 	IBOutlet NSImageView				*_portStatusImageView;
 	IBOutlet NSTextField				*_portStatusTextField;
+	IBOutlet NSButton					*_checkPortAgain;
 	
 	IBOutlet NSTextField				*_accountStatusTextField;
 	IBOutlet NSImageView				*_accountStatusImageView;
@@ -93,7 +94,7 @@
 - (IBAction)other:(id)sender;
 
 - (IBAction)port:(id)sender;
-- (IBAction)automaticallyMapPort:(id)sender;
+- (IBAction)checkPortAgain:(id)sender;
 
 - (IBAction)setPasswordForAdmin:(id)sender;
 - (IBAction)createNewAdminUser:(id)sender;

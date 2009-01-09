@@ -400,8 +400,6 @@
 	
 	if(![_wiredManager startWithError:&error])
 		[[error alert] beginSheetModalForWindow:[_startButton window]];
-	
-	[self _updateRunningStatus];
 }
 
 
@@ -411,16 +409,12 @@
 	
 	if(![_wiredManager stopWithError:&error])
 		[[error alert] beginSheetModalForWindow:[_startButton window]];
-	
-	[self _updateRunningStatus];
 }
 
 
 
 - (IBAction)launchAutomatically:(id)sender {
 	[_wiredManager setLaunchesAutomatically:[_launchAutomaticallyButton state]];
-	
-	[self _updateRunningStatus];
 }
 
 
@@ -482,7 +476,14 @@
 
 
 
-- (IBAction)automaticallyMapPort:(id)sender {
+- (IBAction)checkPortAgain:(id)sender {
+	if([_wiredManager isRunning]) {
+		_portCheckerStatus = WPPortCheckerUnknown;
+		
+		[_portChecker checkStatusForPort:[_portTextField intValue]];
+	}
+	
+	[self _updatePortStatus];
 }
 
 
