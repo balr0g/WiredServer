@@ -56,6 +56,7 @@ cat <<EOF >"$LIBRARY/LaunchDaemons/com.zankasoftware.WiredServer.plist"
 		<string>-d</string>
 		<string>$LIBRARY/Wired</string>
 		<string>-X</string>
+		<string>-l</string>
 		<string>-L</string>
 		<string>$LIBRARY/Wired/wired.log</string>
 		<string>-i</string>

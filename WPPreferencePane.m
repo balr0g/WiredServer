@@ -394,7 +394,9 @@
 	WPError		*error;
 	
 	if(returnCode == NSOKButton) {
-		if(![_configManager setString:[openPanel filename] forConfigWithName:@"files" andWriteWithError:&error])
+		if([_configManager setString:[openPanel filename] forConfigWithName:@"files" andWriteWithError:&error])
+			[_wiredManager sendServerSIGHUP];
+		else
 			[[error alert] beginSheetModalForWindow:[_filesPopUpButton window]];
 		
 		[self _updateSettings];

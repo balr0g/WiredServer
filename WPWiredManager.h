@@ -36,6 +36,7 @@
 	NSDate										*_launchDate;
 	
 	BOOL										_running;
+	NSUInteger									_pid;
 }
 
 - (NSString *)pathForFile:(NSString *)file;
@@ -48,6 +49,8 @@
 
 - (void)setLaunchesAutomatically:(BOOL)launchesAutomatically;
 - (BOOL)launchesAutomatically;
+
+- (void)sendServerSIGHUP;
 
 - (BOOL)installWithError:(WPError **)error;
 - (BOOL)uninstallWithError:(WPError **)error;

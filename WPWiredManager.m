@@ -84,10 +84,13 @@
 	if(string) {
 		command = [[NSWorkspace sharedWorkspace] commandForProcessIdentifier:[string unsignedIntValue]];
 		
-		if([command isEqualToString:@"wired"])
+		if([command isEqualToString:@"wired"]) {
+			_pid = [string unsignedIntegerValue];
+			
 			running = YES;
-		else
+		} else {
 			[[NSFileManager defaultManager] removeFileAtPath:[self pathForFile:@"wired.pid"] handler:NULL];
+		}
 	}
 	
 	if(running != _running) {
@@ -240,6 +243,15 @@
 	dictionary = [NSDictionary dictionaryWithContentsOfFile:[WPWiredLaunchDaemonPlistPath stringByExpandingTildeInPath]];
 	
 	return [dictionary boolForKey:@"RunAtLoad"];
+}
+
+
+
+#pragma mark -
+
+- (void)sendServerSIGHUP {
+	if([self isRunning])
+		kill(_pid, SIGHUP);
 }
 
 
