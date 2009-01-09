@@ -49,6 +49,7 @@
 		77266B360F163F7E00F93725 /* install.sh in Resources */ = {isa = PBXBuildFile; fileRef = A5FEE2FF0B78787900199A37 /* install.sh */; };
 		77266B860F16423500F93725 /* WPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 77266B840F16423500F93725 /* WPError.m */; };
 		77266C230F16474D00F93725 /* uninstall.sh in Resources */ = {isa = PBXBuildFile; fileRef = 77266C220F16474D00F93725 /* uninstall.sh */; };
+		7767001C0F179D51000AA7B5 /* WPPortChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767001B0F179D51000AA7B5 /* WPPortChecker.m */; };
 		7767F5FF0F16525B000AA7B5 /* GreenDrop.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 7767F5FD0F16525B000AA7B5 /* GreenDrop.tiff */; };
 		7767F6000F16525B000AA7B5 /* RedDrop.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 7767F5FE0F16525B000AA7B5 /* RedDrop.tiff */; };
 		7767F6870F1654EF000AA7B5 /* GrayDrop.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 7767F6860F1654EF000AA7B5 /* GrayDrop.tiff */; };
@@ -177,6 +178,8 @@
 		77266B840F16423500F93725 /* WPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPError.m; sourceTree = "<group>"; };
 		77266B850F16423500F93725 /* WPError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPError.h; sourceTree = "<group>"; };
 		77266C220F16474D00F93725 /* uninstall.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = uninstall.sh; sourceTree = "<group>"; };
+		7767001A0F179D51000AA7B5 /* WPPortChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPPortChecker.h; sourceTree = "<group>"; };
+		7767001B0F179D51000AA7B5 /* WPPortChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPPortChecker.m; sourceTree = "<group>"; };
 		7767F5FD0F16525B000AA7B5 /* GreenDrop.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GreenDrop.tiff; sourceTree = "<group>"; };
 		7767F5FE0F16525B000AA7B5 /* RedDrop.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = RedDrop.tiff; sourceTree = "<group>"; };
 		7767F6860F1654EF000AA7B5 /* GrayDrop.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GrayDrop.tiff; sourceTree = "<group>"; };
@@ -294,6 +297,8 @@
 				77266B850F16423500F93725 /* WPError.h */,
 				7767F9EB0F165DCA000AA7B5 /* WPLogManager.m */,
 				7767F9EA0F165DCA000AA7B5 /* WPLogManager.h */,
+				7767001B0F179D51000AA7B5 /* WPPortChecker.m */,
+				7767001A0F179D51000AA7B5 /* WPPortChecker.h */,
 				772666FC0F1631BC00F93725 /* WPPreferencePane.m */,
 				772666FB0F1631BC00F93725 /* WPPreferencePane.h */,
 				A5C35DDF0F16CD8300886FC9 /* WPSettings.m */,
@@ -597,6 +602,7 @@
 				7767FBEC0F167B0C000AA7B5 /* WPConfigManager.m in Sources */,
 				A57761720F168F6300C659DB /* WPAccountManager.m in Sources */,
 				A5C35DE00F16CD8300886FC9 /* WPSettings.m in Sources */,
+				7767001C0F179D51000AA7B5 /* WPPortChecker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

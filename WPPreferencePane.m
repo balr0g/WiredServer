@@ -29,6 +29,7 @@
 #import "WPAccountManager.h"
 #import "WPConfigManager.h"
 #import "WPLogManager.h"
+#import "WPPortChecker.h"
 #import "WPPreferencePane.h"
 #import "WPSettings.h"
 #import "WPWiredManager.h"
@@ -38,6 +39,7 @@
 - (void)_updateInstallationStatus;
 - (void)_updateRunningStatus;
 - (void)_updateSettings;
+- (void)_updatePortStatus;
 
 - (void)_install;
 - (void)_uninstall;
@@ -72,17 +74,17 @@
 	NSString		*status;
 	
 	if(![_wiredManager isInstalled]) {
-		status = WPLS(@"Wired not found", @"Server status");
+		status = WPLS(@"Wired Server not found", @"Server status");
 	}
 	else if(![_wiredManager isRunning]) {
-		status = WPLS(@"Wired is not running", @"Server status");
+		status = WPLS(@"Wired Server is not running", @"Server status");
 	}
 	else if(_installDate && [_installDate compare:[_wiredManager launchDate]] == NSOrderedDescending) {
-		status = [NSSWF:WPLS(@"A previous version of Wired is running since %@", @"Server status"),
+		status = [NSSWF:WPLS(@"A previous version of Wired Server is running since %@", @"Server status"),
 			[_dateFormatter stringFromDate:[_wiredManager launchDate]]];
 	}
 	else {
-		status = [NSSWF:WPLS(@"Wired is running since %@", @"Server status"),
+		status = [NSSWF:WPLS(@"Wired Server is running since %@", @"Server status"),
 			[_dateFormatter stringFromDate:[_wiredManager launchDate]]];
 	}
 	
@@ -135,9 +137,6 @@
 	if(string)
 		[_portTextField setStringValue:string];
 	
-	[_portStatusImageView setImage:_grayDropImage];
-	[_portStatusTextField setStringValue:WPLS(@"Port status unknown", @"Port status")];
-	
 	if([_accountManager hasUserAccountWithName:@"admin" password:&password]) {
 		if([password length] == 0 || [password isEqualToString:[@"" SHA1]]) {
 			[_accountStatusImageView setImage:_redDropImage];
@@ -149,6 +148,47 @@
 	} else {
 		[_accountStatusImageView setImage:_grayDropImage];
 		[_accountStatusTextField setStringValue:WPLS(@"No account with name \u201cadmin\u201d found", @"Account status")];
+	}
+}
+
+
+
+- (void)_updatePortStatus {
+	if(![_wiredManager isInstalled]) {
+		[_portStatusImageView setImage:_grayDropImage];
+		[_portStatusTextField setStringValue:WPLS(@"Wired Server not found", @"Port status")];
+	}
+	else if(![_wiredManager isRunning]) {
+		[_portStatusImageView setImage:_grayDropImage];
+		[_portStatusTextField setStringValue:WPLS(@"Wired Server is not running", @"Port status")];
+	}
+	else {
+		switch(_portCheckerStatus) {
+			case WPPortCheckerUnknown:
+				[_portStatusImageView setImage:_grayDropImage];
+				[_portStatusTextField setStringValue:WPLS(@"Checking port status\u2026", @"Port status")];
+				break;
+
+			case WPPortCheckerOpen:
+				[_portStatusImageView setImage:_greenDropImage];
+				[_portStatusTextField setStringValue:[NSSWF:WPLS(@"Port %u is open", @"Port status"), _portCheckerPort]];
+				break;
+				
+			case WPPortCheckerClosed:
+				[_portStatusImageView setImage:_redDropImage];
+				[_portStatusTextField setStringValue:[NSSWF:WPLS(@"Port %u is closed", @"Port status"), _portCheckerPort]];
+				break;
+				
+			case WPPortCheckerFiltered:
+				[_portStatusImageView setImage:_redDropImage];
+				[_portStatusTextField setStringValue:[NSSWF:WPLS(@"Port %u is filtered", @"Port status"), _portCheckerPort]];
+				break;
+				
+			case WPPortCheckerFailed:
+				[_portStatusImageView setImage:_redDropImage];
+				[_portStatusTextField setStringValue:WPLS(@"Port check failed", @"Port status")];
+				break;
+		}
 	}
 }
 
@@ -172,6 +212,7 @@
 	
 	[self _updateInstallationStatus];
 	[self _updateRunningStatus];
+	[self _updatePortStatus];
 
 	[_progressIndicator stopAnimation:self];
 }
@@ -190,6 +231,7 @@
 	
 	[self _updateInstallationStatus];
 	[self _updateRunningStatus];
+	[self _updatePortStatus];
 
 	[_progressIndicator stopAnimation:self];
 }
@@ -212,6 +254,8 @@
 													   groupsPath:[_wiredManager pathForFile:@"groups"]];
 	_configManager	= [[WPConfigManager alloc] initWithConfigPath:[_wiredManager pathForFile:@"etc/wired.conf"]];
 	_logManager		= [[WPLogManager alloc] initWithLogPath:[_wiredManager pathForFile:@"wired.log"]];
+	
+	_portChecker	= [[WPPortChecker alloc] initWithDelegate:self];
 	
 	_updater = [[SUUpdater updaterForBundle:[self bundle]] retain];
 	[_updater setDelegate:self];
@@ -258,6 +302,7 @@
 	[self _updateInstallationStatus];
 	[self _updateRunningStatus];
 	[self _updateSettings];
+	[self _updatePortStatus];
 	
 	[_updater resetUpdateCycle];
 	[_updater checkForUpdatesInBackground];
@@ -276,6 +321,14 @@
 
 - (void)wiredStatusDidChange:(NSNotification *)notification {
 	[self _updateRunningStatus];
+	
+	if([_wiredManager isRunning]) {
+		_portCheckerStatus = WPPortCheckerUnknown;
+		
+		[_portChecker checkStatusForPort:[_portTextField intValue]];
+	}
+
+	[self _updatePortStatus];
 }
 
 
@@ -283,6 +336,15 @@
 - (void)logLinesDidChange:(NSNotification *)notification {
 	[_logTableView reloadData];
 	[_logTableView scrollRowToVisible:[[_logManager logLines] count] - 1];
+}
+
+
+
+- (void)portChecker:(WPPortChecker *)portChecker didReceiveStatus:(WPPortCheckerStatus)status forPort:(NSUInteger)port {
+	_portCheckerStatus	= status;
+	_portCheckerPort	= port;
+	
+	[self _updatePortStatus];
 }
 
 

@@ -27,6 +27,7 @@
  */
 
 @class WPAccountManager, WPConfigManager, WPLogManager, WPWiredManager;
+@class WPPortChecker;
 
 @interface WPPreferencePane : NSPreferencePane {
 	IBOutlet NSTextField				*_versionTextField;
@@ -48,7 +49,6 @@
 	IBOutlet NSTextField				*_portTextField;
 	IBOutlet NSImageView				*_portStatusImageView;
 	IBOutlet NSTextField				*_portStatusTextField;
-	IBOutlet NSButton					*_automaticallyMapPortButton;
 	
 	IBOutlet NSTextField				*_accountStatusTextField;
 	IBOutlet NSImageView				*_accountStatusImageView;
@@ -64,6 +64,10 @@
 	WPConfigManager						*_configManager;
 	WPLogManager						*_logManager;
 	WPWiredManager						*_wiredManager;
+	
+	WPPortChecker						*_portChecker;
+	WPPortCheckerStatus					_portCheckerStatus;
+	NSUInteger							_portCheckerPort;
 	
 	SUUpdater							*_updater;
 	
