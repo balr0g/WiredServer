@@ -39,6 +39,9 @@
 - (void)_updateRunningStatus;
 - (void)_updateSettings;
 
+- (void)_install;
+- (void)_uninstall;
+
 @end
 
 
@@ -55,7 +58,7 @@
 		[_versionTextField setStringValue:WPLS(@"Wired is not installed", @"Installed version notice")];
 	
 	if([_wiredManager isInstalled]) {
-		[_installButton setTitle:WPLS(@"Uninstall", @"Uninstall button title")];
+		[_installButton setTitle:WPLS(@"Uninstall\u2026", @"Uninstall button title")];
 		[_installButton setAction:@selector(uninstall:)];
 	} else {
 		[_installButton setTitle:WPLS(@"Install", @"Install button title")];
@@ -149,6 +152,48 @@
 	}
 }
 
+
+
+#pragma mark -
+
+- (void)_install {
+	WPError		*error;
+	
+	[_progressIndicator startAnimation:self];
+	
+	if([_wiredManager installWithError:&error]) {
+		[_installDate release];
+		_installDate = [[NSDate date] retain];
+		
+		[_logManager startReadingFromLog];
+	} else {
+		[[error alert] beginSheetModalForWindow:[_installButton window]];
+	}
+	
+	[self _updateInstallationStatus];
+	[self _updateRunningStatus];
+
+	[_progressIndicator stopAnimation:self];
+}
+
+
+
+- (void)_uninstall {
+	WPError		*error;
+	
+	[_progressIndicator startAnimation:self];
+	
+	if([_wiredManager uninstallWithError:&error])
+		[_logManager stopReadingFromLog];
+	else
+		[[error alert] beginSheetModalForWindow:[_installButton window]];
+	
+	[self _updateInstallationStatus];
+	[self _updateRunningStatus];
+
+	[_progressIndicator stopAnimation:self];
+}
+
 @end
 
 
@@ -208,7 +253,7 @@
 
 - (void)willSelect {
 	if(![_wiredManager isInstalled] || ![[_wiredManager installedVersion] isEqualToString:[_wiredManager packagedVersion]])
-		[self install:self];
+		[self _install];
 	
 	[self _updateInstallationStatus];
 	[self _updateRunningStatus];
@@ -251,45 +296,35 @@
 #pragma mark -
 
 - (IBAction)install:(id)sender {
-	WPError		*error;
-	
-	[_progressIndicator startAnimation:self];
-	
-	if([_wiredManager installWithError:&error]) {
-		[_installDate release];
-		_installDate = [[NSDate date] retain];
-		
-		[_logManager startReadingFromLog];
-	} else {
-		[[error alert] beginSheetModalForWindow:[_installButton window]];
-	}
-	
-	[self _updateInstallationStatus];
-	[self _updateRunningStatus];
-
-	[_progressIndicator stopAnimation:self];
+	[self _install];
 }
 
 
 
 - (IBAction)uninstall:(id)sender {
-	WPError		*error;
+	NSAlert		*alert;
 	
-	[_progressIndicator startAnimation:self];
+	alert = [NSAlert alertWithMessageText:WPLS(@"Are you sure you want to uninstall Wired Server?", @"Uninstall dialog title")
+							defaultButton:WPLS(@"Cancel", @"Uninstall dialog button title")
+						  alternateButton:WPLS(@"Uninstall", @"Uninstall dialog button title")
+							  otherButton:NULL
+				informativeTextWithFormat:WPLS(@"All your settings, accounts and other server data will be lost.", @"Uninstall dialog description")];
 	
-	if([_wiredManager uninstallWithError:&error])
-		[_logManager stopReadingFromLog];
-	else
-		[[error alert] beginSheetModalForWindow:[_installButton window]];
-	
-	[self _updateInstallationStatus];
-	[self _updateRunningStatus];
-
-	[_progressIndicator stopAnimation:self];
+	[alert beginSheetModalForWindow:[_installButton window]
+					  modalDelegate:self
+					 didEndSelector:@selector(uninstallAlertDidEnd:returnCode:contextInfo:)
+						contextInfo:NULL];
 }
 
 
 
+- (void)uninstallAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+	if(returnCode == NSAlertAlternateReturn)
+		[self performSelector:@selector(_uninstall) afterDelay:0.1];
+}
+
+	 
+	 
 - (IBAction)checkForUpdate:(id)sender {
 	[_updater checkForUpdates:sender];
 }
