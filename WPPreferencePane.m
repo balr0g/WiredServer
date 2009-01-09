@@ -139,12 +139,12 @@
 	[_portStatusTextField setStringValue:WPLS(@"Port status unknown", @"Port status")];
 	
 	if([_accountManager hasUserAccountWithName:@"admin" password:&password]) {
-		if([password length] > 0) {
-			[_accountStatusImageView setImage:_greenDropImage];
-			[_accountStatusTextField setStringValue:WPLS(@"Account with name \u201cadmin\u201d has a password set", @"Account status")];
-		} else {
+		if([password length] == 0 || [password isEqualToString:[@"" SHA1]]) {
 			[_accountStatusImageView setImage:_redDropImage];
 			[_accountStatusTextField setStringValue:WPLS(@"Account with name \u201cadmin\u201d has no password set", @"Account status")];
+		} else {
+			[_accountStatusImageView setImage:_greenDropImage];
+			[_accountStatusTextField setStringValue:WPLS(@"Account with name \u201cadmin\u201d has a password set", @"Account status")];
 		}
 	} else {
 		[_accountStatusImageView setImage:_grayDropImage];
@@ -428,6 +428,7 @@
 - (IBAction)setPasswordForAdmin:(id)sender {
 	[_newPasswordTextField setStringValue:@""];
 	[_verifyPasswordTextField setStringValue:@""];
+	[_passwordMismatchTextField setHidden:YES];
 
 	[_passwordPanel makeFirstResponder:_newPasswordTextField];
 
@@ -461,6 +462,7 @@
 - (IBAction)createNewAdminUser:(id)sender {
 	[_newPasswordTextField setStringValue:@""];
 	[_verifyPasswordTextField setStringValue:@""];
+	[_passwordMismatchTextField setHidden:YES];
 	
 	[_passwordPanel makeFirstResponder:_newPasswordTextField];
 	
@@ -497,10 +499,13 @@
 	newPassword		= [_newPasswordTextField stringValue];
 	verifyPassword	= [_verifyPasswordTextField stringValue];
 	
-	if([newPassword length] > 0 && [newPassword isEqualToString:verifyPassword])
+	if([newPassword isEqualToString:verifyPassword]) {
 		[self submitSheet:sender];
-	else
+	} else {
 		NSBeep();
+		
+		[_passwordMismatchTextField setHidden:NO];
+	}
 }
 
 

@@ -58,6 +58,7 @@
 	IBOutlet NSPanel					*_passwordPanel;
 	IBOutlet NSSecureTextField			*_newPasswordTextField;
 	IBOutlet NSSecureTextField			*_verifyPasswordTextField;
+	IBOutlet NSTextField				*_passwordMismatchTextField;
 
 	WPAccountManager					*_accountManager;
 	WPConfigManager						*_configManager;
