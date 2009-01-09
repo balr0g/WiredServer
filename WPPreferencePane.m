@@ -28,6 +28,7 @@
 
 #import "WPAccountManager.h"
 #import "WPConfigManager.h"
+#import "WPExportManager.h"
 #import "WPLogManager.h"
 #import "WPPortChecker.h"
 #import "WPPreferencePane.h"
@@ -248,11 +249,14 @@
 
 
 
+#pragma mark -
+
 - (void)mainViewDidLoad {
 	_wiredManager	= [[WPWiredManager alloc] init];
 	_accountManager	= [[WPAccountManager alloc] initWithUsersPath:[_wiredManager pathForFile:@"users"]
 													   groupsPath:[_wiredManager pathForFile:@"groups"]];
 	_configManager	= [[WPConfigManager alloc] initWithConfigPath:[_wiredManager pathForFile:@"etc/wired.conf"]];
+	_exportManager	= [[WPExportManager alloc] initWithRootPath:[_wiredManager rootPath]];
 	_logManager		= [[WPLogManager alloc] initWithLogPath:[_wiredManager pathForFile:@"wired.log"]];
 	
 	_portChecker	= [[WPPortChecker alloc] initWithDelegate:self];

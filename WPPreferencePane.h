@@ -26,7 +26,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-@class WPAccountManager, WPConfigManager, WPLogManager, WPWiredManager;
+@class WPAccountManager, WPConfigManager, WPExportManager, WPLogManager, WPWiredManager;
 @class WPPortChecker;
 
 @interface WPPreferencePane : NSPreferencePane {
@@ -63,6 +63,7 @@
 
 	WPAccountManager					*_accountManager;
 	WPConfigManager						*_configManager;
+	WPExportManager						*_exportManager;
 	WPLogManager						*_logManager;
 	WPWiredManager						*_wiredManager;
 	
@@ -99,5 +100,7 @@
 - (IBAction)setPasswordForAdmin:(id)sender;
 - (IBAction)createNewAdminUser:(id)sender;
 - (IBAction)submitPasswordSheet:(id)sender;
+
+
 
 @end

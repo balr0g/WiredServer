@@ -1,7 +1,7 @@
 /* $Id$ */
 
 /*
- *  Copyright (c) 2003-2009 Axel Andersson
+ *  Copyright (c) 2009 Axel Andersson
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -26,36 +26,24 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#define	WPWiredStatusDidChangeNotification		@"WPWiredStatusDidChangeNotification"
+#import "WPExportManager.h"
 
-@class WPError;
+@implementation WPExportManager
 
-@interface WPWiredManager : WIObject {
-	NSString									*_rootPath;
-	NSTimer										*_statusTimer;
-	NSDate										*_launchDate;
+- (id)initWithRootPath:(NSString *)rootPath {
+	self = [super init];
 	
-	BOOL										_running;
-	NSUInteger									_pid;
+	_rootPath = [rootPath retain];
+	
+	return self;
 }
 
-- (NSString *)rootPath;
-- (NSString *)pathForFile:(NSString *)file;
 
-- (BOOL)isInstalled;
-- (BOOL)isRunning;
-- (NSDate *)launchDate;
-- (NSString *)installedVersion;
-- (NSString *)packagedVersion;
 
-- (void)setLaunchesAutomatically:(BOOL)launchesAutomatically;
-- (BOOL)launchesAutomatically;
-
-- (void)sendServerSIGHUP;
-
-- (BOOL)installWithError:(WPError **)error;
-- (BOOL)uninstallWithError:(WPError **)error;
-- (BOOL)startWithError:(WPError **)error;
-- (BOOL)stopWithError:(WPError **)error;
+- (void)dealloc {
+	[_rootPath release];
+	
+	[super dealloc];
+}
 
 @end

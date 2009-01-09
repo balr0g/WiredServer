@@ -184,6 +184,12 @@
 
 #pragma mark -
 
+- (NSString *)rootPath {
+	return _rootPath;
+}
+
+
+
 - (NSString *)pathForFile:(NSString *)file {
 	return [_rootPath stringByAppendingPathComponent:file];
 }
