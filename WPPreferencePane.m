@@ -30,6 +30,7 @@
 #import "WPConfigManager.h"
 #import "WPLogManager.h"
 #import "WPPreferencePane.h"
+#import "WPSettings.h"
 #import "WPWiredManager.h"
 
 @interface WPPreferencePane(Private)
@@ -153,6 +154,12 @@
 
 
 @implementation WPPreferencePane
+
++ (void)load {
+	[WPSettings loadWithIdentifier:[[self bundle] bundleIdentifier]];
+}
+
+
 
 - (void)mainViewDidLoad {
 	_wiredManager	= [[WPWiredManager alloc] init];

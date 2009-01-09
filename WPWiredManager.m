@@ -27,6 +27,7 @@
  */
 
 #import "WPError.h"
+#import "WPSettings.h"
 #import "WPWiredManager.h"
 
 #define WPLibraryPath							@"~/Library"
@@ -255,14 +256,18 @@
 	[task setArguments:[NSArray arrayWithObjects:
 		[[self bundle] resourcePath],
 		[WPLibraryPath stringByExpandingTildeInPath],
+		[WPSettings boolForKey:WPMigratedWired13] ? @"NO" : @"YES",
 		NULL]];
 	[task setStandardOutput:[NSPipe pipe]];
 	[task setStandardError:[task standardOutput]];
 	[task launch];
 	[task waitUntilExit];
 	
-	if([task terminationStatus] == 0)
+	if([task terminationStatus] == 0) {
+		[WPSettings setBool:YES forKey:WPMigratedWired13];
+		
 		return YES;
+	}
 	
 	reason = @"";
 	data = [[[task standardOutput] fileHandleForReading] readDataToEndOfFile];

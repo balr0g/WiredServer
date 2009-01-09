@@ -2,6 +2,7 @@
 
 SOURCE="$1"
 LIBRARY="$2"
+MIGRATE="$3"
 
 install -m 775 -d "$LIBRARY/Wired" || exit 1
 install -m 755 -d "$LIBRARY/Wired/etc" || exit 1
@@ -66,7 +67,13 @@ cat <<EOF >"$LIBRARY/LaunchDaemons/com.zankasoftware.WiredServer.plist"
 </plist>
 EOF
 
-# copy stuff from /Library/Wired
+if [ "$MIGRATE" = "YES" -a "$LIBRARY" != "/Library" ]; then
+	cp "/Library/Wired/banlist" "$LIBRARY/Wired/banlist"
+	cp "/Library/Wired/etc/wired.conf" "$LIBRARY/Wired/etc/wired.conf"
+	cp "/Library/Wired/groups" "$LIBRARY/Wired/groups"
+	cp "/Library/Wired/news" "$LIBRARY/Wired/news"
+	cp "/Library/Wired/users" "$LIBRARY/Wired/users"
+fi
 
 export GROUP=$(id -gn)
 export LIBRARY
