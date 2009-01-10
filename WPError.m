@@ -49,6 +49,14 @@
 				return WPLS(@"Stop Failed", @"WPPreferencePaneStopFailed title");
 				break;
 				
+			case WPPreferencePaneExportFailed:
+				return WPLS(@"Export Failed", @"WPPreferencePaneExportFailed title");
+				break;
+				
+			case WPPreferencePaneImportFailed:
+				return WPLS(@"Import Failed", @"WPPreferencePaneImportFailed title");
+				break;
+				
 			default:
 				break;
 		}
@@ -84,6 +92,14 @@
 			case WPPreferencePaneStopFailed:
 				return [NSSWF:WPLS(@"Wired Server could not be stopped:\n\n%@.", @"WPPreferencePaneStopFailed description (output)"),
 					argument];
+				break;
+				
+			case WPPreferencePaneExportFailed:
+				return WPLS(@"Could not write settings data to file.", @"WPPreferencePaneExportFailed description");
+				break;
+				
+			case WPPreferencePaneImportFailed:
+				return WPLS(@"Could not read settings data from file.", @"WPPreferencePaneExportFailed description");
 				break;
 				
 			default:

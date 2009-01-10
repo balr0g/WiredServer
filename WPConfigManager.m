@@ -45,7 +45,7 @@
 	NSString				*file, *line, *name, *value;
 	
 	config		= [NSMutableDictionary dictionary];
-	file		= [NSString stringWithContentsOfFile:_configPath];
+	file		= [NSString stringWithContentsOfFile:_configPath encoding:NSUTF8StringEncoding error:NULL];
 	enumerator	= [[file componentsSeparatedByString:@"\n"] objectEnumerator];
 	
 	while((line = [enumerator nextObject])) {

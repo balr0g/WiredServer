@@ -26,10 +26,15 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+@class WPWiredManager, WPError;
+
 @interface WPExportManager : WIObject {
-	NSString					*_rootPath;
+	WPWiredManager				*_wiredManager;
 }
 
-- (id)initWithRootPath:(NSString *)rootPath;
+- (id)initWithWiredManager:(WPWiredManager *)wiredManager;
+
+- (BOOL)exportToFile:(NSString *)file error:(WPError **)error;
+- (BOOL)importFromFile:(NSString *)file error:(WPError **)error;
 
 @end

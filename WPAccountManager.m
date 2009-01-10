@@ -44,7 +44,7 @@
 	NSString			*file, *line;
 	
 	accounts		= [NSMutableArray array];
-	file			= [NSString stringWithContentsOfFile:_usersPath];
+	file			= [NSString stringWithContentsOfFile:_usersPath encoding:NSUTF8StringEncoding error:NULL];
 	enumerator		= [[file componentsSeparatedByString:@"\n"] objectEnumerator];
 	
 	while((line = [enumerator nextObject])) {

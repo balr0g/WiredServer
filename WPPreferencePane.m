@@ -44,6 +44,8 @@
 
 - (void)_install;
 - (void)_uninstall;
+- (void)_exportToFile:(NSString *)file;
+- (void)_importFromFile:(NSString *)file;
 
 @end
 
@@ -58,7 +60,7 @@
 	if(version)
 		[_versionTextField setStringValue:version];
 	else
-		[_versionTextField setStringValue:WPLS(@"Wired is not installed", @"Installed version notice")];
+		[_versionTextField setStringValue:WPLS(@"Wired is not installed", @"Installation status")];
 	
 	if([_wiredManager isInstalled]) {
 		[_installButton setTitle:WPLS(@"Uninstall\u2026", @"Uninstall button title")];
@@ -121,34 +123,51 @@
 	NSImage			*image;
 	NSString		*string, *password;
 	
-	string = [_configManager stringForConfigWithName:@"files"];
-	
-	if(string) {
-		image = [[NSWorkspace sharedWorkspace] iconForFile:string];
+	if([_wiredManager isInstalled]) {
+		string = [_configManager stringForConfigWithName:@"files"];
 		
-		[image setSize:NSMakeSize(16.0, 16.0)];
-		
-		[_filesMenuItem setTitle:[[NSFileManager defaultManager] displayNameAtPath:string]];
-		[_filesMenuItem setImage:image];
-		[_filesMenuItem setRepresentedObject:string];
-	}
-	
-	string = [_configManager stringForConfigWithName:@"port"];
-	
-	if(string)
-		[_portTextField setStringValue:string];
-	
-	if([_accountManager hasUserAccountWithName:@"admin" password:&password]) {
-		if([password length] == 0 || [password isEqualToString:[@"" SHA1]]) {
-			[_accountStatusImageView setImage:_redDropImage];
-			[_accountStatusTextField setStringValue:WPLS(@"Account with name \u201cadmin\u201d has no password set", @"Account status")];
-		} else {
-			[_accountStatusImageView setImage:_greenDropImage];
-			[_accountStatusTextField setStringValue:WPLS(@"Account with name \u201cadmin\u201d has a password set", @"Account status")];
+		if(string) {
+			image = [[NSWorkspace sharedWorkspace] iconForFile:string];
+			
+			[image setSize:NSMakeSize(16.0, 16.0)];
+			
+			[_filesMenuItem setTitle:[[NSFileManager defaultManager] displayNameAtPath:string]];
+			[_filesMenuItem setImage:image];
+			[_filesMenuItem setRepresentedObject:string];
 		}
+		
+		string = [_configManager stringForConfigWithName:@"port"];
+		
+		if(string)
+			[_portTextField setStringValue:string];
+		
+		if([_accountManager hasUserAccountWithName:@"admin" password:&password]) {
+			if([password length] == 0 || [password isEqualToString:[@"" SHA1]]) {
+				[_accountStatusImageView setImage:_redDropImage];
+				[_accountStatusTextField setStringValue:WPLS(@"Account with name \u201cadmin\u201d has no password set", @"Account status")];
+			} else {
+				[_accountStatusImageView setImage:_greenDropImage];
+				[_accountStatusTextField setStringValue:WPLS(@"Account with name \u201cadmin\u201d has a password set", @"Account status")];
+			}
+		} else {
+			[_accountStatusImageView setImage:_grayDropImage];
+			[_accountStatusTextField setStringValue:WPLS(@"No account with name \u201cadmin\u201d found", @"Account status")];
+		}
+
+		[_filesPopUpButton setEnabled:YES];
+		[_setPasswordForAdminButton setEnabled:YES];
+		[_createNewAdminUserButton setEnabled:YES];
+		[_exportSettingsButton setEnabled:YES];
+		[_importSettingsButton setEnabled:YES];
 	} else {
 		[_accountStatusImageView setImage:_grayDropImage];
-		[_accountStatusTextField setStringValue:WPLS(@"No account with name \u201cadmin\u201d found", @"Account status")];
+		[_accountStatusTextField setStringValue:WPLS(@"Wired is not installed", @"Account status")];
+
+		[_filesPopUpButton setEnabled:NO];
+		[_setPasswordForAdminButton setEnabled:NO];
+		[_createNewAdminUserButton setEnabled:NO];
+		[_exportSettingsButton setEnabled:NO];
+		[_importSettingsButton setEnabled:NO];
 	}
 }
 
@@ -214,6 +233,7 @@
 	[self _updateInstallationStatus];
 	[self _updateRunningStatus];
 	[self _updatePortStatus];
+	[self _updateSettings];
 
 	[_progressIndicator stopAnimation:self];
 }
@@ -233,8 +253,29 @@
 	[self _updateInstallationStatus];
 	[self _updateRunningStatus];
 	[self _updatePortStatus];
+	[self _updateSettings];
 
 	[_progressIndicator stopAnimation:self];
+}
+
+
+
+- (void)_exportToFile:(NSString *)file {
+	WPError		*error;
+	
+	if(![_exportManager exportToFile:file error:&error])
+		[[error alert] beginSheetModalForWindow:[_exportSettingsButton window]];
+}
+
+
+
+- (void)_importFromFile:(NSString *)file {
+	WPError		*error;
+	
+	if([_exportManager importFromFile:file error:&error])
+		[self _updateSettings];
+	else
+		[[error alert] beginSheetModalForWindow:[_importSettingsButton window]];
 }
 
 @end
@@ -256,7 +297,7 @@
 	_accountManager	= [[WPAccountManager alloc] initWithUsersPath:[_wiredManager pathForFile:@"users"]
 													   groupsPath:[_wiredManager pathForFile:@"groups"]];
 	_configManager	= [[WPConfigManager alloc] initWithConfigPath:[_wiredManager pathForFile:@"etc/wired.conf"]];
-	_exportManager	= [[WPExportManager alloc] initWithRootPath:[_wiredManager rootPath]];
+	_exportManager	= [[WPExportManager alloc] initWithWiredManager:_wiredManager];
 	_logManager		= [[WPLogManager alloc] initWithLogPath:[_wiredManager pathForFile:@"wired.log"]];
 	
 	_portChecker	= [[WPPortChecker alloc] initWithDelegate:self];
@@ -281,6 +322,9 @@
 	[_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 	[_dateFormatter setNaturalLanguageStyle:WIDateFormatterNormalNaturalLanguageStyle];
 	
+	_logLines = [[NSMutableArray alloc] init];
+	_logRows = [[NSMutableArray alloc] init];
+	
 	_logAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:
 		[NSFont fontWithName:@"Monaco" size:9.0],
 			NSFontAttributeName,
@@ -293,8 +337,8 @@
 	
 	[[NSNotificationCenter defaultCenter]
 		addObserver:self
-		   selector:@selector(logLinesDidChange:)
-			   name:WPLogLinesDidChangeNotification];
+		   selector:@selector(logManagerDidReadLines:)
+			   name:WPLogManagerDidReadLinesNotification];
 }
 
 
@@ -337,9 +381,29 @@
 
 
 
-- (void)logLinesDidChange:(NSNotification *)notification {
+- (void)logManagerDidReadLines:(NSNotification *)notification {
+	NSEnumerator	*enumerator;
+	NSString		*line;
+	NSSize			size;
+	NSUInteger		rows;
+	
+	enumerator = [[notification object] objectEnumerator];
+	
+	while((line = [enumerator nextObject])) {
+		rows = 1;
+		size = [line sizeWithAttributes:_logAttributes];
+		
+		while(size.width > [_logTableColumn width]) {
+			size.width -= [_logTableColumn width];
+			rows++;
+		}
+		
+		[_logLines addObject:line];
+		[_logRows addObject:[NSNumber numberWithUnsignedInteger:rows]];
+	}
+	
 	[_logTableView reloadData];
-	[_logTableView scrollRowToVisible:[[_logManager logLines] count] - 1];
+	[_logTableView scrollRowToVisible:[_logLines count] - 1];
 }
 
 
@@ -374,7 +438,7 @@
 							defaultButton:WPLS(@"Cancel", @"Uninstall dialog button title")
 						  alternateButton:WPLS(@"Uninstall", @"Uninstall dialog button title")
 							  otherButton:NULL
-				informativeTextWithFormat:WPLS(@"All your settings, accounts and other server data will be lost.", @"Uninstall dialog description")];
+				informativeTextWithFormat:WPLS(@"All your settings, accounts and other server data will be lost. Export your settings first to be able to restore your data.", @"Uninstall dialog description")];
 	
 	[alert beginSheetModalForWindow:[_installButton window]
 					  modalDelegate:self
@@ -581,31 +645,95 @@
 
 #pragma mark -
 
+- (IBAction)exportSettings:(id)sender {
+	NSSavePanel		*savePanel;
+	NSString		*file;
+	
+	file = [[_configManager stringForConfigWithName:@"name"] stringByAppendingPathExtension:@"wiredSettings"];
+	
+	savePanel = [NSSavePanel savePanel];
+	[savePanel setRequiredFileType:@"wiredSettings"];
+	[savePanel setCanSelectHiddenExtension:YES];
+	[savePanel setCanCreateDirectories:YES];
+	[savePanel setPrompt:NSLS(@"Export", @"Export panel button title")];
+	[savePanel beginSheetForDirectory:NULL
+								 file:file
+					   modalForWindow:[_exportSettingsButton window]
+						modalDelegate:self
+					   didEndSelector:@selector(exportSavePanelDidEnd:returnCode:contextInfo:)
+						  contextInfo:NULL];
+}
+
+
+
+- (void)exportSavePanelDidEnd:(NSSavePanel *)savePanel returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+	if(returnCode == NSOKButton)
+		[self performSelector:@selector(_exportToFile:) withObject:[savePanel filename] afterDelay:0.1];
+}
+
+
+
+- (IBAction)importSettings:(id)sender {
+	NSOpenPanel		*openPanel;
+	
+	openPanel = [NSOpenPanel openPanel];
+	[openPanel setCanChooseFiles:YES];
+	[openPanel setCanChooseDirectories:NO];
+	[openPanel setRequiredFileType:@"wiredSettings"];
+	[openPanel setPrompt:NSLS(@"Import", @"Import panel button title")];
+	[openPanel beginSheetForDirectory:NULL
+								 file:NULL
+								types:[NSArray arrayWithObject:@"wiredSettings"]
+					   modalForWindow:[_importSettingsButton window]
+						modalDelegate:self
+					   didEndSelector:@selector(importOpenPanelDidEnd:returnCode:contextInfo:)
+						  contextInfo:NULL];
+}
+
+
+
+- (void)importOpenPanelDidEnd:(NSOpenPanel *)openPanel returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+	if(returnCode == NSOKButton)
+		[self performSelector:@selector(_importFromFile:) withObject:[openPanel filename] afterDelay:0.1];
+}
+
+
+
+#pragma mark -
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-	return [[_logManager logLines] count];
+	return [_logLines count];
 }
 
 
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-	return [NSAttributedString attributedStringWithString:[[_logManager logLines] objectAtIndex:row]
+	return [NSAttributedString attributedStringWithString:[_logLines objectAtIndex:row]
 											   attributes:_logAttributes];
 }
 
 
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
-	NSSize			size;
-	NSUInteger		rows = 0;
+	if([_logRows count] < (NSUInteger) row)
+		return 12.0;
 	
-	size = [[[_logManager logLines] objectAtIndex:row] sizeWithAttributes:_logAttributes];
+	return [[_logRows objectAtIndex:row] unsignedIntegerValue] * 12.0;
+	
+	NSSize			size;
+	NSUInteger		rows = 1;
+	
+	size = [[_logLines objectAtIndex:row] sizeWithAttributes:_logAttributes];
 	
 	while(size.width > [_logTableColumn width]) {
 		size.width -= [_logTableColumn width];
 		rows++;
 	}
 	
-	return [tableView rowHeight] + (rows * 12.0);
+//	NSLog(@"%u: %u (%f) rows for \"%@\"", row, rows, rows * 12.0, [[_logManager logLines] objectAtIndex:row]);
+	
+//	return (row % 2 == 0) ? 24 : 36;
+	return rows * 12.0;
 }
 
 @end

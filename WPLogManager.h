@@ -26,23 +26,21 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#define WPLogLinesDidChangeNotification		@"WPLogLinesDidChangeNotification"
+#define WPLogManagerDidReadLinesNotification	@"WPLogManagerDidReadLinesNotification"
 
 
 @interface WPLogManager : WIObject {
-	NSString								*_logPath;
-	NSTimer									*_logTimer;
-	NSMutableArray							*_logLines;
+	NSString									*_logPath;
+	NSTimer										*_logTimer;
+	NSMutableArray								*_logLines;
 	
-	NSTask									*_tailTask;
-	FILE									*_tailFile;
+	NSTask										*_tailTask;
+	FILE										*_tailFile;
 }
 
 - (id)initWithLogPath:(NSString *)logPath;
 
 - (void)startReadingFromLog;
 - (void)stopReadingFromLog;
-
-- (NSArray *)logLines;
 
 @end

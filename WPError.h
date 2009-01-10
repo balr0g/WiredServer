@@ -33,7 +33,9 @@ enum _WPPreferencePaneErrors {
 	WPPreferencePaneInstallFailed,
 	WPPreferencePaneUninstallFailed,
 	WPPreferencePaneStartFailed,
-	WPPreferencePaneStopFailed
+	WPPreferencePaneStopFailed,
+	WPPreferencePaneExportFailed,
+	WPPreferencePaneImportFailed
 };
 
 

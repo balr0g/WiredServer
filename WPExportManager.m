@@ -26,14 +26,23 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "WPError.h"
 #import "WPExportManager.h"
+#import "WPWiredManager.h"
+
+#define WPExportManagerBanlist				@"WPBanlist"
+#define WPExportManagerConfig				@"WPConfig"
+#define WPExportManagerGroups				@"WPGroups"
+#define WPExportManagerNews					@"WPNews"
+#define WPExportManagerUsers				@"WPUsers"
+
 
 @implementation WPExportManager
 
-- (id)initWithRootPath:(NSString *)rootPath {
+- (id)initWithWiredManager:(WPWiredManager *)wiredManager {
 	self = [super init];
 	
-	_rootPath = [rootPath retain];
+	_wiredManager = [wiredManager retain];
 	
 	return self;
 }
@@ -41,9 +50,92 @@
 
 
 - (void)dealloc {
-	[_rootPath release];
+	[_wiredManager release];
 	
 	[super dealloc];
+}
+
+
+
+#pragma mark -
+
+- (BOOL)exportToFile:(NSString *)file error:(WPError **)error {
+	NSEnumerator			*enumerator;
+	NSMutableDictionary		*dictionary;
+	NSDictionary			*files;
+	NSString				*string, *key, *value;
+	
+	dictionary = [NSMutableDictionary dictionary];
+
+	files = [NSDictionary dictionaryWithObjectsAndKeys:
+		@"banlist",			WPExportManagerBanlist,
+		@"etc/wired.conf",	WPExportManagerConfig,
+		@"groups",			WPExportManagerGroups,
+		@"news",			WPExportManagerNews,
+		@"users",			WPExportManagerUsers,
+		NULL];
+	
+	enumerator	= [files keyEnumerator];
+	
+	while((key = [enumerator nextObject])) {
+		value	= [files objectForKey:key];
+		string	= [NSString stringWithContentsOfFile:[_wiredManager pathForFile:value]
+											encoding:NSUTF8StringEncoding
+											   error:(NSError **) error];
+		
+		if(!string)
+			return NO;
+		
+		[dictionary setObject:[string dataUsingEncoding:NSUTF8StringEncoding] forKey:key];
+	}
+	
+	if(![dictionary writeToFile:file atomically:YES]) {
+		*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneExportFailed];
+		
+		return NO;
+	}
+	
+	return YES;
+}
+
+
+
+- (BOOL)importFromFile:(NSString *)file error:(WPError **)error {
+	NSEnumerator		*enumerator;
+	NSDictionary		*dictionary, *files;
+	NSString			*string, *key, *value;
+	
+	dictionary = [NSDictionary dictionaryWithContentsOfFile:file];
+	
+	if(!dictionary) {
+		*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneImportFailed];
+		
+		return NO;
+	}
+	
+	files = [NSDictionary dictionaryWithObjectsAndKeys:
+		@"banlist",			WPExportManagerBanlist,
+		@"etc/wired.conf",	WPExportManagerConfig,
+		@"groups",			WPExportManagerGroups,
+		@"news",			WPExportManagerNews,
+		@"users",			WPExportManagerUsers,
+		NULL];
+	
+	enumerator = [files keyEnumerator];
+
+	while((key = [enumerator nextObject])) {
+		value	= [files objectForKey:key];
+		string	= [NSString stringWithData:[dictionary objectForKey:key] encoding:NSUTF8StringEncoding];
+		
+		if(![string writeToFile:[_wiredManager pathForFile:value]
+					 atomically:YES
+					   encoding:NSUTF8StringEncoding
+						  error:(NSError **) error]) {
+			return NO;
+		}
+	}
+	
+	return YES;
 }
 
 @end

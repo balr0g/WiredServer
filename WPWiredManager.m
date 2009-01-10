@@ -79,7 +79,9 @@
 	NSString		*string, *command;
 	BOOL			running = NO;
 	
-	string = [NSString stringWithContentsOfFile:[self pathForFile:@"wired.pid"]];
+	string = [NSString stringWithContentsOfFile:[self pathForFile:@"wired.pid"]
+									   encoding:NSUTF8StringEncoding
+										  error:NULL];
 	
 	if(string) {
 		command = [[NSWorkspace sharedWorkspace] commandForProcessIdentifier:[string unsignedIntValue]];
@@ -109,7 +111,9 @@
 	NSArray			*status;
 	NSDate			*date;
 	
-	string = [NSString stringWithContentsOfFile:[self pathForFile:@"wired.status"]];
+	string = [NSString stringWithContentsOfFile:[self pathForFile:@"wired.status"]
+									   encoding:NSUTF8StringEncoding
+										  error:NULL];
 	
 	if(status) {
 		status = [string componentsSeparatedByString:@" "];

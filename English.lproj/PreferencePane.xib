@@ -8,8 +8,8 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="2"/>
 			<integer value="129"/>
+			<integer value="10"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -763,7 +763,7 @@
 												<reference key="NSSuperview" ref="265851423"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSButtonCell" key="NSCell" id="791351621">
-													<int key="NSCellFlags">604110336</int>
+													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">134217728</int>
 													<string type="base64-UTF8" key="NSContents">RXhwb3J0IFNldHRpbmdz4oCmA</string>
 													<reference key="NSSupport" ref="72208873"/>
@@ -783,7 +783,7 @@
 												<reference key="NSSuperview" ref="265851423"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSButtonCell" key="NSCell" id="63380967">
-													<int key="NSCellFlags">604110336</int>
+													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">134217728</int>
 													<string type="base64-UTF8" key="NSContents">SW1wb3J0IFNldHRpbmdz4oCmA</string>
 													<reference key="NSSupport" ref="72208873"/>
@@ -1358,6 +1358,38 @@
 						<reference key="destination" ref="103122228"/>
 					</object>
 					<int key="connectionID">172</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">exportSettings:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="812654401"/>
+					</object>
+					<int key="connectionID">173</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">importSettings:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="454875007"/>
+					</object>
+					<int key="connectionID">174</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_exportSettingsButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="812654401"/>
+					</object>
+					<int key="connectionID">175</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_importSettingsButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="454875007"/>
+					</object>
+					<int key="connectionID">176</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2325,7 +2357,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">172</int>
+			<int key="maxID">176</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2347,6 +2379,8 @@
 							<string>checkForUpdate:</string>
 							<string>checkPortAgain:</string>
 							<string>createNewAdminUser:</string>
+							<string>exportSettings:</string>
+							<string>importSettings:</string>
 							<string>install:</string>
 							<string>launchAutomatically:</string>
 							<string>openLog:</string>
@@ -2373,6 +2407,8 @@
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
+							<string>id</string>
+							<string>id</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
@@ -2383,8 +2419,10 @@
 							<string>_accountStatusTextField</string>
 							<string>_checkPortAgain</string>
 							<string>_createNewAdminUserButton</string>
+							<string>_exportSettingsButton</string>
 							<string>_filesMenuItem</string>
 							<string>_filesPopUpButton</string>
+							<string>_importSettingsButton</string>
 							<string>_installButton</string>
 							<string>_launchAutomaticallyButton</string>
 							<string>_logTableColumn</string>
@@ -2410,8 +2448,10 @@
 							<string>NSTextField</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
+							<string>NSButton</string>
 							<string>NSMenuItem</string>
 							<string>NSPopUpButton</string>
+							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSTableColumn</string>

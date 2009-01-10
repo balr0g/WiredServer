@@ -56,6 +56,9 @@
 	IBOutlet NSButton					*_setPasswordForAdminButton;
 	IBOutlet NSButton					*_createNewAdminUserButton;
 	
+	IBOutlet NSButton					*_exportSettingsButton;
+	IBOutlet NSButton					*_importSettingsButton;
+	
 	IBOutlet NSPanel					*_passwordPanel;
 	IBOutlet NSSecureTextField			*_newPasswordTextField;
 	IBOutlet NSSecureTextField			*_verifyPasswordTextField;
@@ -79,6 +82,8 @@
 	
 	WIDateFormatter						*_dateFormatter;
 	NSDate								*_installDate;
+	NSMutableArray						*_logLines;
+	NSMutableArray						*_logRows;
 	NSDictionary						*_logAttributes;
 }
 
@@ -101,6 +106,7 @@
 - (IBAction)createNewAdminUser:(id)sender;
 - (IBAction)submitPasswordSheet:(id)sender;
 
-
+- (IBAction)exportSettings:(id)sender;
+- (IBAction)importSettings:(id)sender;
 
 @end

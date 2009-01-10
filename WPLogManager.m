@@ -80,22 +80,26 @@
 #pragma mark -
 
 - (void)logTimer:(NSTimer *)timer {
-	NSString		*string;
-	NSUInteger		lines = 0;
-	char			buffer[1024];
+	NSMutableArray		*lines = NULL;
+	NSString			*string;
+	char				buffer[1024];
 	
 	if(_tailFile > 0) {
 		while(fgets(buffer, sizeof(buffer), _tailFile) != NULL) {
-			string = [NSString stringWithUTF8String:buffer];
+			string = [[NSString stringWithUTF8String:buffer] stringByTrimmingCharactersInSet:
+				[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 			
-			[_logLines addObject:string];
-			
-			lines++;
+			if([string length] > 0) {
+				if(!lines)
+					lines = [NSMutableArray array];
+				
+				[lines addObject:string];
+			}
 		}
-		
-		if(lines > 0)
-			[[NSNotificationCenter defaultCenter] postNotificationName:WPLogLinesDidChangeNotification object:self];
 	}
+
+	if(lines)
+		[[NSNotificationCenter defaultCenter] postNotificationName:WPLogManagerDidReadLinesNotification object:lines];
 }
 
 
@@ -131,14 +135,6 @@
 	
 	fclose(_tailFile);
 	_tailFile = NULL;
-}
-
-
-
-#pragma mark -
-
-- (NSArray *)logLines {
-	return _logLines;
 }
 
 @end
