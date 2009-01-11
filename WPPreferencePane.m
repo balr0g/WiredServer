@@ -503,6 +503,7 @@
 	openPanel = [NSOpenPanel openPanel];
 	[openPanel setCanChooseFiles:NO];
 	[openPanel setCanChooseDirectories:YES];
+	[openPanel setCanCreateDirectories:YES];
 	[openPanel setTitle:WPLS(@"Select Files", @"Files dialog title")];
 	[openPanel setPrompt:WPLS(@"Select", @"Files dialog button title")];
 	[openPanel beginSheetForDirectory:[_filesMenuItem representedObject]
