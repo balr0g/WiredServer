@@ -86,7 +86,7 @@
 		if(!string)
 			return NO;
 		
-		[dictionary setObject:[string dataUsingEncoding:NSUTF8StringEncoding] forKey:key];
+		[dictionary setObject:string forKey:key];
 	}
 	
 	if(![dictionary writeToFile:file atomically:YES]) {
@@ -125,7 +125,7 @@
 
 	while((key = [enumerator nextObject])) {
 		value	= [files objectForKey:key];
-		string	= [NSString stringWithData:[dictionary objectForKey:key] encoding:NSUTF8StringEncoding];
+		string	= [dictionary objectForKey:key];
 		
 		if(![string writeToFile:[_wiredManager pathForFile:value]
 					 atomically:YES
