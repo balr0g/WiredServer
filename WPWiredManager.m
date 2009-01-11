@@ -259,9 +259,16 @@
 
 #pragma mark -
 
-- (void)sendServerSIGHUP {
+- (void)makeServerReloadConfig {
 	if([self isRunning])
 		kill(_pid, SIGHUP);
+}
+
+
+
+- (void)makeServerIndexFiles {
+	if([self isRunning])
+		kill(_pid, SIGUSR2);
 }
 
 

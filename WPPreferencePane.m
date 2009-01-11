@@ -518,10 +518,12 @@
 	WPError		*error;
 	
 	if(returnCode == NSOKButton) {
-		if([_configManager setString:[openPanel filename] forConfigWithName:@"files" andWriteWithError:&error])
-			[_wiredManager sendServerSIGHUP];
-		else
+		if([_configManager setString:[openPanel filename] forConfigWithName:@"files" andWriteWithError:&error]) {
+			[_wiredManager makeServerReloadConfig];
+			[_wiredManager makeServerIndexFiles];
+		} else {
 			[[error alert] beginSheetModalForWindow:[_filesPopUpButton window]];
+		}
 		
 		[self _updateSettings];
 	}

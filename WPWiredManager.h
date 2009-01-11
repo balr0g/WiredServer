@@ -51,7 +51,8 @@
 - (void)setLaunchesAutomatically:(BOOL)launchesAutomatically;
 - (BOOL)launchesAutomatically;
 
-- (void)sendServerSIGHUP;
+- (void)makeServerReloadConfig;
+- (void)makeServerIndexFiles;
 
 - (BOOL)installWithError:(WPError **)error;
 - (BOOL)uninstallWithError:(WPError **)error;
