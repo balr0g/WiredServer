@@ -162,9 +162,14 @@
 	
 	accounts	= [NSMutableArray array];
 	enumerator	= [[self _readUserAccounts] objectEnumerator];
-	account		= [[NSSWF:@"%@:%@::1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:0:0:0:0:1",
-							name, [password SHA1]]
-				   componentsSeparatedByString:@":"];
+	account		= [NSArray arrayWithObjects:
+		name,
+		[password SHA1],
+		@"",
+		@"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"0", @"0", @"0", @"0", @"0", @"1",
+		@"", @"Administrator", @"", @"", @"", @"", @"",
+		@"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"0", @"1", @"1", @"1", @"1", @"0", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1",
+		NULL];
 	
 	[accounts addObject:account];
 	
