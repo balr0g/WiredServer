@@ -35,11 +35,11 @@
 	
 	_logPath	= [logPath retain];
 	_logLines	= [[NSMutableArray alloc] initWithCapacity:10000];
-	_logTimer	 = [[NSTimer scheduledTimerWithTimeInterval:0.33
-												   target:self
-												 selector:@selector(logTimer:)
-												 userInfo:NULL
-												  repeats:YES] retain];
+	_logTimer	= [[NSTimer scheduledTimerWithTimeInterval:1.0
+													target:self
+												   selector:@selector(logTimer:)
+												   userInfo:NULL
+													repeats:YES] retain];
 	
 	[[NSNotificationCenter defaultCenter]
 		addObserver:self
@@ -116,7 +116,7 @@
 	[_tailTask setStandardOutput:[NSPipe pipe]];
 	[_tailTask setStandardError:[_tailTask standardOutput]];
 	[_tailTask launch];
-
+	
 	fileHandle		= [[_tailTask standardOutput] fileHandleForReading];
 	fd				= [fileHandle fileDescriptor];
 	
