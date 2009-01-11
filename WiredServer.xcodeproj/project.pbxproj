@@ -195,7 +195,6 @@
 		77E8501A0E4C606D0011688C /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A503354A0864C15D00CE6911 /* wired.sh */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.script.sh; path = wired.sh; sourceTree = "<group>"; };
 		A519E5E609782F18002A9A5C /* wired */ = {isa = PBXFileReference; lastKnownFileType = folder; path = wired; sourceTree = "<group>"; };
-		A540687705CDC46100068FBB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		A57761700F168F6300C659DB /* WPAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPAccountManager.h; sourceTree = "<group>"; };
 		A57761710F168F6300C659DB /* WPAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPAccountManager.m; sourceTree = "<group>"; };
 		A58841E10BF39E7F00AA20E8 /* WiredAdditions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WiredAdditions; sourceTree = "<group>"; };
@@ -208,7 +207,6 @@
 		A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WiredAdditions.xcodeproj; path = WiredAdditions/WiredAdditions.xcodeproj; sourceTree = SOURCE_ROOT; };
 		A5C35DDE0F16CD8300886FC9 /* WPSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPSettings.h; sourceTree = "<group>"; };
 		A5C35DDF0F16CD8300886FC9 /* WPSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPSettings.m; sourceTree = "<group>"; };
-		A5E4AAE30794812C00FA127F /* WiredAdditions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WiredAdditions.framework; path = WiredAdditions/build/WiredAdditions.framework; sourceTree = SOURCE_ROOT; };
 		A5FEE2FF0B78787900199A37 /* install.sh */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.script.sh; path = install.sh; sourceTree = "<group>"; };
 		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -256,8 +254,6 @@
 			children = (
 				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
 				F506C035013D953901CA16C8 /* PreferencePanes.framework */,
-				A540687705CDC46100068FBB /* Security.framework */,
-				A5E4AAE30794812C00FA127F /* WiredAdditions.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -735,6 +731,16 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = WPConfigurationTest;
+				MACOSX_DEPLOYMENT_TARGET = "$(inherited)";
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[arch=ppc64]" = 10.5;
+				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
+				SDKROOT = "";
+				"SDKROOT[arch=i386]" = macosx10.4;
+				"SDKROOT[arch=ppc64]" = macosx10.5;
+				"SDKROOT[arch=ppc]" = macosx10.4;
+				"SDKROOT[arch=x86_64]" = macosx10.5;
 			};
 			name = Test/Universal;
 		};
@@ -774,6 +780,16 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = WPConfigurationDebug;
+				MACOSX_DEPLOYMENT_TARGET = "$(inherited)";
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[arch=ppc64]" = 10.5;
+				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
+				SDKROOT = "";
+				"SDKROOT[arch=i386]" = macosx10.4;
+				"SDKROOT[arch=ppc64]" = macosx10.5;
+				"SDKROOT[arch=ppc]" = macosx10.4;
+				"SDKROOT[arch=x86_64]" = macosx10.5;
 			};
 			name = Debug/Native;
 		};
@@ -786,6 +802,16 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = WPConfigurationRelease;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				MACOSX_DEPLOYMENT_TARGET = "$(inherited)";
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[arch=ppc64]" = 10.5;
+				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
+				SDKROOT = "";
+				"SDKROOT[arch=i386]" = macosx10.4;
+				"SDKROOT[arch=ppc64]" = macosx10.5;
+				"SDKROOT[arch=ppc]" = macosx10.4;
+				"SDKROOT[arch=x86_64]" = macosx10.5;
 			};
 			name = Release/Universal;
 		};
