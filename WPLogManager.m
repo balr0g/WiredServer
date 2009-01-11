@@ -110,6 +110,9 @@
 	NSFileHandle	*fileHandle;
 	int				fd;
 	
+	if(_tailTask)
+		return;
+	
 	_tailTask = [[NSTask alloc] init];
 	[_tailTask setLaunchPath:@"/usr/bin/tail"];
 	[_tailTask setArguments:[NSArray arrayWithObjects:@"-100", @"-f", _logPath, NULL]];
