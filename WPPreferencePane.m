@@ -141,6 +141,18 @@
 		if(string)
 			[_portTextField setStringValue:string];
 		
+		if([NSApp systemVersion] >= 0x1050) {
+			string = [_configManager stringForConfigWithName:@"map port"];
+			
+			if(string)
+				[_mapPortAutomaticallyButton setState:[string isEqualToString:@"yes"] ? NSOnState : NSOffState];
+
+			[_mapPortAutomaticallyButton setEnabled:YES];
+		} else {
+			[_mapPortAutomaticallyButton setState:NSOffState];
+			[_mapPortAutomaticallyButton setEnabled:NO];
+		}
+		
 		if([_accountManager hasUserAccountWithName:@"admin" password:&password]) {
 			if([password length] == 0 || [password isEqualToString:[@"" SHA1]]) {
 				[_accountStatusImageView setImage:_redDropImage];
@@ -155,6 +167,8 @@
 		}
 
 		[_filesPopUpButton setEnabled:YES];
+		[_portTextField setEnabled:YES];
+		[_checkPortAgainButton setEnabled:YES];
 		[_setPasswordForAdminButton setEnabled:YES];
 		[_createNewAdminUserButton setEnabled:YES];
 		[_exportSettingsButton setEnabled:YES];
@@ -164,6 +178,9 @@
 		[_accountStatusTextField setStringValue:WPLS(@"Wired is not installed", @"Account status")];
 
 		[_filesPopUpButton setEnabled:NO];
+		[_portTextField setEnabled:NO];
+		[_mapPortAutomaticallyButton setEnabled:NO];
+		[_checkPortAgainButton setEnabled:NO];
 		[_setPasswordForAdminButton setEnabled:NO];
 		[_createNewAdminUserButton setEnabled:NO];
 		[_exportSettingsButton setEnabled:NO];
@@ -540,6 +557,20 @@
 	WPError		*error;
 	
 	if(![_configManager setString:[_portTextField stringValue] forConfigWithName:@"port" andWriteWithError:&error])
+		[[error alert] beginSheetModalForWindow:[_portTextField window]];
+	
+	[self _updateSettings];
+}
+
+
+
+- (IBAction)mapPortAutomatically:(id)sender {
+	NSInteger	state;
+	WPError		*error;
+	
+	state = [_mapPortAutomaticallyButton state];
+	
+	if(![_configManager setString:state ? @"yes" : @"no" forConfigWithName:@"map port" andWriteWithError:&error])
 		[[error alert] beginSheetModalForWindow:[_portTextField window]];
 	
 	[self _updateSettings];
