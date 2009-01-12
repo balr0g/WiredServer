@@ -2,7 +2,7 @@
 
 PATH="/opt/local/bin:/usr/local/bin:$PATH"
 CFLAGS="-gdwarf-2"
-LDFLAGS="-Wl,-U -Wl,_DNSServiceNATPortMappingCreate"
+LDFLAGS="-Wl,-U -Wl,_DNSServiceNATPortMappingCreate -flat_namespace"
 
 if echo $CONFIGURATION | grep -q Debug; then
 	CFLAGS="$CFLAGS -O0"
