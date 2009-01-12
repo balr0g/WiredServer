@@ -52,14 +52,12 @@ cat <<EOF >"$LIBRARY/LaunchDaemons/com.zankasoftware.WiredServer.plist"
 	<string>com.zankasoftware.WiredServer</string>
 	<key>OnDemand</key>
 	<false/>
-	<key>Program</key>
-	<string>$LIBRARY/Wired/wired</string>
 	<key>ProgramArguments</key>
 	<array>
 		<string>$LIBRARY/Wired/wired</string>
+		<string>-x</string>
 		<string>-d</string>
 		<string>$LIBRARY/Wired</string>
-		<string>-X</string>
 		<string>-l</string>
 		<string>-L</string>
 		<string>$LIBRARY/Wired/wired.log</string>
@@ -68,6 +66,8 @@ cat <<EOF >"$LIBRARY/LaunchDaemons/com.zankasoftware.WiredServer.plist"
 	</array>
 	<key>RunAtLoad</key>
 	<true/>
+	<key>WorkingDirectory</key>
+	<string>$LIBRARY/Wired</string>
 </dict>
 </plist>
 EOF
