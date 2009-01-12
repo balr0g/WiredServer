@@ -146,6 +146,8 @@
 			
 			if(string)
 				[_mapPortAutomaticallyButton setState:[string isEqualToString:@"yes"] ? NSOnState : NSOffState];
+			else
+				[_mapPortAutomaticallyButton setState:NSOnState];
 
 			[_mapPortAutomaticallyButton setEnabled:YES];
 		} else {
