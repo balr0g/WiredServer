@@ -62,7 +62,7 @@ cp "/tmp/wired.universal" "$TARGET_TEMP_DIR/run/$MASTER/wired/wired"
 
 mkdir -p "$TARGET_TEMP_DIR/run/$MASTER/wired/files/Drop Box/.wired" "$TARGET_TEMP_DIR/run/$MASTER/wired/files/Uploads/.wired"
 
-for i in banlist "files/Drop Box/.wired/type" "files/Uploads/.wired/type" groups news users wired.xml; do
+for i in "banlist" "banner.png" "files/Drop Box/.wired/type" "files/Uploads/.wired/type" "groups" "news" "users" "wired.xml"; do
 	cp "$SRCROOT/wired/run/$i" "$TARGET_TEMP_DIR/run/$MASTER/wired/$i"
 done
 

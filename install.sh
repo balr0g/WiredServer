@@ -12,6 +12,10 @@ if [ ! -f "$LIBRARY/Wired/banlist" ]; then
 	install -m 644 "$SOURCE/Wired/banlist" "$LIBRARY/Wired" || exit 1
 fi
 
+if [ ! -f "$LIBRARY/Wired/banner.png" ]; then
+	install -m 644 "$SOURCE/Wired/banner.png" "$LIBRARY/Wired" || exit 1
+fi
+
 if [ ! -f "$LIBRARY/Wired/etc/wired.conf" ]; then
 	install -m 644 "$SOURCE/Wired/etc/wired.conf" "$LIBRARY/Wired/etc" || exit 1
 fi
@@ -70,6 +74,7 @@ EOF
 
 if [ "$MIGRATE" = "YES" -a "$LIBRARY" != "/Library" ]; then
 	cp "/Library/Wired/banlist" "$LIBRARY/Wired/banlist"
+	cp "/Library/Wired/banner.png" "$LIBRARY/Wired/banner.png"
 	cp "/Library/Wired/etc/wired.conf" "$LIBRARY/Wired/etc/wired.conf"
 	cp "/Library/Wired/groups" "$LIBRARY/Wired/groups"
 	cp "/Library/Wired/news" "$LIBRARY/Wired/news"
