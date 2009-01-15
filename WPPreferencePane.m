@@ -685,10 +685,10 @@
 	NSSavePanel		*savePanel;
 	NSString		*file;
 	
-	file = [[_configManager stringForConfigWithName:@"name"] stringByAppendingPathExtension:@"wiredSettings"];
+	file = [[_configManager stringForConfigWithName:@"name"] stringByAppendingPathExtension:@"WiredSettings"];
 	
 	savePanel = [NSSavePanel savePanel];
-	[savePanel setRequiredFileType:@"wiredSettings"];
+	[savePanel setRequiredFileType:@"WiredSettings"];
 	[savePanel setCanSelectHiddenExtension:YES];
 	[savePanel setCanCreateDirectories:YES];
 	[savePanel setPrompt:NSLS(@"Export", @"Export panel button title")];
@@ -715,11 +715,11 @@
 	openPanel = [NSOpenPanel openPanel];
 	[openPanel setCanChooseFiles:YES];
 	[openPanel setCanChooseDirectories:NO];
-	[openPanel setRequiredFileType:@"wiredSettings"];
+	[openPanel setRequiredFileType:@"WiredSettings"];
 	[openPanel setPrompt:NSLS(@"Import", @"Import panel button title")];
 	[openPanel beginSheetForDirectory:NULL
 								 file:NULL
-								types:[NSArray arrayWithObject:@"wiredSettings"]
+								types:[NSArray arrayWithObject:@"WiredSettings"]
 					   modalForWindow:[_importSettingsButton window]
 						modalDelegate:self
 					   didEndSelector:@selector(importOpenPanelDidEnd:returnCode:contextInfo:)
