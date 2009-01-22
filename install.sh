@@ -5,8 +5,6 @@ LIBRARY="$2"
 MIGRATE="$3"
 
 install -m 775 -d "$LIBRARY/Wired" || exit 1
-install -m 755 -d "$LIBRARY/Wired/etc" || exit 1
-install -m 755 -d "$LIBRARY/Wired/files" || exit 1
 
 if [ ! -f "$LIBRARY/Wired/banlist" ]; then
 	install -m 644 "$SOURCE/Wired/banlist" "$LIBRARY/Wired" || exit 1
@@ -16,9 +14,21 @@ if [ ! -f "$LIBRARY/Wired/banner.png" ]; then
 	install -m 644 "$SOURCE/Wired/banner.png" "$LIBRARY/Wired" || exit 1
 fi
 
-if [ ! -f "$LIBRARY/Wired/etc/wired.conf" ]; then
+if [ ! -d "$LIBRARY/Wired/board/" ]; then
+	install -m 755 -d "$LIBRARY/Wired/board" || exit 1
+	install -m 755 -d "$LIBRARY/Wired/board/General" || exit 1
+	install -m 755 -d "$LIBRARY/Wired/board/General/.wired" || exit 1
+	install -m 644 "$SOURCE/Wired/board/General/.wired/permissions" "$LIBRARY/Wired/board/General/.wired/" || exit 1
+	install -m 755 -d "$LIBRARY/Wired/board/General/BC5B30BF-AC4F-4FEE-BB92-C5F3A5436E18.WiredThread/" || exit 1
+	install -m 644 "$SOURCE/Wired/board/General/BC5B30BF-AC4F-4FEE-BB92-C5F3A5436E18.WiredThread/AD70D7CB-F789-4030-A92F-40D546DBE1D9.WiredPost" "$LIBRARY/Wired/board/General/BC5B30BF-AC4F-4FEE-BB92-C5F3A5436E18.WiredThread/" || exit 1
+fi
+
+if [ ! -d "$LIBRARY/Wired/etc/" ]; then
+	install -m 755 -d "$LIBRARY/Wired/etc/" || exit 1
 	install -m 644 "$SOURCE/Wired/etc/wired.conf" "$LIBRARY/Wired/etc" || exit 1
 fi
+
+install -m 755 -d "$LIBRARY/Wired/files/" || exit 1
 
 if [ ! -f "$LIBRARY/Wired/groups" ]; then
 	install -m 644 "$SOURCE/Wired/groups" "$LIBRARY/Wired" || exit 1
