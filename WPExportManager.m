@@ -30,10 +30,11 @@
 #import "WPExportManager.h"
 #import "WPWiredManager.h"
 
+// TODO: serialize boards/ directory in some way
+
 #define WPExportManagerBanlist				@"WPBanlist"
 #define WPExportManagerConfig				@"WPConfig"
 #define WPExportManagerGroups				@"WPGroups"
-#define WPExportManagerNews					@"WPNews"
 #define WPExportManagerUsers				@"WPUsers"
 
 
@@ -71,7 +72,6 @@
 		@"banlist",			WPExportManagerBanlist,
 		@"etc/wired.conf",	WPExportManagerConfig,
 		@"groups",			WPExportManagerGroups,
-		@"news",			WPExportManagerNews,
 		@"users",			WPExportManagerUsers,
 		NULL];
 	
@@ -117,7 +117,6 @@
 		@"banlist",			WPExportManagerBanlist,
 		@"etc/wired.conf",	WPExportManagerConfig,
 		@"groups",			WPExportManagerGroups,
-		@"news",			WPExportManagerNews,
 		@"users",			WPExportManagerUsers,
 		NULL];
 	
