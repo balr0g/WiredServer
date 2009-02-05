@@ -34,10 +34,6 @@ if [ ! -f "$LIBRARY/Wired/groups" ]; then
 	install -m 644 "$SOURCE/Wired/groups" "$LIBRARY/Wired" || exit 1
 fi
 
-if [ ! -f "$LIBRARY/Wired/news" ]; then
-	install -m 644 "$SOURCE/Wired/news" "$LIBRARY/Wired" || exit 1
-fi
-
 if [ ! -f "$LIBRARY/Wired/users" ]; then
 	install -m 644 "$SOURCE/Wired/users" "$LIBRARY/Wired" || exit 1
 fi
