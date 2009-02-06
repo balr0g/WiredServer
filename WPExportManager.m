@@ -30,9 +30,8 @@
 #import "WPExportManager.h"
 #import "WPWiredManager.h"
 
-// TODO: serialize boards/ directory in some way
-
 #define WPExportManagerBanlist				@"WPBanlist"
+#define WPExportManagerBoard				@"WPBoard"
 #define WPExportManagerConfig				@"WPConfig"
 #define WPExportManagerGroups				@"WPGroups"
 #define WPExportManagerUsers				@"WPUsers"
@@ -64,7 +63,9 @@
 	NSEnumerator			*enumerator;
 	NSMutableDictionary		*dictionary;
 	NSDictionary			*files;
-	NSString				*string, *key, *value;
+	NSTask					*task;
+	NSData					*data;
+	NSString				*string, *key, *value, *zipfile;
 	
 	dictionary = [NSMutableDictionary dictionary];
 
@@ -75,7 +76,7 @@
 		@"users",			WPExportManagerUsers,
 		NULL];
 	
-	enumerator	= [files keyEnumerator];
+	enumerator = [files keyEnumerator];
 	
 	while((key = [enumerator nextObject])) {
 		value	= [files objectForKey:key];
@@ -87,6 +88,46 @@
 			return NO;
 		
 		[dictionary setObject:string forKey:key];
+	}
+	
+	if(![[NSFileManager defaultManager] changeCurrentDirectoryPath:[_wiredManager rootPath]]) {
+		*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneExportFailed];
+		
+		return NO;
+	}
+	
+	files = [NSDictionary dictionaryWithObjectsAndKeys:
+		@"board",			WPExportManagerBoard,
+		NULL];
+	
+	enumerator = [files keyEnumerator];
+	
+	while((key = [enumerator nextObject])) {
+		value		= [files objectForKey:key];
+		zipfile		= [NSFileManager temporaryPathWithPrefix:@"WiredSettings"];
+		task		= [NSTask launchedTaskWithLaunchPath:@"/usr/bin/zip"
+										 arguments:[NSArray arrayWithObjects:
+														@"-r",
+														zipfile,
+														value,
+														NULL]];
+		
+		[task waitUntilExit];
+		
+		if([task terminationStatus] != 0) {
+			*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneExportFailed];
+			
+			return NO;
+		}
+		
+		data = [NSData dataWithContentsOfFile:[zipfile stringByAppendingPathExtension:@"zip"]
+									  options:0
+										error:error];
+		
+		if(!data)
+			return NO;
+		
+		[dictionary setObject:data forKey:key];
 	}
 	
 	if(![dictionary writeToFile:file atomically:YES]) {
@@ -103,7 +144,9 @@
 - (BOOL)importFromFile:(NSString *)file error:(WPError **)error {
 	NSEnumerator		*enumerator;
 	NSDictionary		*dictionary, *files;
-	NSString			*string, *key, *value;
+	NSTask				*task;
+	NSData				*data;
+	NSString			*string, *key, *value, *zipfile;
 	
 	dictionary = [NSDictionary dictionaryWithContentsOfFile:file];
 	
@@ -130,6 +173,50 @@
 					 atomically:YES
 					   encoding:NSUTF8StringEncoding
 						  error:(NSError **) error]) {
+			return NO;
+		}
+	}
+	
+	if(![[NSFileManager defaultManager] changeCurrentDirectoryPath:[_wiredManager rootPath]]) {
+		*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneImportFailed];
+		
+		return NO;
+	}
+
+	files = [NSDictionary dictionaryWithObjectsAndKeys:
+		@"board",			WPExportManagerBoard,
+		NULL];
+	
+	enumerator = [files keyEnumerator];
+
+	while((key = [enumerator nextObject])) {
+		value = [files objectForKey:key];
+		
+		if([[NSFileManager defaultManager] fileExistsAtPath:[_wiredManager pathForFile:value]]) {
+			if(![[NSFileManager defaultManager] removeFileAtPath:[_wiredManager pathForFile:value] handler:NULL]) {
+				*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneImportFailed];
+				
+				return NO;
+			}
+		}
+		
+		data		= [dictionary objectForKey:key];
+		zipfile		= [NSFileManager temporaryPathWithPrefix:@"WiredSettings"];
+		
+		if(![data writeToFile:zipfile options:0 error:error])
+			return NO;
+		
+		task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/unzip"
+										arguments:[NSArray arrayWithObjects:
+													@"-o",
+													zipfile,
+													NULL]];
+		
+		[task waitUntilExit];
+
+		if([task terminationStatus] != 0) {
+			*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneImportFailed];
+			
 			return NO;
 		}
 	}
