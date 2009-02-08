@@ -742,6 +742,7 @@
 				"SDKROOT[arch=ppc64]" = macosx10.5;
 				"SDKROOT[arch=ppc]" = macosx10.4;
 				"SDKROOT[arch=x86_64]" = macosx10.5;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Test/Universal;
 		};
@@ -791,6 +792,7 @@
 				"SDKROOT[arch=ppc64]" = macosx10.5;
 				"SDKROOT[arch=ppc]" = macosx10.4;
 				"SDKROOT[arch=x86_64]" = macosx10.5;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug/Native;
 		};
