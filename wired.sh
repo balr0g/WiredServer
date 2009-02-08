@@ -1,8 +1,13 @@
 #!/bin/sh
 
 PATH="/opt/local/bin:/usr/local/bin:$PATH"
-CFLAGS="-gdwarf-2"
 LDFLAGS="-Wl,-U -Wl,_DNSServiceNATPortMappingCreate -flat_namespace"
+
+if echo $DEBUG_INFORMATION_FORMAT | grep -q dwarf; then
+	CFLAGS="-gdwarf-2"
+else
+	CFLAGS="-gstabs"
+fi
 
 if echo $CONFIGURATION | grep -q Debug; then
 	CFLAGS="$CFLAGS -O0"
