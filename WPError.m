@@ -57,6 +57,14 @@
 				return WPLS(@"Import Failed", @"WPPreferencePaneImportFailed title");
 				break;
 				
+			case WPPreferencePaneUsersReadFailed:
+				return WPLS(@"Read Accounts Failed", @"WPPreferencePaneUsersReadFailed title");
+				break;
+				
+			case WPPreferencePaneUsersWriteFailed:
+				return WPLS(@"Write Accounts Failed", @"WPPreferencePaneUsersWriteFailed title");
+				break;
+				
 			default:
 				break;
 		}
@@ -100,6 +108,14 @@
 				
 			case WPPreferencePaneImportFailed:
 				return WPLS(@"Could not read settings data from file.", @"WPPreferencePaneExportFailed description");
+				break;
+				
+			case WPPreferencePaneUsersReadFailed:
+				return WPLS(@"Could not read user accounts from file.", @"WPPreferencePaneUsersReadFailed description");
+				break;
+				
+			case WPPreferencePaneUsersWriteFailed:
+				return WPLS(@"Could not write user accounts from file.", @"WPPreferencePaneUsersWriteFailed description");
 				break;
 				
 			default:
