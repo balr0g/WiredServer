@@ -155,19 +155,33 @@
 			[_mapPortAutomaticallyButton setEnabled:NO];
 		}
 		
-		if([_accountManager hasUserAccountWithName:@"admin" password:&password]) {
-			if([password length] == 0 || [password isEqualToString:[@"" SHA1]]) {
-				[_accountStatusImageView setImage:_redDropImage];
-				[_accountStatusTextField setStringValue:WPLS(@"Account with name \u201cadmin\u201d has no password set", @"Account status")];
-			} else {
-				[_accountStatusImageView setImage:_greenDropImage];
-				[_accountStatusTextField setStringValue:WPLS(@"Account with name \u201cadmin\u201d has a password set", @"Account status")];
-			}
-		} else {
-			[_accountStatusImageView setImage:_grayDropImage];
-			[_accountStatusTextField setStringValue:WPLS(@"No account with name \u201cadmin\u201d found", @"Account status")];
+		switch([_accountManager hasUserAccountWithName:@"admin" password:&password]) {
+			case WPAccountFailed:
+				[_accountStatusImageView setImage:_grayDropImage];
+				[_accountStatusTextField setStringValue:WPLS(@"Could not read accounts file", @"Account status")];
+				break;
+			
+			case WPAccountOldStyle:
+				[_accountStatusImageView setImage:_grayDropImage];
+				[_accountStatusTextField setStringValue:WPLS(@"Accounts file is in a previous format, log in to upgrade it", @"Account status")];
+				break;
+			
+			case WPAccountNotFound:
+				[_accountStatusImageView setImage:_grayDropImage];
+				[_accountStatusTextField setStringValue:WPLS(@"No account with name \u201cadmin\u201d found", @"Account status")];
+				break;
+			
+			case WPAccountOK:
+				if([password length] == 0 || [password isEqualToString:[@"" SHA1]]) {
+					[_accountStatusImageView setImage:_redDropImage];
+					[_accountStatusTextField setStringValue:WPLS(@"Account with name \u201cadmin\u201d has no password set", @"Account status")];
+				} else {
+					[_accountStatusImageView setImage:_greenDropImage];
+					[_accountStatusTextField setStringValue:WPLS(@"Account with name \u201cadmin\u201d has a password set", @"Account status")];
+				}
+				break;
 		}
-
+		
 		[_filesPopUpButton setEnabled:YES];
 		[_portTextField setEnabled:YES];
 		[_checkPortAgainButton setEnabled:YES];

@@ -28,6 +28,14 @@
 
 @class WPError;
 
+enum _WPAccountStatus {
+	WPAccountFailed,
+	WPAccountOldStyle,
+	WPAccountNotFound,
+	WPAccountOK
+};
+typedef enum _WPAccountStatus		WPAccountStatus;
+
 @interface WPAccountManager : WIObject {
 	NSString						*_usersPath;
 	NSString						*_groupsPath;
@@ -37,7 +45,7 @@
 
 - (id)initWithUsersPath:(NSString *)usersPath groupsPath:(NSString *)groupsPath;
 
-- (BOOL)hasUserAccountWithName:(NSString *)name password:(NSString **)password;
+- (WPAccountStatus)hasUserAccountWithName:(NSString *)name password:(NSString **)password;
 
 - (BOOL)setPassword:(NSString *)password forUserAccountWithName:(NSString *)name andWriteWithError:(WPError **)error;
 - (BOOL)createNewAdminUserAccountWithName:(NSString *)name password:(NSString *)password andWriteWithError:(WPError **)error;

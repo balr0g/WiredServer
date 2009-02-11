@@ -59,23 +59,34 @@
 
 #pragma mark -
 
-- (BOOL)hasUserAccountWithName:(NSString *)name password:(NSString **)password {
+- (WPAccountStatus)hasUserAccountWithName:(NSString *)name password:(NSString **)password {
 	NSEnumerator		*enumerator;
 	NSArray				*accounts;
 	NSDictionary		*account;
+	NSString			*string;
 	
-	accounts	= [NSArray arrayWithContentsOfFile:_usersPath];
-	enumerator	= [accounts objectEnumerator];
+	accounts = [NSArray arrayWithContentsOfFile:_usersPath];
+	
+	if(!accounts) {
+		string = [NSString stringWithContentsOfFile:_usersPath];
+		
+		if(!string)
+			return WPAccountFailed;
+		
+		return WPAccountOldStyle;
+	}
+	
+	enumerator = [accounts objectEnumerator];
 	
 	while((account = [enumerator nextObject])) {
 		if([[account objectForKey:@"wired.account.name"] isEqualToString:name]) {
 			*password = [account objectForKey:@"wired.account.password"];
 			
-			return YES;
+			return WPAccountOK;
 		}
 	}
 	
-	return NO;
+	return WPAccountNotFound;
 }
 
 
