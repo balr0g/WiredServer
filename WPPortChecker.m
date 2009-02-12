@@ -30,12 +30,10 @@
 
 @implementation WPPortChecker
 
-- (id)initWithDelegate:(id)newDelegate {
+- (id)init {
 	self = [super init];
 	
-	delegate	= newDelegate;
-	
-	_data		= [[NSMutableData alloc] init];
+	_data = [[NSMutableData alloc] init];
 	
 	return self;
 }

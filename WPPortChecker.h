@@ -44,8 +44,6 @@ typedef enum _WPPortCheckerStatus		WPPortCheckerStatus;
 	NSUInteger							_HTTPStatusCode;
 }
 
-- (id)initWithDelegate:(id)delegate;
-
 - (void)setDelegate:(id)delegate;
 - (id)delegate;
 

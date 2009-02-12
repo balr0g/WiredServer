@@ -333,7 +333,8 @@
 	_exportManager	= [[WPExportManager alloc] initWithWiredManager:_wiredManager];
 	_logManager		= [[WPLogManager alloc] initWithLogPath:[_wiredManager pathForFile:@"wired.log"]];
 	
-	_portChecker	= [[WPPortChecker alloc] initWithDelegate:self];
+	_portChecker	= [[WPPortChecker alloc] init];
+	[_portChecker setDelegate:self];
 	
 	_updater = [[SUUpdater updaterForBundle:[self bundle]] retain];
 	[_updater setDelegate:self];

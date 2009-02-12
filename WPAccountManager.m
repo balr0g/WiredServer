@@ -220,7 +220,7 @@
 			[newAccounts addObject:account];
 	}
 	
-	[newAccounts addObject:account];
+	[newAccounts addObject:newAccount];
 	
 	if(![newAccounts writeToFile:_usersPath atomically:YES]) {
 		*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneUsersWriteFailed];
