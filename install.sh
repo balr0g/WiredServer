@@ -78,6 +78,8 @@ cat <<EOF >"$LIBRARY/LaunchDaemons/com.zankasoftware.WiredServer.plist"
 </plist>
 EOF
 
+chmod 644 "$LIBRARY/LaunchDaemons/com.zankasoftware.WiredServer.plist"
+
 if [ "$MIGRATE" = "YES" -a "$LIBRARY" != "/Library" ]; then
 	cp "/Library/Wired/banlist" "$LIBRARY/Wired/banlist"
 	cp "/Library/Wired/banner.png" "$LIBRARY/Wired/banner.png"
