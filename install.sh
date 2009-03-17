@@ -45,19 +45,19 @@ install -m 755 "$SOURCE/Wired/wiredctl" "$LIBRARY/Wired" || exit 1
 echo "-L $LIBRARY/Wired/wired.log -i 1000" > "$LIBRARY/Wired/etc/wired.flags"
 touch "$LIBRARY/Wired/wired.log"
 
-install -m 755 -d "$LIBRARY/LaunchDaemons" || exit 1
+install -m 700 -d "$LIBRARY/LaunchAgents" || exit 1
 
-cat <<EOF >"$LIBRARY/LaunchDaemons/com.zankasoftware.WiredServer.plist"
+cat <<EOF >"$LIBRARY/LaunchAgents/com.zankasoftware.WiredServer.plist"
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Debug</key>
-	<true/>
 	<key>Disabled</key>
 	<true/>
 	<key>Label</key>
 	<string>com.zankasoftware.WiredServer</string>
+	<key>KeepAlive</key>
+	<true/>
 	<key>OnDemand</key>
 	<false/>
 	<key>ProgramArguments</key>
@@ -80,7 +80,7 @@ cat <<EOF >"$LIBRARY/LaunchDaemons/com.zankasoftware.WiredServer.plist"
 </plist>
 EOF
 
-chmod 644 "$LIBRARY/LaunchDaemons/com.zankasoftware.WiredServer.plist"
+chmod 644 "$LIBRARY/LaunchAgents/com.zankasoftware.WiredServer.plist"
 
 if [ "$MIGRATE" = "YES" -a "$LIBRARY" != "/Library" ]; then
 	cp "/Library/Wired/banlist" "$LIBRARY/Wired/banlist"

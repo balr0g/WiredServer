@@ -31,7 +31,7 @@
 #import "WPWiredManager.h"
 
 #define WPLibraryPath							@"~/Library"
-#define WPWiredLaunchDaemonPlistPath			@"~/Library/LaunchDaemons/com.zankasoftware.WiredServer.plist"
+#define WPWiredLaunchAgentPlistPath				@"~/Library/LaunchAgents/com.zankasoftware.WiredServer.plist"
 
 @interface WPWiredManager(Private)
 
@@ -238,11 +238,11 @@
 	NSMutableDictionary		*dictionary;
 	
 	dictionary = [[[NSDictionary dictionaryWithContentsOfFile:
-		[WPWiredLaunchDaemonPlistPath stringByExpandingTildeInPath]] mutableCopy] autorelease];
+		[WPWiredLaunchAgentPlistPath stringByExpandingTildeInPath]] mutableCopy] autorelease];
 	
 	[dictionary setBool:launchesAutomatically forKey:@"RunAtLoad"];
 	
-	[dictionary writeToFile:[WPWiredLaunchDaemonPlistPath stringByExpandingTildeInPath] atomically:YES];
+	[dictionary writeToFile:[WPWiredLaunchAgentPlistPath stringByExpandingTildeInPath] atomically:YES];
 }
 
 
@@ -250,7 +250,7 @@
 - (BOOL)launchesAutomatically {
 	NSDictionary		*dictionary;
 	
-	dictionary = [NSDictionary dictionaryWithContentsOfFile:[WPWiredLaunchDaemonPlistPath stringByExpandingTildeInPath]];
+	dictionary = [NSDictionary dictionaryWithContentsOfFile:[WPWiredLaunchAgentPlistPath stringByExpandingTildeInPath]];
 	
 	return [dictionary boolForKey:@"RunAtLoad"];
 }
@@ -355,7 +355,7 @@
 	
 	task = [[NSTask alloc] init];
 	[task setLaunchPath:@"/bin/launchctl"];
-	[task setArguments:[NSArray arrayWithObjects:@"load", @"-w", [WPWiredLaunchDaemonPlistPath stringByExpandingTildeInPath], NULL]];
+	[task setArguments:[NSArray arrayWithObjects:@"load", @"-w", [WPWiredLaunchAgentPlistPath stringByExpandingTildeInPath], NULL]];
 	[task setStandardOutput:[NSPipe pipe]];
 	[task setStandardError:[task standardOutput]];
 	[task launch];
@@ -388,7 +388,7 @@
 	
 	task = [[NSTask alloc] init];
 	[task setLaunchPath:@"/bin/launchctl"];
-	[task setArguments:[NSArray arrayWithObjects:@"unload", @"-w", [WPWiredLaunchDaemonPlistPath stringByExpandingTildeInPath], NULL]];
+	[task setArguments:[NSArray arrayWithObjects:@"unload", @"-w", [WPWiredLaunchAgentPlistPath stringByExpandingTildeInPath], NULL]];
 	[task setStandardOutput:[NSPipe pipe]];
 	[task setStandardError:[task standardOutput]];
 	[task launch];
