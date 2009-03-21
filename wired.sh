@@ -45,7 +45,7 @@ for i in $ARCHS; do
 		mv config.h Makefile "$TARGET_TEMP_DIR/make/$i/"
 
 		cd "$SRCROOT/wired/libwired"
-		CC="$ARCH_CC" CFLAGS="$ARCH_CFLAGS" CPPFLAGS="$ARCH_CPPFLAGS -I$TARGET_TEMP_DIR/make/$i/libwired" LDFLAGS="$ARCH_LDFLAGS" ./configure --build="$BUILD" --host="$HOST" --enable-warnings --enable-ssl --enable-pthreads --enable-libxml2 --enable-p7 --srcdir="$SRCROOT/wired/libwired" --with-objdir="$OBJECT_FILE_DIR/$i" --with-rundir="$TARGET_TEMP_DIR/run/$i/wired/libwired" || exit 1
+		CC="$ARCH_CC" CFLAGS="$ARCH_CFLAGS" CPPFLAGS="$ARCH_CPPFLAGS -I$TARGET_TEMP_DIR/make/$i/libwired" LDFLAGS="$ARCH_LDFLAGS" ./configure --build="$BUILD" --host="$HOST" --enable-warnings --enable-pthreads --enable-libxml2 --enable-p7 --srcdir="$SRCROOT/wired/libwired" --with-objdir="$OBJECT_FILE_DIR/$i" --with-rundir="$TARGET_TEMP_DIR/run/$i/wired/libwired" || exit 1
 
 		mv config.h Makefile "$TARGET_TEMP_DIR/make/$i/libwired"
 		
