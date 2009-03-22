@@ -68,7 +68,7 @@ cp "/tmp/wired.universal" "$TARGET_TEMP_DIR/run/$MASTER/wired/wired"
 mkdir -p "$TARGET_TEMP_DIR/run/$MASTER/wired/files/Drop Box/.wired" "$TARGET_TEMP_DIR/run/$MASTER/wired/files/Uploads/.wired"
 mkdir -p "$TARGET_TEMP_DIR/run/$MASTER/wired/board/General/.wired" "$TARGET_TEMP_DIR/run/$MASTER/wired/board/General/BC5B30BF-AC4F-4FEE-BB92-C5F3A5436E18.WiredThread"
 
-for i in "banlist" "banner.png" "board/General/.wired/permissions" "board/General/BC5B30BF-AC4F-4FEE-BB92-C5F3A5436E18.WiredThread/AD70D7CB-F789-4030-A92F-40D546DBE1D9.WiredPost" "files/Drop Box/.wired/type" "files/Uploads/.wired/type" "groups" "users" "wired.xml"; do
+for i in "banlist" "banner.png" "board/General/.wired/permissions" "board/General/BC5B30BF-AC4F-4FEE-BB92-C5F3A5436E18.WiredThread/AD70D7CB-F789-4030-A92F-40D546DBE1D9.WiredPost" "files/Drop Box/.wired/permissions" "files/Drop Box/.wired/type" "files/Uploads/.wired/type" "groups" "users" "wired.xml"; do
 	cp "$SRCROOT/wired/run/$i" "$TARGET_TEMP_DIR/run/$MASTER/wired/$i"
 done
 
