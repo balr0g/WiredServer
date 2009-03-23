@@ -318,7 +318,7 @@
 @implementation WPPreferencePane
 
 + (void)load {
-	[WPSettings loadWithIdentifier:[[self bundle] bundleIdentifier]];
+	[WPSettings setIdentifier:[[self bundle] bundleIdentifier]];
 }
 
 
