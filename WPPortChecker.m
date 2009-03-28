@@ -102,7 +102,9 @@
 	WPPortCheckerStatus		status = WPPortCheckerFailed;
 	
 	if([[self delegate] respondsToSelector:@selector(portChecker:didReceiveStatus:forPort:)]) {
-		if(_HTTPStatusCode < 400) {
+		if(_HTTPStatusCode >= 400) {
+			NSLog(@"*** [%@ %@]: HTTP status code %u", [self class], NSStringFromSelector(_cmd), _HTTPStatusCode);
+		} else {
 			string = [[NSString stringWithData:_data encoding:NSUTF8StringEncoding]
 				stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 			
@@ -120,6 +122,9 @@
 						status = WPPortCheckerFiltered;
 				}
 			}
+			
+			if(status == WPPortCheckerFailed)
+				NSLog(@"*** [%@ %@]: invalid string \"%@\"", [self class], NSStringFromSelector(_cmd), string);
 		}
 		
 		[[self delegate] portChecker:self didReceiveStatus:status forPort:_port];
@@ -129,6 +134,8 @@
 
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+	NSLog(@"*** [%@ %@]: %@", [self class], NSStringFromSelector(_cmd), [error localizedFailureReason]);
+		
 	if([[self delegate] respondsToSelector:@selector(portChecker:didReceiveStatus:forPort:)])
 		[[self delegate] portChecker:self didReceiveStatus:WPPortCheckerFailed forPort:_port];
 }
