@@ -31,6 +31,7 @@
 #import "WPWiredManager.h"
 
 #define WPExportManagerBanlist				@"WPBanlist"
+#define WPExportManagerBanner				@"WPBanner"
 #define WPExportManagerBoard				@"WPBoard"
 #define WPExportManagerConfig				@"WPConfig"
 #define WPExportManagerGroups				@"WPGroups"
@@ -61,15 +62,14 @@
 
 - (BOOL)exportToFile:(NSString *)file error:(WPError **)error {
 	NSEnumerator			*enumerator;
-	NSMutableDictionary		*dictionary;
-	NSDictionary			*files;
+	NSMutableDictionary		*dictionary, *files;
 	NSTask					*task;
 	NSData					*data;
 	NSString				*string, *key, *value, *zipfile;
 	
 	dictionary = [NSMutableDictionary dictionary];
 
-	files = [NSDictionary dictionaryWithObjectsAndKeys:
+	files = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 		@"banlist",			WPExportManagerBanlist,
 		@"etc/wired.conf",	WPExportManagerConfig,
 		@"groups",			WPExportManagerGroups,
@@ -96,9 +96,12 @@
 		return NO;
 	}
 	
-	files = [NSDictionary dictionaryWithObjectsAndKeys:
+	files = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 		@"board",			WPExportManagerBoard,
 		NULL];
+	
+	if([[NSFileManager defaultManager] fileExistsAtPath:@"banner.png"])
+		[files setObject:@"banner.png" forKey:WPExportManagerBanner];
 	
 	enumerator = [files keyEnumerator];
 	
@@ -185,6 +188,7 @@
 
 	files = [NSDictionary dictionaryWithObjectsAndKeys:
 		@"board",			WPExportManagerBoard,
+		@"banner.png",		WPExportManagerBanner,
 		NULL];
 	
 	enumerator = [files keyEnumerator];
@@ -200,8 +204,12 @@
 			}
 		}
 		
-		data		= [dictionary objectForKey:key];
-		zipfile		= [NSFileManager temporaryPathWithPrefix:@"WiredSettings"];
+		data = [dictionary objectForKey:key];
+		
+		if(!data)
+			continue;
+		
+		zipfile = [NSFileManager temporaryPathWithPrefix:@"WiredSettings"];
 		
 		if(![data writeToFile:zipfile options:0 error:error])
 			return NO;
