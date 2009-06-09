@@ -574,6 +574,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "rm -f \"English.lproj/Localizable.strings\"\nfind . -name \"*.[mc]\" | xargs genstrings -s WPLS -q -o \"English.lproj\"\n";
+			showEnvVarsInLog = 0;
 		};
 		A5D97283078E387200CD982E /* Run Script (Zip) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -588,6 +589,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Zip\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$BUILD_DIR/WiredServer.zip\"\nzip -ry \"$BUILD_DIR/WiredServer.zip\" \"WiredServer2.0.prefPane\" || exit 1\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
