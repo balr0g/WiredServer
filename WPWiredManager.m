@@ -53,7 +53,7 @@
 	if(![[NSFileManager defaultManager] isExecutableFileAtPath:path])
 		return NULL;
 	
-	task = [[NSTask alloc] init];
+	task = [[[NSTask alloc] init] autorelease];
 	[task setLaunchPath:path];
 	[task setArguments:[NSArray arrayWithObject:@"-v"]];
 	[task setStandardOutput:[NSPipe pipe]];
@@ -115,7 +115,7 @@
 									   encoding:NSUTF8StringEncoding
 										  error:NULL];
 	
-	if(status) {
+	if(string) {
 		status = [string componentsSeparatedByString:@" "];
 		date = [NSDate dateWithTimeIntervalSince1970:[[status objectAtIndex:0] intValue]];
 		
@@ -280,7 +280,7 @@
 	NSString		*string, *reason;
 	NSData			*data;
 	
-	task = [[NSTask alloc] init];
+	task = [[[NSTask alloc] init] autorelease];
 	[task setLaunchPath:[[self bundle] pathForResource:@"install" ofType:@"sh"]];
 	[task setArguments:[NSArray arrayWithObjects:
 		[[self bundle] resourcePath],
@@ -320,7 +320,7 @@
 	NSString		*string, *reason;
 	NSData			*data;
 	
-	task = [[NSTask alloc] init];
+	task = [[[NSTask alloc] init] autorelease];
 	[task setLaunchPath:[[self bundle] pathForResource:@"uninstall" ofType:@"sh"]];
 	[task setArguments:[NSArray arrayWithObject:[WPLibraryPath stringByExpandingTildeInPath]]];
 	[task setStandardOutput:[NSPipe pipe]];
@@ -353,7 +353,7 @@
 	NSString		*string, *reason;
 	NSData			*data;
 	
-	task = [[NSTask alloc] init];
+	task = [[[NSTask alloc] init] autorelease];
 	[task setLaunchPath:@"/bin/launchctl"];
 	[task setArguments:[NSArray arrayWithObjects:@"load", @"-w", [WPWiredLaunchAgentPlistPath stringByExpandingTildeInPath], NULL]];
 	[task setStandardOutput:[NSPipe pipe]];
@@ -386,7 +386,7 @@
 	NSString		*string, *reason;
 	NSData			*data;
 	
-	task = [[NSTask alloc] init];
+	task = [[[NSTask alloc] init] autorelease];
 	[task setLaunchPath:@"/bin/launchctl"];
 	[task setArguments:[NSArray arrayWithObjects:@"unload", @"-w", [WPWiredLaunchAgentPlistPath stringByExpandingTildeInPath], NULL]];
 	[task setStandardOutput:[NSPipe pipe]];
