@@ -150,7 +150,7 @@
 		if(string)
 			[_portTextField setStringValue:string];
 		
-		if([NSApp systemVersion] >= 0x1050) {
+		if([[NSApplication sharedApplication] systemVersion] >= 0x1050) {
 			string = [_configManager stringForConfigWithName:@"map port"];
 			
 			if(string)

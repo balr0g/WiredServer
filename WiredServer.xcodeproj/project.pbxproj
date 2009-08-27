@@ -729,7 +729,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BE6D1A0864B5FB00DA5C89 /* WiredServer.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = stabs;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -804,7 +804,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BE6D1A0864B5FB00DA5C89 /* WiredServer.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = WPConfigurationRelease;
