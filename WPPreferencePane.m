@@ -53,14 +53,23 @@
 @implementation WPPreferencePane(Private)
 
 - (void)_updateInstallationStatus {
+	NSDictionary	*info, *localizedInfo;
 	NSString		*version;
 	
-	version = [_wiredManager installedVersion];
+	version			= [_wiredManager installedVersion];
+	info			= [[self bundle] infoDictionary];
+	localizedInfo	= [[self bundle] localizedInfoDictionary];
 	
-	if(version)
-		[_versionTextField setStringValue:version];
-	else
+	if(version) {
+		[_versionTextField setStringValue:
+			[NSSWF:WPLS(@"%@ / %@ Preference Pane %@ (%@)", @"Installation status (server version, pref pane name, pref pane version, pref pane revision"),
+				version,
+				[localizedInfo objectForKey:@"CFBundleName"],
+				[localizedInfo objectForKey:@"CFBundleShortVersionString"],
+				[info objectForKey:@"CFBundleVersion"]]];
+	} else {
 		[_versionTextField setStringValue:WPLS(@"Wired is not installed", @"Installation status")];
+	}
 	
 	if([_wiredManager isInstalled]) {
 		[_installButton setTitle:WPLS(@"Uninstall\u2026", @"Uninstall button title")];
