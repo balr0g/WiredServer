@@ -287,10 +287,13 @@
 	
 	[_progressIndicator startAnimation:self];
 	
-	if([_wiredManager uninstallWithError:&error])
+	if([_wiredManager uninstallWithError:&error]) {
 		[_logManager stopReadingFromLog];
-	else
+		
+		[WPSettings removeObjectForKey:WPMigratedWired13];
+	} else {
 		[[error alert] beginSheetModalForWindow:[_installButton window]];
+	}
 	
 	[self _updateInstallationStatus];
 	[self _updateRunningStatus];
