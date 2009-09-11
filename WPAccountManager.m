@@ -156,6 +156,7 @@
 		@"Administrator",					@"wired.account.full_name",
 		@"",								@"wired.account.group",
 		[NSArray array],					@"wired.account.groups",
+		[NSDate date],						@"wired.account.creation_time",
 		[NSNumber numberWithBool:YES],		@"wired.account.account.change_password",
 		[NSNumber numberWithBool:YES],		@"wired.account.account.create_users",
 		[NSNumber numberWithBool:YES],		@"wired.account.account.delete_users",
@@ -183,6 +184,7 @@
 		[NSNumber numberWithBool:YES],		@"wired.account.board.rename_boards",
 		[NSNumber numberWithBool:YES],		@"wired.account.board.set_permissions",
 		[NSNumber numberWithBool:YES],		@"wired.account.chat.create_chats",
+		[NSNumber numberWithBool:YES],		@"wired.account.chat.kick_users",
 		[NSNumber numberWithBool:YES],		@"wired.account.chat.set_topic",
 		[NSNumber numberWithBool:YES],		@"wired.account.file.access_all_dropboxes",
 		[NSNumber numberWithBool:YES],		@"wired.account.file.create_directories",
@@ -190,6 +192,7 @@
 		[NSNumber numberWithBool:YES],		@"wired.account.file.delete_files",
 		[NSNumber numberWithBool:YES],		@"wired.account.file.get_info",
 		[NSNumber numberWithBool:YES],		@"wired.account.file.list_files",
+		[NSNumber numberWithBool:YES],		@"wired.account.file.search_files",
 		[NSNumber numberWithBool:YES],		@"wired.account.file.move_files",
 		[NSNumber numberWithBool:YES],		@"wired.account.file.rename_files",
 		[NSNumber numberWithBool:YES],		@"wired.account.file.set_comment",
@@ -212,7 +215,7 @@
 		[NSNumber numberWithBool:NO],		@"wired.account.user.cannot_set_nick",
 		[NSNumber numberWithBool:YES],		@"wired.account.user.get_info",
 		[NSNumber numberWithBool:YES],		@"wired.account.user.get_users",
-		[NSNumber numberWithBool:YES],		@"wired.account.user.kick_users",
+		[NSNumber numberWithBool:YES],		@"wired.account.user.disconnect_users",
 		NULL];
 		
 	while((account = [enumerator nextObject])) {
