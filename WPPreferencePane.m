@@ -499,8 +499,18 @@
 		[self performSelector:@selector(_uninstall) afterDelay:0.1];
 }
 
-	 
-	 
+
+
+- (IBAction)releaseNotes:(id)sender {
+	NSString		*path;
+	
+	path = [[self bundle] pathForResource:@"ReleaseNotes" ofType:@"rtf"];
+	
+	[[WIReleaseNotesController releaseNotesController] showWindow:self withReleaseNotesFile:path];
+}
+
+
+
 - (IBAction)checkForUpdate:(id)sender {
 	[_updater checkForUpdates:sender];
 }

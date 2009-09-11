@@ -90,6 +90,7 @@
 
 - (IBAction)install:(id)sender;
 - (IBAction)uninstall:(id)sender;
+- (IBAction)releaseNotes:(id)sender;
 - (IBAction)checkForUpdate:(id)sender;
 
 - (IBAction)start:(id)sender;

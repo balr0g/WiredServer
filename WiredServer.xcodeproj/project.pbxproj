@@ -108,13 +108,6 @@
 			remoteGlobalIDString = 773F65070E5DBDC1001A753B;
 			remoteInfo = StaticWiredFoundation;
 		};
-		A5829D880E7370FA00FBAA6D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 77DBEA800E62B8F500B738D3;
-			remoteInfo = StaticWiredAppKit;
-		};
 		A5829D8A0E7370FA00FBAA6D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */;
@@ -361,7 +354,6 @@
 				773F4A7E0E5D9A2F001A753B /* WiredAppKit.framework */,
 				A5A2A5A90CD4E79C00969CEF /* WiredNetworking.framework */,
 				A5829D870E7370FA00FBAA6D /* libWiredFoundation.a */,
-				A5829D890E7370FA00FBAA6D /* libWiredAppKit.a */,
 				A5829D8B0E7370FA00FBAA6D /* libWiredNetworking.a */,
 				A5B084370EBA859700DA90DD /* libwired.a */,
 			);
@@ -461,13 +453,6 @@
 			fileType = archive.ar;
 			path = libWiredFoundation.a;
 			remoteRef = A5829D860E7370FA00FBAA6D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		A5829D890E7370FA00FBAA6D /* libWiredAppKit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libWiredAppKit.a;
-			remoteRef = A5829D880E7370FA00FBAA6D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		A5829D8B0E7370FA00FBAA6D /* libWiredNetworking.a */ = {
