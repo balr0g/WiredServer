@@ -98,6 +98,7 @@
 - (IBAction)launchAutomatically:(id)sender;
 
 - (IBAction)openLog:(id)sender;
+- (IBAction)crashReports:(id)sender;
 
 - (IBAction)other:(id)sender;
 

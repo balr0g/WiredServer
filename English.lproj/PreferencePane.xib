@@ -239,6 +239,26 @@
 													<int key="NSPeriodicInterval">25</int>
 												</object>
 											</object>
+											<object class="NSButton" id="540027156">
+												<reference key="NSNextResponder" ref="79366982"/>
+												<int key="NSvFlags">268</int>
+												<string key="NSFrame">{{187, 12}, {129, 32}}</string>
+												<reference key="NSSuperview" ref="79366982"/>
+												<bool key="NSEnabled">YES</bool>
+												<object class="NSButtonCell" key="NSCell" id="433933295">
+													<int key="NSCellFlags">67239424</int>
+													<int key="NSCellFlags2">134217728</int>
+													<string key="NSContents">Crash Reports</string>
+													<reference key="NSSupport" ref="72208873"/>
+													<reference key="NSControlView" ref="540027156"/>
+													<int key="NSButtonFlags">-2038284033</int>
+													<int key="NSButtonFlags2">1</int>
+													<string key="NSAlternateContents"/>
+													<string key="NSKeyEquivalent"/>
+													<int key="NSPeriodicDelay">200</int>
+													<int key="NSPeriodicInterval">25</int>
+												</object>
+											</object>
 											<object class="NSProgressIndicator" id="259694228">
 												<reference key="NSNextResponder" ref="79366982"/>
 												<int key="NSvFlags">1292</int>
@@ -1464,6 +1484,14 @@
 					</object>
 					<int key="connectionID">184</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">crashReports:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="540027156"/>
+					</object>
+					<int key="connectionID">188</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1584,6 +1612,7 @@
 							<reference ref="476872960"/>
 							<reference ref="201712548"/>
 							<reference ref="718677283"/>
+							<reference ref="540027156"/>
 						</object>
 						<reference key="parent" ref="955549561"/>
 					</object>
@@ -2209,6 +2238,20 @@
 						<reference key="object" ref="488247960"/>
 						<reference key="parent" ref="718677283"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">185</int>
+						<reference key="object" ref="540027156"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="433933295"/>
+						</object>
+						<reference key="parent" ref="79366982"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">186</int>
+						<reference key="object" ref="433933295"/>
+						<reference key="parent" ref="540027156"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -2278,6 +2321,8 @@
 					<string>178.IBPluginDependency</string>
 					<string>181.IBPluginDependency</string>
 					<string>182.IBPluginDependency</string>
+					<string>185.IBPluginDependency</string>
+					<string>186.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
 					<string>2.IBPluginDependency</string>
 					<string>2.IBUserGuides</string>
@@ -2333,10 +2378,10 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{146, 113}, {668, 473}}</string>
+					<string>{{488, 30}, {668, 473}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="NO"/>
-					<string>{{146, 113}, {668, 473}}</string>
+					<string>{{488, 30}, {668, 473}}</string>
 					<boolean value="NO"/>
 					<string>{196, 240}</string>
 					<string>{{357, 418}, {480, 270}}</string>
@@ -2358,6 +2403,8 @@
 					<boolean value="NO"/>
 					<string>{100000, 134}</string>
 					<string>{0, 134}</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2462,7 +2509,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">184</int>
+			<int key="maxID">188</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2483,6 +2530,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>checkForUpdate:</string>
 							<string>checkPortAgain:</string>
+							<string>crashReports:</string>
 							<string>createNewAdminUser:</string>
 							<string>exportSettings:</string>
 							<string>importSettings:</string>
@@ -2501,6 +2549,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>

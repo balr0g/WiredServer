@@ -553,6 +553,13 @@
 
 
 
+- (IBAction)crashReports:(id)sender {
+	[[WICrashReportsController crashReportsController] setApplicationName:@"wired"];
+	[[WICrashReportsController crashReportsController] showWindow:self];
+}
+
+
+
 #pragma mark -
 
 - (IBAction)other:(id)sender {
