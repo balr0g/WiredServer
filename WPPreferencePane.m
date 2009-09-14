@@ -84,6 +84,9 @@
 
 - (void)_updateRunningStatus {
 	NSString		*status;
+	NSDate			*launchDate;
+	
+	launchDate = [_wiredManager launchDate];
 	
 	if(![_wiredManager isInstalled]) {
 		status = WPLS(@"Wired Server not found", @"Server status");
@@ -92,12 +95,20 @@
 		status = WPLS(@"Wired Server is not running", @"Server status");
 	}
 	else if(_installDate && [_installDate compare:[_wiredManager launchDate]] == NSOrderedDescending) {
-		status = [NSSWF:WPLS(@"A previous version of Wired Server is running since %@", @"Server status"),
-			[_dateFormatter stringFromDate:[_wiredManager launchDate]]];
+		if(launchDate) {
+			status = [NSSWF:WPLS(@"A previous version of Wired Server is running since %@", @"Server status"),
+				[_dateFormatter stringFromDate:launchDate]];
+		} else {
+			status = WPLS(@"A previous version of Wired Server is running", @"Server status");
+		}
 	}
 	else {
-		status = [NSSWF:WPLS(@"Wired Server is running since %@", @"Server status"),
-			[_dateFormatter stringFromDate:[_wiredManager launchDate]]];
+		if(launchDate) {
+			status = [NSSWF:WPLS(@"Wired Server is running since %@", @"Server status"),
+				[_dateFormatter stringFromDate:launchDate]];
+		} else {
+			status = WPLS(@"Wired Server is running", @"Server status");
+		}
 	}
 	
 	[_statusTextField setStringValue:status];
