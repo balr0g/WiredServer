@@ -77,7 +77,6 @@
 
 - (BOOL)_reloadPidFile {
 	NSString		*string, *command;
-	NSUInteger		pid;
 	BOOL			running = NO;
 	
 	string = [NSString stringWithContentsOfFile:[self pathForFile:@"wired.pid"]
@@ -93,14 +92,6 @@
 			running = YES;
 		} else {
 			[[NSFileManager defaultManager] removeFileAtPath:[self pathForFile:@"wired.pid"] handler:NULL];
-		}
-	} else {
-		pid = [[NSWorkspace sharedWorkspace] processIdentifierForCommand:@"wired"];
-		
-		if(pid != 0) {
-			_pid = pid;
-			
-			running = YES;
 		}
 	}
 	
