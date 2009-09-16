@@ -179,16 +179,25 @@
 			case WPAccountFailed:
 				[_accountStatusImageView setImage:_grayDropImage];
 				[_accountStatusTextField setStringValue:WPLS(@"Could not read accounts file", @"Account status")];
+
+				[_setPasswordForAdminButton setEnabled:NO];
+				[_createNewAdminUserButton setEnabled:NO];
 				break;
 			
 			case WPAccountOldStyle:
 				[_accountStatusImageView setImage:_grayDropImage];
 				[_accountStatusTextField setStringValue:WPLS(@"Accounts file is in a previous format, log in to upgrade it", @"Account status")];
+
+				[_setPasswordForAdminButton setEnabled:NO];
+				[_createNewAdminUserButton setEnabled:NO];
 				break;
 			
 			case WPAccountNotFound:
 				[_accountStatusImageView setImage:_grayDropImage];
 				[_accountStatusTextField setStringValue:WPLS(@"No account with name \u201cadmin\u201d found", @"Account status")];
+
+				[_setPasswordForAdminButton setEnabled:YES];
+				[_createNewAdminUserButton setEnabled:YES];
 				break;
 			
 			case WPAccountOK:
@@ -199,14 +208,15 @@
 					[_accountStatusImageView setImage:_greenDropImage];
 					[_accountStatusTextField setStringValue:WPLS(@"Account with name \u201cadmin\u201d has a password set", @"Account status")];
 				}
+
+				[_setPasswordForAdminButton setEnabled:YES];
+				[_createNewAdminUserButton setEnabled:YES];
 				break;
 		}
 		
 		[_filesPopUpButton setEnabled:YES];
 		[_portTextField setEnabled:YES];
 		[_checkPortAgainButton setEnabled:YES];
-		[_setPasswordForAdminButton setEnabled:YES];
-		[_createNewAdminUserButton setEnabled:YES];
 		[_exportSettingsButton setEnabled:YES];
 		[_importSettingsButton setEnabled:YES];
 	} else {

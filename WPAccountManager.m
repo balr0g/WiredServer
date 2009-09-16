@@ -65,16 +65,18 @@
 	NSDictionary		*account;
 	NSString			*string;
 	
+	string = [NSString stringWithContentsOfFile:_usersPath];
+	
+	if(!string)
+		return WPAccountFailed;
+	
+	if(![string hasPrefix:@"<?xml"])
+		return WPAccountOldStyle;
+
 	accounts = [NSArray arrayWithContentsOfFile:_usersPath];
 	
-	if(!accounts) {
-		string = [NSString stringWithContentsOfFile:_usersPath];
-		
-		if(!string)
-			return WPAccountFailed;
-		
-		return WPAccountOldStyle;
-	}
+	if(!string)
+		return WPAccountFailed;
 	
 	enumerator = [accounts objectEnumerator];
 	
