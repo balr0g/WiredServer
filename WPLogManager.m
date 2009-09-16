@@ -46,6 +46,11 @@
 		   selector:@selector(applicationWillTerminate:)
 			   name:NSApplicationWillTerminateNotification];
 
+	[[NSNotificationCenter defaultCenter]
+		addObserver:self
+		   selector:@selector(taskDidTerminate:)
+			   name:NSTaskDidTerminateNotification];
+	
 	return self;
 }
 
@@ -73,6 +78,13 @@
 - (void)applicationWillTerminate:(NSNotification *)notification {
 	[_tailTask terminate];
 	[_logTimer invalidate];
+}
+
+
+
+- (void)taskDidTerminate:(NSNotification *)notification {
+	if([notification object] == _tailTask)
+		[self stopReadingFromLog];
 }
 
 

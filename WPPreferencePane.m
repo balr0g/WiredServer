@@ -279,6 +279,8 @@
 		_installDate = [[NSDate date] retain];
 		
 		[_logManager startReadingFromLog];
+
+		[WPSettings removeObjectForKey:WPUninstalled];
 	} else {
 		[[error alert] beginSheetModalForWindow:[_installButton window]];
 	}
@@ -302,6 +304,8 @@
 		[_logManager stopReadingFromLog];
 		
 		[WPSettings removeObjectForKey:WPMigratedWired13];
+		[WPSettings setBool:YES forKey:WPUninstalled];
+		[WPSettings synchronize];
 	} else {
 		[[error alert] beginSheetModalForWindow:[_installButton window]];
 	}
@@ -401,8 +405,10 @@
 
 
 - (void)willSelect {
-	if(![_wiredManager isInstalled] || ![[_wiredManager installedVersion] isEqualToString:[_wiredManager packagedVersion]])
-		[self _install];
+	if(![WPSettings boolForKey:WPUninstalled]) {
+		if(![_wiredManager isInstalled] || ![[_wiredManager installedVersion] isEqualToString:[_wiredManager packagedVersion]])
+			[self _install];
+	}
 	
 	[self _updateInstallationStatus];
 	[self _updateRunningStatus];
@@ -823,9 +829,6 @@
 		rows++;
 	}
 	
-//	NSLog(@"%u: %u (%f) rows for \"%@\"", row, rows, rows * 12.0, [[_logManager logLines] objectAtIndex:row]);
-	
-//	return (row % 2 == 0) ? 24 : 36;
 	return rows * 12.0;
 }
 

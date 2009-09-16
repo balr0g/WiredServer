@@ -28,13 +28,10 @@
 
 #import "WPSettings.h"
 
-@implementation WPSettings
+NSString * const WPMigratedWired13		= @"WPMigratedWired13";
+NSString * const WPUninstalled			= @"WPUninstalled";
 
-+ (NSDictionary *)defaults {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-		[NSNumber numberWithBool:NO],
-			WPMigratedWired13,
-		NULL];
-}
+
+@implementation WPSettings
 
 @end

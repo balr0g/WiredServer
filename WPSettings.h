@@ -26,7 +26,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#define WPMigratedWired13			@"WPMigratedWired13"
+extern NSString * const WPMigratedWired13;
+extern NSString * const WPUninstalled;
 
 @interface WPSettings : WISettings
 
