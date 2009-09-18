@@ -240,7 +240,7 @@
 	dictionary = [[[NSDictionary dictionaryWithContentsOfFile:
 		[WPWiredLaunchAgentPlistPath stringByExpandingTildeInPath]] mutableCopy] autorelease];
 	
-	[dictionary setBool:launchesAutomatically forKey:@"RunAtLoad"];
+	[dictionary setBool:!launchesAutomatically forKey:@"Disabled"];
 	
 	[dictionary writeToFile:[WPWiredLaunchAgentPlistPath stringByExpandingTildeInPath] atomically:YES];
 }
@@ -252,7 +252,7 @@
 	
 	dictionary = [NSDictionary dictionaryWithContentsOfFile:[WPWiredLaunchAgentPlistPath stringByExpandingTildeInPath]];
 	
-	return [dictionary boolForKey:@"RunAtLoad"];
+	return ![dictionary boolForKey:@"Disabled"];
 }
 
 
@@ -355,7 +355,7 @@
 	
 	task = [[[NSTask alloc] init] autorelease];
 	[task setLaunchPath:@"/bin/launchctl"];
-	[task setArguments:[NSArray arrayWithObjects:@"load", @"-w", [WPWiredLaunchAgentPlistPath stringByExpandingTildeInPath], NULL]];
+	[task setArguments:[NSArray arrayWithObjects:@"load", @"-F", [WPWiredLaunchAgentPlistPath stringByExpandingTildeInPath], NULL]];
 	[task setStandardOutput:[NSPipe pipe]];
 	[task setStandardError:[task standardOutput]];
 	[task launch];
@@ -390,7 +390,7 @@
 	
 	task = [[[NSTask alloc] init] autorelease];
 	[task setLaunchPath:@"/bin/launchctl"];
-	[task setArguments:[NSArray arrayWithObjects:@"unload", @"-w", [WPWiredLaunchAgentPlistPath stringByExpandingTildeInPath], NULL]];
+	[task setArguments:[NSArray arrayWithObjects:@"unload", [WPWiredLaunchAgentPlistPath stringByExpandingTildeInPath], NULL]];
 	[task setStandardOutput:[NSPipe pipe]];
 	[task setStandardError:[task standardOutput]];
 	[task launch];
