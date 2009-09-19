@@ -12,8 +12,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="129"/>
 			<integer value="10"/>
+			<integer value="129"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -264,6 +264,16 @@
 												<int key="NSvFlags">1292</int>
 												<object class="NSPSMatrix" key="NSDrawMatrix"/>
 												<string key="NSFrame">{{467, 341}, {16, 16}}</string>
+												<reference key="NSSuperview" ref="79366982"/>
+												<int key="NSpiFlags">28938</int>
+												<double key="NSMinValue">16</double>
+												<double key="NSMaxValue">100</double>
+											</object>
+											<object class="NSProgressIndicator" id="373426196">
+												<reference key="NSNextResponder" ref="79366982"/>
+												<int key="NSvFlags">1292</int>
+												<object class="NSPSMatrix" key="NSDrawMatrix"/>
+												<string key="NSFrame">{{193, 266}, {16, 16}}</string>
 												<reference key="NSSuperview" ref="79366982"/>
 												<int key="NSpiFlags">28938</int>
 												<double key="NSMinValue">16</double>
@@ -1126,14 +1136,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">_progressIndicator</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="259694228"/>
-					</object>
-					<int key="connectionID">20</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">_statusImageView</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="131744481"/>
@@ -1492,6 +1494,30 @@
 					</object>
 					<int key="connectionID">188</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_installProgressIndicator</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="259694228"/>
+					</object>
+					<int key="connectionID">190</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_startProgressIndicator</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="373426196"/>
+					</object>
+					<int key="connectionID">191</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_checkPortAgainButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="103122228"/>
+					</object>
+					<int key="connectionID">192</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1613,6 +1639,7 @@
 							<reference ref="201712548"/>
 							<reference ref="718677283"/>
 							<reference ref="540027156"/>
+							<reference ref="373426196"/>
 						</object>
 						<reference key="parent" ref="955549561"/>
 					</object>
@@ -2252,6 +2279,11 @@
 						<reference key="object" ref="433933295"/>
 						<reference key="parent" ref="540027156"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">189</int>
+						<reference key="object" ref="373426196"/>
+						<reference key="parent" ref="79366982"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -2323,6 +2355,7 @@
 					<string>182.IBPluginDependency</string>
 					<string>185.IBPluginDependency</string>
 					<string>186.IBPluginDependency</string>
+					<string>189.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
 					<string>2.IBPluginDependency</string>
 					<string>2.IBUserGuides</string>
@@ -2378,10 +2411,10 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{488, 30}, {668, 473}}</string>
+					<string>{{49, 56}, {668, 473}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="NO"/>
-					<string>{{488, 30}, {668, 473}}</string>
+					<string>{{49, 56}, {668, 473}}</string>
 					<boolean value="NO"/>
 					<string>{196, 240}</string>
 					<string>{{357, 418}, {480, 270}}</string>
@@ -2403,6 +2436,7 @@
 					<boolean value="NO"/>
 					<string>{100000, 134}</string>
 					<string>{0, 134}</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2509,7 +2543,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">188</int>
+			<int key="maxID">192</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2582,6 +2616,7 @@
 							<string>_filesPopUpButton</string>
 							<string>_importSettingsButton</string>
 							<string>_installButton</string>
+							<string>_installProgressIndicator</string>
 							<string>_launchAutomaticallyButton</string>
 							<string>_logTableColumn</string>
 							<string>_logTableView</string>
@@ -2593,9 +2628,9 @@
 							<string>_portStatusImageView</string>
 							<string>_portStatusTextField</string>
 							<string>_portTextField</string>
-							<string>_progressIndicator</string>
 							<string>_setPasswordForAdminButton</string>
 							<string>_startButton</string>
+							<string>_startProgressIndicator</string>
 							<string>_statusImageView</string>
 							<string>_statusTextField</string>
 							<string>_verifyPasswordTextField</string>
@@ -2612,6 +2647,7 @@
 							<string>NSPopUpButton</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
+							<string>NSProgressIndicator</string>
 							<string>NSButton</string>
 							<string>NSTableColumn</string>
 							<string>NSTableView</string>
@@ -2623,9 +2659,9 @@
 							<string>NSImageView</string>
 							<string>NSTextField</string>
 							<string>NSTextField</string>
+							<string>NSButton</string>
+							<string>NSButton</string>
 							<string>NSProgressIndicator</string>
-							<string>NSButton</string>
-							<string>NSButton</string>
 							<string>NSImageView</string>
 							<string>NSTextField</string>
 							<string>NSSecureTextField</string>

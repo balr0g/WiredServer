@@ -32,11 +32,12 @@
 @interface WPPreferencePane : NSPreferencePane {
 	IBOutlet NSTextField				*_versionTextField;
 	IBOutlet NSButton					*_installButton;
-	IBOutlet NSProgressIndicator		*_progressIndicator;
+	IBOutlet NSProgressIndicator		*_installProgressIndicator;
 
 	IBOutlet NSImageView				*_statusImageView;
 	IBOutlet NSTextField				*_statusTextField;
 	IBOutlet NSButton					*_startButton;
+	IBOutlet NSProgressIndicator		*_startProgressIndicator;
 	IBOutlet NSButton					*_launchAutomaticallyButton;
 
 	IBOutlet NSTableView				*_logTableView;

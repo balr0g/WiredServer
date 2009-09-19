@@ -282,7 +282,7 @@
 - (void)_install {
 	WPError		*error;
 	
-	[_progressIndicator startAnimation:self];
+	[_installProgressIndicator startAnimation:self];
 	
 	if([_wiredManager installWithError:&error]) {
 		[_installDate release];
@@ -300,7 +300,7 @@
 	[self _updatePortStatus];
 	[self _updateSettings];
 
-	[_progressIndicator stopAnimation:self];
+	[_installProgressIndicator stopAnimation:self];
 }
 
 
@@ -308,7 +308,7 @@
 - (void)_uninstall {
 	WPError		*error;
 	
-	[_progressIndicator startAnimation:self];
+	[_installProgressIndicator startAnimation:self];
 	
 	if([_wiredManager uninstallWithError:&error]) {
 		[_logManager stopReadingFromLog];
@@ -325,7 +325,7 @@
 	[self _updatePortStatus];
 	[self _updateSettings];
 
-	[_progressIndicator stopAnimation:self];
+	[_installProgressIndicator stopAnimation:self];
 }
 
 
@@ -440,6 +440,9 @@
 		
 		[_portChecker checkStatusForPort:[_portTextField intValue]];
 	}
+		
+	[_startButton setEnabled:YES];
+	[_startProgressIndicator stopAnimation:self];
 
 	[self _updatePortStatus];
 }
@@ -543,8 +546,15 @@
 - (IBAction)start:(id)sender {
 	WPError		*error;
 	
-	if(![_wiredManager startWithError:&error])
+	[_startButton setEnabled:NO];
+	[_startProgressIndicator startAnimation:self];
+	
+	if(![_wiredManager startWithError:&error]) {
 		[[error alert] beginSheetModalForWindow:[_startButton window]];
+
+		[_startButton setEnabled:YES];
+		[_startProgressIndicator stopAnimation:self];
+	}
 }
 
 
@@ -552,8 +562,15 @@
 - (IBAction)stop:(id)sender {
 	WPError		*error;
 	
-	if(![_wiredManager stopWithError:&error])
+	[_startButton setEnabled:NO];
+	[_startProgressIndicator startAnimation:self];
+	
+	if(![_wiredManager stopWithError:&error]) {
 		[[error alert] beginSheetModalForWindow:[_startButton window]];
+		
+		[_startButton setEnabled:YES];
+		[_startProgressIndicator stopAnimation:self];
+	}
 }
 
 
