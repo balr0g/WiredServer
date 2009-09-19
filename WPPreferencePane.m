@@ -290,7 +290,7 @@
 		
 		[_logManager startReadingFromLog];
 
-		[WPSettings removeObjectForKey:WPUninstalled];
+		[[WPSettings settings] removeObjectForKey:WPUninstalled];
 	} else {
 		[[error alert] beginSheetModalForWindow:[_installButton window]];
 	}
@@ -313,9 +313,9 @@
 	if([_wiredManager uninstallWithError:&error]) {
 		[_logManager stopReadingFromLog];
 		
-		[WPSettings removeObjectForKey:WPMigratedWired13];
-		[WPSettings setBool:YES forKey:WPUninstalled];
-		[WPSettings synchronize];
+		[[WPSettings settings] removeObjectForKey:WPMigratedWired13];
+		[[WPSettings settings] setBool:YES forKey:WPUninstalled];
+		[[WPSettings settings] synchronize];
 	} else {
 		[[error alert] beginSheetModalForWindow:[_installButton window]];
 	}
@@ -353,14 +353,6 @@
 
 
 @implementation WPPreferencePane
-
-+ (void)load {
-	[WPSettings setIdentifier:[[self bundle] bundleIdentifier]];
-}
-
-
-
-#pragma mark -
 
 - (void)mainViewDidLoad {
 	_wiredManager	= [[WPWiredManager alloc] init];
@@ -415,7 +407,7 @@
 
 
 - (void)willSelect {
-	if(![WPSettings boolForKey:WPUninstalled]) {
+	if(![[WPSettings settings] boolForKey:WPUninstalled]) {
 		if(![_wiredManager isInstalled] || ![[_wiredManager installedVersion] isEqualToString:[_wiredManager packagedVersion]])
 			[self _install];
 	}

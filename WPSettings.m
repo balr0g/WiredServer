@@ -34,4 +34,8 @@ NSString * const WPUninstalled			= @"WPUninstalled";
 
 @implementation WPSettings
 
++ (id)settings {
+	return [self settingsWithIdentifier:[[self bundle] bundleIdentifier]];
+}
+
 @end

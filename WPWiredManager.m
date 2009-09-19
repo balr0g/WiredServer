@@ -285,7 +285,7 @@
 	[task setArguments:[NSArray arrayWithObjects:
 		[[self bundle] resourcePath],
 		[WPLibraryPath stringByExpandingTildeInPath],
-		[WPSettings boolForKey:WPMigratedWired13] ? @"NO" : @"YES",
+		[[WPSettings settings] boolForKey:WPMigratedWired13] ? @"NO" : @"YES",
 		NULL]];
 	[task setStandardOutput:[NSPipe pipe]];
 	[task setStandardError:[task standardOutput]];
@@ -293,7 +293,7 @@
 	[task waitUntilExit];
 	
 	if([task terminationStatus] == 0) {
-		[WPSettings setBool:YES forKey:WPMigratedWired13];
+		[[WPSettings settings] setBool:YES forKey:WPMigratedWired13];
 		
 		return YES;
 	}
