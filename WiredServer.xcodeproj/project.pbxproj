@@ -57,6 +57,7 @@
 		7767F9EC0F165DCA000AA7B5 /* WPLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767F9EB0F165DCA000AA7B5 /* WPLogManager.m */; };
 		7767FA8E0F166553000AA7B5 /* WiredServer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7767FA8D0F166553000AA7B5 /* WiredServer.icns */; };
 		7767FBEC0F167B0C000AA7B5 /* WPConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767FBEB0F167B0C000AA7B5 /* WPConfigManager.m */; };
+		77CA57F9106AFB9B00A0463B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CA57F8106AFB9B00A0463B /* WebKit.framework */; };
 		A57761720F168F6300C659DB /* WPAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A57761710F168F6300C659DB /* WPAccountManager.m */; };
 		A57769890F16A61600C659DB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77E850190E4C606D0011688C /* Localizable.strings */; };
 		A5B164F60F16BC8E00D4AD1D /* WiredServer2.0.prefPane in Copy Files (PreferencePanes */ = {isa = PBXBuildFile; fileRef = 772666DD0F1630F100F93725 /* WiredServer2.0.prefPane */; };
@@ -184,6 +185,7 @@
 		7767FA8D0F166553000AA7B5 /* WiredServer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = WiredServer.icns; sourceTree = "<group>"; };
 		7767FBEA0F167B0C000AA7B5 /* WPConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPConfigManager.h; sourceTree = "<group>"; };
 		7767FBEB0F167B0C000AA7B5 /* WPConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPConfigManager.m; sourceTree = "<group>"; };
+		77CA57F8106AFB9B00A0463B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		77E850180E4C606D0011688C /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		77E8501A0E4C606D0011688C /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A503354A0864C15D00CE6911 /* wired.sh */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = text.script.sh; path = wired.sh; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				772669EA0F16324200F93725 /* Cocoa.framework in Frameworks */,
 				772669ED0F16324600F93725 /* PreferencePanes.framework in Frameworks */,
 				77266A580F1634DA00F93725 /* Sparkle.framework in Frameworks */,
+				77CA57F9106AFB9B00A0463B /* WebKit.framework in Frameworks */,
 				77266A620F1634EC00F93725 /* WiredFoundation.framework in Frameworks */,
 				77266A630F1634EC00F93725 /* WiredAppKit.framework in Frameworks */,
 			);
@@ -229,6 +232,7 @@
 				089C1671FE841209C02AAC07 /* Frameworks */,
 				A5D96C85078DD96400CD982E /* Subprojects */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
+				77CA57F8106AFB9B00A0463B /* WebKit.framework */,
 			);
 			name = "Wired Preferences";
 			sourceTree = "<group>";
@@ -247,6 +251,7 @@
 			children = (
 				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
 				F506C035013D953901CA16C8 /* PreferencePanes.framework */,
+				77266A4C0F16346600F93725 /* Sparkle.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -366,7 +371,6 @@
 				A5BE6D1C0864B62000DA5C89 /* WiredAdditions.xcodeproj */,
 				A58841E10BF39E7F00AA20E8 /* WiredAdditions */,
 				A519E5E609782F18002A9A5C /* wired */,
-				77266A4C0F16346600F93725 /* Sparkle.framework */,
 			);
 			name = Subprojects;
 			sourceTree = "<group>";

@@ -29,6 +29,7 @@
 #import <Cocoa/Cocoa.h>
 #import <PreferencePanes/PreferencePanes.h>
 #import <Sparkle/Sparkle.h>
+#import <WebKit/WebKit.h>
 #import <WiredFoundation/WiredFoundation.h>
 #import <WiredAppKit/WiredAppKit.h>
 
