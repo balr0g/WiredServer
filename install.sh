@@ -90,25 +90,26 @@ if [ "$MIGRATE" = "YES" -a "$LIBRARY" != "/Library" ]; then
 	cp "/Library/Wired/news" "$LIBRARY/Wired/news"
 	cp "/Library/Wired/users" "$LIBRARY/Wired/users"
 	
-	perl -i -pe 's,^ban time =,#ban time,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^bandwidth =,#bandwidth,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^banlist =,#banlist,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^certificate =,#certificate,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^client downloads =,#client downloads,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^client uploads =,#client uploads,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^control cipher =,#control cipher,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^groups =,#groups,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^idle time =,#idle time,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^index =,#index,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^news =,#news,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^pid =,#pid,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^search method =,#search method,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^show dot files =,#show dot files,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^show invisible files =,#show invisible files,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^status =,#status,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^transfer cipher =,#transfer cipher,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^users =,#users,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-	perl -i -pe 's,^zeroconf =,#zeroconf,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^ban time =,#ban time =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^bandwidth =,#bandwidth =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^banlist =,#banlist =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^certificate =,#certificate =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^client downloads =,#client downloads =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^client uploads =,#client uploads =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^control cipher =,#control cipher =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^groups =,#groups =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^idle time =,#idle time =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^index =,#index =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^index time =,#index time =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^news =,#news =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^pid =,#pid =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^search method =,#search method =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^show dot files =,#show dot files =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^show invisible files =,#show invisible files =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^status =,#status =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^transfer cipher =,#transfer cipher =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^users =,#users =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+	perl -i -pe 's,^zeroconf =,#zeroconf =,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
 fi
 
 export GROUP=$(id -gn)
@@ -118,7 +119,6 @@ perl -i -pe 's,^#?port = 2000$,port = 4871,' "$LIBRARY/Wired/etc/wired.conf" || 
 perl -i -pe 's,^#?files = files$,files = $ENV{"HOME"}/Public,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
 perl -i -pe 's,^#?user = .+$,user = $ENV{"USER"},' "$LIBRARY/Wired/etc/wired.conf" || exit 1
 perl -i -pe 's,^#?group = .+$,group = $ENV{"GROUP"},' "$LIBRARY/Wired/etc/wired.conf" || exit 1
-perl -i -pe 's,^#?index time = .+$,index time = 3600,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
 
 perl -i -pe 's,/Library/Wired,$ENV{"LIBRARY"}/Wired,' "$LIBRARY/Wired/wiredctl" || exit 1
 
