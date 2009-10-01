@@ -26,7 +26,7 @@ if [ ! -d "$LIBRARY/Wired/board/" ]; then
 	install -m 644 "$SOURCE/Wired/board/General/BC5B30BF-AC4F-4FEE-BB92-C5F3A5436E18.WiredThread/AD70D7CB-F789-4030-A92F-40D546DBE1D9.WiredPost" "$LIBRARY/Wired/board/General/BC5B30BF-AC4F-4FEE-BB92-C5F3A5436E18.WiredThread/" || exit 1
 fi
 
-if [ ! -d "$LIBRARY/Wired/etc/wired.conf" ]; then
+if [ ! -f "$LIBRARY/Wired/etc/wired.conf" ]; then
 	install -m 644 "$SOURCE/Wired/etc/wired.conf" "$LIBRARY/Wired/etc" || exit 1
 fi
 
