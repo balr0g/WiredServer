@@ -38,7 +38,9 @@ typedef enum _WPAccountStatus		WPAccountStatus;
 
 @interface WPAccountManager : WIObject {
 	NSString						*_usersPath;
+	NSString						*_usersDistPath;
 	NSString						*_groupsPath;
+	NSString						*_groupsDistPath;
 	
 	WIDateFormatter					*_dateFormatter;
 }

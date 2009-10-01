@@ -186,7 +186,7 @@
 			
 			case WPAccountOldStyle:
 				[_accountStatusImageView setImage:_grayDropImage];
-				[_accountStatusTextField setStringValue:WPLS(@"Accounts file is in a previous format, log in to upgrade it", @"Account status")];
+				[_accountStatusTextField setStringValue:WPLS(@"Accounts file is in a previous format, start to upgrade it", @"Account status")];
 
 				[_setPasswordForAdminButton setEnabled:NO];
 				[_createNewAdminUserButton setEnabled:NO];
@@ -433,6 +433,7 @@
 #pragma mark -
 
 - (void)wiredStatusDidChange:(NSNotification *)notification {
+	[self _updateSettings];
 	[self _updateRunningStatus];
 	
 	if([_wiredManager isRunning]) {
