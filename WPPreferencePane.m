@@ -42,8 +42,8 @@
 - (void)_updateSettings;
 - (void)_updatePortStatus;
 
-- (void)_install;
-- (void)_uninstall;
+- (BOOL)_install;
+- (BOOL)_uninstall;
 - (void)_exportToFile:(NSString *)file;
 - (void)_importFromFile:(NSString *)file;
 
@@ -93,14 +93,6 @@
 	}
 	else if(![_wiredManager isRunning]) {
 		status = WPLS(@"Wired Server is not running", @"Server status");
-	}
-	else if(_installDate && [_installDate compare:[_wiredManager launchDate]] == NSOrderedDescending) {
-		if(launchDate) {
-			status = [NSSWF:WPLS(@"A previous version of Wired Server is running since %@", @"Server status"),
-				[_dateFormatter stringFromDate:launchDate]];
-		} else {
-			status = WPLS(@"A previous version of Wired Server is running", @"Server status");
-		}
 	}
 	else {
 		if(launchDate) {
@@ -279,20 +271,22 @@
 
 #pragma mark -
 
-- (void)_install {
+- (BOOL)_install {
 	WPError		*error;
+	BOOL		result;
 	
 	[_installProgressIndicator startAnimation:self];
 	
 	if([_wiredManager installWithError:&error]) {
-		[_installDate release];
-		_installDate = [[NSDate date] retain];
-		
 		[_logManager startReadingFromLog];
 
 		[[WPSettings settings] removeObjectForKey:WPUninstalled];
+		
+		result = YES;
 	} else {
 		[[error alert] beginSheetModalForWindow:[_installButton window]];
+		
+		result = NO;
 	}
 	
 	[self _updateInstallationStatus];
@@ -301,12 +295,15 @@
 	[self _updateSettings];
 
 	[_installProgressIndicator stopAnimation:self];
+	
+	return result;
 }
 
 
 
-- (void)_uninstall {
+- (BOOL)_uninstall {
 	WPError		*error;
+	BOOL		result;
 	
 	[_installProgressIndicator startAnimation:self];
 	
@@ -316,8 +313,12 @@
 		[[WPSettings settings] removeObjectForKey:WPMigratedWired13];
 		[[WPSettings settings] setBool:YES forKey:WPUninstalled];
 		[[WPSettings settings] synchronize];
+		
+		result = YES;
 	} else {
 		[[error alert] beginSheetModalForWindow:[_installButton window]];
+		
+		result = NO;
 	}
 	
 	[self _updateInstallationStatus];
@@ -326,6 +327,8 @@
 	[self _updateSettings];
 
 	[_installProgressIndicator stopAnimation:self];
+	
+	return result;
 }
 
 
@@ -407,9 +410,17 @@
 
 
 - (void)willSelect {
+	WPError		*error;
+	
 	if(![[WPSettings settings] boolForKey:WPUninstalled]) {
-		if(![_wiredManager isInstalled] || ![[_wiredManager installedVersion] isEqualToString:[_wiredManager packagedVersion]])
-			[self _install];
+		if(![_wiredManager isInstalled] || ![[_wiredManager installedVersion] isEqualToString:[_wiredManager packagedVersion]]) {
+			if([self _install]) {
+				if([_wiredManager isRunning]) {
+					if(![_wiredManager restartWithError:&error])
+						[[error alert] beginSheetModalForWindow:[_startButton window]];
+				}
+			}
+		}
 	}
 	
 	[self _updateInstallationStatus];

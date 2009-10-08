@@ -83,7 +83,6 @@
 	NSImage								*_grayDropImage;
 	
 	WIDateFormatter						*_dateFormatter;
-	NSDate								*_installDate;
 	NSMutableArray						*_logLines;
 	NSMutableArray						*_logRows;
 	NSDictionary						*_logAttributes;

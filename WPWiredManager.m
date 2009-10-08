@@ -154,6 +154,8 @@
 												   userInfo:NULL
 													repeats:YES] retain];
 	
+	[_statusTimer fire];
+	
 	return self;
 }
 
@@ -379,6 +381,18 @@
 	*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneStartFailed argument:reason];
 	
 	return NO;
+}
+
+
+
+- (BOOL)restartWithError:(WPError **)error {
+	if(![self stopWithError:error])
+		return NO;
+	
+	if(![self startWithError:error])
+		return NO;
+	
+	return YES;
 }
 
 

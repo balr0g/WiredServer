@@ -57,6 +57,7 @@
 - (BOOL)installWithError:(WPError **)error;
 - (BOOL)uninstallWithError:(WPError **)error;
 - (BOOL)startWithError:(WPError **)error;
+- (BOOL)restartWithError:(WPError **)error;
 - (BOOL)stopWithError:(WPError **)error;
 
 @end
