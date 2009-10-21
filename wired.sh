@@ -62,6 +62,7 @@ done
 cp "$TARGET_TEMP_DIR/run/$MASTER/wired/wired" "/tmp/wired.$MASTER"
 lipo -create $WIRED_BINARIES -output "/tmp/wired.universal" || exit 1
 cp "/tmp/wired.universal" "$TARGET_TEMP_DIR/run/$MASTER/wired/wired"
+codesign -f -s "Mac OS X Developer: Axel Andersson" "$TARGET_TEMP_DIR/run/$MASTER/wired/wired"
 
 mkdir -p "$TARGET_TEMP_DIR/run/$MASTER/wired/files/Drop Box/.wired" "$TARGET_TEMP_DIR/run/$MASTER/wired/files/Uploads/.wired"
 mkdir -p "$TARGET_TEMP_DIR/run/$MASTER/wired/board/General/.wired" "$TARGET_TEMP_DIR/run/$MASTER/wired/board/General/BC5B30BF-AC4F-4FEE-BB92-C5F3A5436E18.WiredThread"
@@ -73,7 +74,5 @@ done
 make -f "$TARGET_TEMP_DIR/make/$MASTER/Makefile" install-wired || exit 1
 
 cp "/tmp/wired.$MASTER" "$TARGET_TEMP_DIR/run/$MASTER/wired/wired"
-
-/usr/bin/codesign -f -s "Mac OS X Developer: Axel Andersson" "$TARGET_TEMP_DIR/run/$MASTER/wired/wired"
 
 find "$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH" -name .svn -print0 | xargs -0 sudo rm -rf
