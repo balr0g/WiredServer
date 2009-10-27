@@ -560,6 +560,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/bin/codesign -f -s \"Mac OS X Developer: Axel Andersson\" \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\" || 0";
+			showEnvVarsInLog = 0;
 		};
 		A5D97272078E375B00CD982E /* Run Script (Localize) */ = {
 			isa = PBXShellScriptBuildPhase;
