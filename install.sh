@@ -59,13 +59,19 @@ touch "$LIBRARY/Wired/wired.log"
 
 install -m 700 -d "$HOME/Library/LaunchAgents" || exit 1
 
+if [ $(defaults read "$HOME/Library/LaunchAgents/com.zankasoftware.WiredServer" Disabled 2>/dev/null || echo 1) = "1" ]; then
+	DISABLED="true"
+else
+	DISABLED="false"
+fi
+
 cat <<EOF >"$HOME/Library/LaunchAgents/com.zankasoftware.WiredServer.plist"
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>Disabled</key>
-	<true/>
+	<$DISABLED/>
 	<key>Label</key>
 	<string>com.zankasoftware.WiredServer</string>
 	<key>KeepAlive</key>
