@@ -32,8 +32,14 @@ fi
 
 install -m 644 "$SOURCE/Wired/etc/wired.conf" "$LIBRARY/Wired/etc/wired.conf.dist" || exit 1
 
-if [ ! -f "$LIBRARY/Wired/events" ]; then
-	install -m 644 "$SOURCE/Wired/events" "$LIBRARY/Wired" || exit 1
+if [ -f "$LIBRARY/Wired/events" ]; then
+	rm -f "$LIBRARY/Wired/events"
+fi
+
+install -m 755 -d "$LIBRARY/Wired/events/" || exit 1
+
+if [ ! -f "$LIBRARY/Wired/events/current" ]; then \
+	install -m 644 "$SOURCE/Wired/events/current" "$LIBRARY/Wired/events/" || exit 1
 fi
 
 install -m 755 -d "$LIBRARY/Wired/files/" || exit 1
