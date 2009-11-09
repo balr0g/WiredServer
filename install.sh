@@ -139,7 +139,7 @@ fi
 export GROUP=$(id -gn)
 export LIBRARY
 
-perl -i -pe 's,^#?banner = .+$,banner = $ENV{"LIBRARY"}/Wired/banner.png' "$LIBRARY/Wired/etc/wired.conf" || exit 1
+perl -i -pe 's,^#?banner = .+$,banner = $ENV{"LIBRARY"}/Wired/banner.png,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
 perl -i -pe 's,^#?port = 2000$,port = 4871,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
 perl -i -pe 's,^#?files = files$,files = $ENV{"HOME"}/Public,' "$LIBRARY/Wired/etc/wired.conf" || exit 1
 perl -i -pe 's,^#?user = .+$,user = $ENV{"USER"},' "$LIBRARY/Wired/etc/wired.conf" || exit 1
