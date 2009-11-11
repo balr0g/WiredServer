@@ -849,18 +849,6 @@
 		return 12.0;
 	
 	return [[_logRows objectAtIndex:row] unsignedIntegerValue] * 12.0;
-	
-	NSSize			size;
-	NSUInteger		rows = 1;
-	
-	size = [[_logLines objectAtIndex:row] sizeWithAttributes:_logAttributes];
-	
-	while(size.width > [_logTableColumn width]) {
-		size.width -= [_logTableColumn width];
-		rows++;
-	}
-	
-	return rows * 12.0;
 }
 
 @end
