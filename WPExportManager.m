@@ -133,7 +133,17 @@
 		[dictionary setObject:data forKey:key];
 	}
 	
-	if(![dictionary writeToFile:file atomically:YES]) {
+	data = [NSPropertyListSerialization dataFromPropertyList:dictionary
+													  format:NSPropertyListBinaryFormat_v1_0
+											errorDescription:NULL];
+	
+	if(!data) {
+		*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneExportFailed];
+		
+		return NO;
+	}
+	
+	if(![data writeToFile:file atomically:YES]) {
 		*error = [WPError errorWithDomain:WPPreferencePaneErrorDomain code:WPPreferencePaneExportFailed];
 		
 		return NO;
