@@ -19,23 +19,31 @@ WIRED_GROUP=$(id -gn)
 
 BUILD=$("$SRCROOT/wired/config.guess")
 
+if echo $GCC_VERSION | grep -q clang; then
+	CCC="$PLATFORM_DEVELOPER_BIN_DIR/clang"
+elif echo $GCC_VERSION | grep -q llvm; then
+    CCC="$PLATFORM_DEVELOPER_BIN_DIR/llvm-gcc"
+else
+	CCC="$PLATFORM_DEVELOPER_BIN_DIR/gcc-$GCC_VERSION"
+fi
+
 for i in $ARCHS; do
 	if [ ! -f "$TARGET_TEMP_DIR/make/$i/Makefile" -o ! -f "$TARGET_TEMP_DIR/configured" ]; then
 		HOST="$i-apple-darwin$(uname -r)"
-		ARCH_CC="$PLATFORM_DEVELOPER_BIN_DIR/gcc-$GCC_VERSION -arch $i"
+		ARCH_CC="$CCC -arch $i"
 		ARCH_CFLAGS="$CFLAGS"
 		ARCH_CPPFLAGS="$CPPFLAGS"
 
-		if [ "$i" = "i386" -o "$i" = "ppc" ]; then
-			SDKROOT="$DEVELOPER_SDK_DIR/MacOSX10.4u.sdk"
-			MACOSX_DEPLOYMENT_TARGET=10.4
-		elif [ "$i" = "x86_64" -o "$i" = "ppc64" ]; then
-			SDKROOT="$DEVELOPER_SDK_DIR/MacOSX10.5.sdk"
-			MACOSX_DEPLOYMENT_TARGET=10.5
-		fi
+#		if [ "$i" = "i386" -o "$i" = "ppc" ]; then
+#			SDKROOT="$DEVELOPER_SDK_DIR/MacOSX10.5.sdk"
+#			MACOSX_DEPLOYMENT_TARGET=10.4
+#		elif [ "$i" = "x86_64" -o "$i" = "ppc64" ]; then
+#			SDKROOT="$DEVELOPER_SDK_DIR/MacOSX10.5.sdk"
+#			MACOSX_DEPLOYMENT_TARGET=10.4
+#		fi
 
 		ARCH_CPPFLAGS="$ARCH_CPPFLAGS -isysroot $SDKROOT -mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET"
-
+		echo $MACOSX_DEPLOYMENT_TARGET
 		cd "$SRCROOT/wired"
 		CC="$ARCH_CC" CFLAGS="$ARCH_CFLAGS" CPPFLAGS="$ARCH_CPPFLAGS -I$TARGET_TEMP_DIR/make/$i" ./configure --build="$BUILD" --host="$HOST" --enable-warnings --srcdir="$SRCROOT/wired" --with-objdir="$OBJECT_FILE_DIR/$i" --with-rundir="$TARGET_TEMP_DIR/run/$i/wired" --prefix="$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH" --with-fake-prefix="/Library" --with-wireddir="Wired" --with-user="$WIRED_USER" --with-group="$WIRED_GROUP" --without-libwired || exit 1
 		
@@ -62,13 +70,16 @@ done
 cp "$TARGET_TEMP_DIR/run/$MASTER/wired/wired" "/tmp/wired.$MASTER"
 lipo -create $WIRED_BINARIES -output "/tmp/wired.universal" || exit 1
 cp "/tmp/wired.universal" "$TARGET_TEMP_DIR/run/$MASTER/wired/wired"
-codesign -f -s "Mac OS X Developer: Axel Andersson" "$TARGET_TEMP_DIR/run/$MASTER/wired/wired"
+echo "CODESIGN WOULD BE HERE!"
+#codesign -f -s "Mac OS X Developer: Axel Andersson" "$TARGET_TEMP_DIR/run/$MASTER/wired/wired"
 
 mkdir -p "$TARGET_TEMP_DIR/run/$MASTER/wired/events"
 mkdir -p "$TARGET_TEMP_DIR/run/$MASTER/wired/files/Drop Box/.wired" "$TARGET_TEMP_DIR/run/$MASTER/wired/files/Uploads/.wired"
 mkdir -p "$TARGET_TEMP_DIR/run/$MASTER/wired/board/General/.wired" "$TARGET_TEMP_DIR/run/$MASTER/wired/board/General/BC5B30BF-AC4F-4FEE-BB92-C5F3A5436E18.WiredThread"
 
 for i in "banlist" "banner.png" "board/General/.wired/permissions" "board/General/BC5B30BF-AC4F-4FEE-BB92-C5F3A5436E18.WiredThread/AD70D7CB-F789-4030-A92F-40D546DBE1D9.WiredPost" "events/current" "files/Drop Box/.wired/permissions" "files/Drop Box/.wired/type" "files/Uploads/.wired/type" "groups" "users" "wired.xml"; do
+    echo "COPYING $i!"
+    echo cp "$SRCROOT/wired/run/$i" "$TARGET_TEMP_DIR/run/$MASTER/wired/$i"
 	cp "$SRCROOT/wired/run/$i" "$TARGET_TEMP_DIR/run/$MASTER/wired/$i"
 done
 

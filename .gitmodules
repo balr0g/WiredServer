@@ -1,3 +1,6 @@
 [submodule "WiredAdditions"]
 	path = WiredAdditions
 	url = git@github.com:balr0g/WiredAdditions.git
+[submodule "wired"]
+	path = wired
+	url = git://github.com/balr0g/wired.git

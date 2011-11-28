@@ -397,6 +397,7 @@
 			};
 			buildConfigurationList = A5BE6CFF0864B5A000DA5C89 /* Build configuration list for PBXProject "WiredServer" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -532,7 +533,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "perl WiredAdditions/version.pl\n";
+			shellScript = "perl WiredAdditions/version.pl $SOURCE_ROOT";
 			showEnvVarsInLog = 0;
 		};
 		77266B0D0F163B8800F93725 /* Run Script (wired) */ = {
@@ -548,7 +549,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "sh wired.sh || exit 1";
-			showEnvVarsInLog = 0;
 		};
 		7759DCD9108DDE80005FBC7E /* Run Script (Codesign) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -562,7 +562,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/bin/codesign -f -s \"Mac OS X Developer: Axel Andersson\" \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\" || 0";
+			shellScript = "# /usr/bin/codesign -f -s \"Mac OS X Developer: Selfsigncert\" \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\" || 0";
 			showEnvVarsInLog = 0;
 		};
 		A5D97272078E375B00CD982E /* Run Script (Localize) */ = {
@@ -681,6 +681,8 @@
 				GCC_PREFIX_HEADER = prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = WiredServer2.0;
+				"SDKROOT[arch=i386]" = macosx10.6;
+				"SDKROOT[arch=x86_64]" = macosx10.6;
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Debug/Native;
@@ -696,6 +698,8 @@
 				GCC_PREFIX_HEADER = prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = WiredServer2.0;
+				"SDKROOT[arch=i386]" = macosx10.6;
+				"SDKROOT[arch=x86_64]" = macosx10.6;
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Test/Universal;
@@ -711,6 +715,8 @@
 				GCC_PREFIX_HEADER = prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = WiredServer2.0;
+				"SDKROOT[arch=i386]" = macosx10.6;
+				"SDKROOT[arch=x86_64]" = macosx10.6;
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Release/Universal;
@@ -735,20 +741,19 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = stabs;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = WPConfigurationTest;
-				GCC_VERSION = 4.0;
-				MACOSX_DEPLOYMENT_TARGET = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
 				"MACOSX_DEPLOYMENT_TARGET[arch=ppc64]" = 10.5;
 				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
 				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
-				SDKROOT = "";
-				"SDKROOT[arch=i386]" = macosx10.4;
+				SDKROOT = macosx10.6;
+				"SDKROOT[arch=i386]" = macosx10.6;
 				"SDKROOT[arch=ppc64]" = macosx10.5;
 				"SDKROOT[arch=ppc]" = macosx10.4;
-				"SDKROOT[arch=x86_64]" = macosx10.5;
+				"SDKROOT[arch=x86_64]" = macosx10.6;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Test/Universal;
@@ -789,17 +794,16 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = WPConfigurationDebug;
-				GCC_VERSION = 4.0;
-				MACOSX_DEPLOYMENT_TARGET = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
 				"MACOSX_DEPLOYMENT_TARGET[arch=ppc64]" = 10.5;
 				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
 				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
-				SDKROOT = "";
-				"SDKROOT[arch=i386]" = macosx10.4;
+				SDKROOT = macosx10.6;
+				"SDKROOT[arch=i386]" = macosx10.6;
 				"SDKROOT[arch=ppc64]" = macosx10.5;
 				"SDKROOT[arch=ppc]" = macosx10.4;
-				"SDKROOT[arch=x86_64]" = macosx10.5;
+				"SDKROOT[arch=x86_64]" = macosx10.6;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug/Native;
@@ -812,18 +816,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = WPConfigurationRelease;
-				GCC_VERSION = 4.0;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				MACOSX_DEPLOYMENT_TARGET = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
 				"MACOSX_DEPLOYMENT_TARGET[arch=ppc64]" = 10.5;
 				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
 				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
-				SDKROOT = "";
-				"SDKROOT[arch=i386]" = macosx10.4;
+				SDKROOT = macosx10.6;
+				"SDKROOT[arch=i386]" = macosx10.6;
 				"SDKROOT[arch=ppc64]" = macosx10.5;
 				"SDKROOT[arch=ppc]" = macosx10.4;
-				"SDKROOT[arch=x86_64]" = macosx10.5;
+				"SDKROOT[arch=x86_64]" = macosx10.6;
 			};
 			name = Release/Universal;
 		};
