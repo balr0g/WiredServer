@@ -381,18 +381,22 @@
 	
 	_portChecker	= [[WPPortChecker alloc] init];
 	[_portChecker setDelegate:self];
-	
+    
+#warning Automatic update not supported yet!
+
+	/*
 	_updater = [[SUUpdater updaterForBundle:[self bundle]] retain];
 	[_updater setDelegate:self];
 	[_updater setSendsSystemProfile:YES];
 	[_updater setAutomaticallyChecksForUpdates:NO];
-	
-#ifdef WPConfigurationRelease
+     //#ifdef WPConfigurationRelease
 	[_updater setFeedURL:[NSURL URLWithString:@"http://www.zankasoftware.com/sparkle/sparkle.pl?file=wiredserverp7.xml"]];
-#else
+     //#else
 	[_updater setFeedURL:[NSURL URLWithString:@"http://www.zankasoftware.com/sparkle/sparkle.pl?file=wiredserverp7-nightly.xml"]];
-#endif
-	
+     //#endif
+	*/
+    
+    
 	_greenDropImage	= [[NSImage alloc] initWithContentsOfFile:[[self bundle] pathForResource:@"GreenDrop" ofType:@"tiff"]];
 	_redDropImage	= [[NSImage alloc] initWithContentsOfFile:[[self bundle] pathForResource:@"RedDrop" ofType:@"tiff"]];
 	_grayDropImage	= [[NSImage alloc] initWithContentsOfFile:[[self bundle] pathForResource:@"GrayDrop" ofType:@"tiff"]];
@@ -441,10 +445,10 @@
 	[self _updateRunningStatus];
 	[self _updateSettings];
 	[self _updatePortStatus];
-	
+	/*
 	[_updater resetUpdateCycle];
 	[_updater checkForUpdatesInBackground];
-	
+	*/
 	[_logManager startReadingFromLog];
 }
 
@@ -562,7 +566,7 @@
 
 
 - (IBAction)checkForUpdate:(id)sender {
-	[_updater checkForUpdates:sender];
+    //	[_updater checkForUpdates:sender];
 }
 
 
