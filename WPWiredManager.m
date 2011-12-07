@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: WPWiredManager.m 7860 2009-10-08 13:51:07Z morris $ */
 
 /*
  *  Copyright (c) 2009 Axel Andersson
@@ -31,7 +31,8 @@
 #import "WPWiredManager.h"
 
 #define WPLibraryPath							@"~/Library"
-#define WPWiredLaunchAgentPlistPath				@"~/Library/LaunchAgents/com.zankasoftware.WiredServer.plist"
+#define WiredDir                                @"Wired2"
+#define WPWiredLaunchAgentPlistPath				@"~/Library/LaunchAgents/com.zankasoftware.WiredServer2.plist"
 
 @interface WPWiredManager(Private)
 
@@ -146,7 +147,7 @@
 - (id)init {
 	self = [super init];
 	
-	_rootPath = [[[WPLibraryPath stringByExpandingTildeInPath] stringByAppendingPathComponent:@"Wired"] retain];
+	_rootPath = [[[WPLibraryPath stringByExpandingTildeInPath] stringByAppendingPathComponent:WiredDir] retain];
 	
 	_statusTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0
 													 target:self

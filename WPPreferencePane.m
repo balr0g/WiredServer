@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: WPPreferencePane.m 8128 2009-11-11 21:28:30Z morris $ */
 
 /*
  *  Copyright (c) 2003-2009 Axel Andersson
@@ -83,7 +83,7 @@
 
 
 - (void)_updateRunningStatus {
-	NSString		*status;
+	NSString		*status, *password;
 	NSDate			*launchDate;
 	
 	launchDate = [_wiredManager launchDate];
@@ -102,8 +102,8 @@
 			status = WPLS(@"Wired Server is running", @"Server status");
 		}
 	}
+    
 	
-	[_statusTextField setStringValue:status];
 	
 	if(![_wiredManager isInstalled]) {
 		[_statusImageView setImage:_grayDropImage];
@@ -111,6 +111,15 @@
 		[_startButton setTitle:WPLS(@"Start", @"Start button")];
 		[_startButton setEnabled:NO];
 	}
+    
+    else if (([_accountManager hasUserAccountWithName:@"admin" password:&password] != WPAccountFailed) &&
+             ([password length] == 0 || [password isEqualToString:[@"" SHA1]])) {
+        [_statusImageView setImage:_redDropImage];
+		[_startButton setEnabled:NO];
+        status = WPLS(@"Admin password is not set, please set it!", @"Server status");
+        
+    }
+    
 	else if(![_wiredManager isRunning]) {
 		[_statusImageView setImage:_redDropImage];
 
@@ -118,6 +127,7 @@
 		[_startButton setEnabled:YES];
 		[_startButton setAction:@selector(start:)];
 	}
+
 	else {
 		[_statusImageView setImage:_greenDropImage];
 
@@ -126,6 +136,7 @@
 		[_startButton setAction:@selector(stop:)];
 	}
 	
+    [_statusTextField setStringValue:status];
 	[_launchAutomaticallyButton setState:[_wiredManager launchesAutomatically]];
 }
 
@@ -170,7 +181,7 @@
 		switch([_accountManager hasUserAccountWithName:@"admin" password:&password]) {
 			case WPAccountFailed:
 				[_accountStatusImageView setImage:_grayDropImage];
-				[_accountStatusTextField setStringValue:WPLS(@"Could not read accounts file", @"Account status")];
+				[_accountStatusTextField setStringValue:WPLS(@"Accounts file is in sql, which is not yet supported", @"Account status")];
 
 				[_setPasswordForAdminButton setEnabled:NO];
 				[_createNewAdminUserButton setEnabled:NO];
@@ -209,8 +220,8 @@
 		[_filesPopUpButton setEnabled:YES];
 		[_portTextField setEnabled:YES];
 		[_checkPortAgainButton setEnabled:YES];
-		[_exportSettingsButton setEnabled:YES];
-		[_importSettingsButton setEnabled:YES];
+		[_exportSettingsButton setEnabled:NO];
+		[_importSettingsButton setEnabled:NO];
 	} else {
 		[_accountStatusImageView setImage:_grayDropImage];
 		[_accountStatusTextField setStringValue:WPLS(@"Wired is not installed", @"Account status")];
@@ -274,7 +285,8 @@
 - (BOOL)_install {
 	WPError		*error;
 	BOOL		result;
-	
+    
+    [[WPSettings settings] removeObjectForKey:WPMigratedWired13];
 	[_installProgressIndicator startAnimation:self];
 	
 	if([_wiredManager installWithError:&error]) {
@@ -361,6 +373,8 @@
 	_wiredManager	= [[WPWiredManager alloc] init];
 	_accountManager	= [[WPAccountManager alloc] initWithUsersPath:[_wiredManager pathForFile:@"users"]
 													   groupsPath:[_wiredManager pathForFile:@"groups"]];
+    NSLog([_wiredManager pathForFile:@"users"]);
+    
 	_configManager	= [[WPConfigManager alloc] initWithConfigPath:[_wiredManager pathForFile:@"etc/wired.conf"]];
 	_exportManager	= [[WPExportManager alloc] initWithWiredManager:_wiredManager];
 	_logManager		= [[WPLogManager alloc] initWithLogPath:[_wiredManager pathForFile:@"wired.log"]];
@@ -717,6 +731,8 @@
 		}
 		
 		[self _updateSettings];
+        [self _updateRunningStatus];
+
 	}
 }
 
@@ -751,6 +767,8 @@
 		}
 		
 		[self _updateSettings];
+        [self _updateRunningStatus];
+
 	}
 }
 
