@@ -33,6 +33,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		63730052142F95930028AAB6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 63730051142F95930028AAB6 /* libsqlite3.dylib */; };
 		772666FD0F1631BC00F93725 /* WPPreferencePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 772666FC0F1631BC00F93725 /* WPPreferencePane.m */; };
 		772669E50F16322D00F93725 /* WiredFoundation.framework in Copy Files (Frameworks) */ = {isa = PBXBuildFile; fileRef = 773F4A7C0E5D9A2F001A753B /* WiredFoundation.framework */; };
 		772669E60F16322D00F93725 /* WiredAppKit.framework in Copy Files (Frameworks) */ = {isa = PBXBuildFile; fileRef = 773F4A7E0E5D9A2F001A753B /* WiredAppKit.framework */; };
@@ -150,6 +151,7 @@
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		63730051142F95930028AAB6 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		772666DD0F1630F100F93725 /* WiredServer2.0.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WiredServer2.0.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		772666FB0F1631BC00F93725 /* WPPreferencePane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPPreferencePane.h; sourceTree = "<group>"; };
 		772666FC0F1631BC00F93725 /* WPPreferencePane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPPreferencePane.m; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63730052142F95930028AAB6 /* libsqlite3.dylib in Frameworks */,
 				772669EA0F16324200F93725 /* Cocoa.framework in Frameworks */,
 				772669ED0F16324600F93725 /* PreferencePanes.framework in Frameworks */,
 				77266A580F1634DA00F93725 /* Sparkle.framework in Frameworks */,
@@ -233,6 +236,7 @@
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				63730051142F95930028AAB6 /* libsqlite3.dylib */,
 				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
 				F506C035013D953901CA16C8 /* PreferencePanes.framework */,
 				77266A4C0F16346600F93725 /* Sparkle.framework */,
@@ -503,7 +507,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" = \"Debug/Native\" ]; then\n\trm -rf \"$HOME/Library/PreferencePanes/$WRAPPER_NAME\"\n\tcp -Rp \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\" \"$HOME/Library/PreferencePanes/\"\nfi\n";
+			shellScript = "#if [ \"$CONFIGURATION\" = \"Debug/Native\" ]; then\n#\trm -rf \"$HOME/Library/PreferencePanes/$WRAPPER_NAME\"\n#\tcp -Rp \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\" \"$HOME/Library/PreferencePanes/\"\n#fi\n";
 			showEnvVarsInLog = 0;
 		};
 		772669F50F16325300F93725 /* Run Script (Linking) */ = {
@@ -549,6 +553,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "sh wired.sh || exit 1";
+			showEnvVarsInLog = 0;
 		};
 		7759DCD9108DDE80005FBC7E /* Run Script (Codesign) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -562,7 +567,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# /usr/bin/codesign -f -s \"Mac OS X Developer: Selfsigncert\" \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\" || 0";
+			shellScript = "# /usr/bin/codesign -f -s \"Mac OS X Developer: Axel Andersson\" \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\" || 0";
 			showEnvVarsInLog = 0;
 		};
 		A5D97272078E375B00CD982E /* Run Script (Localize) */ = {
@@ -681,8 +686,6 @@
 				GCC_PREFIX_HEADER = prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = WiredServer2.0;
-				"SDKROOT[arch=i386]" = macosx10.6;
-				"SDKROOT[arch=x86_64]" = macosx10.6;
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Debug/Native;
@@ -698,8 +701,6 @@
 				GCC_PREFIX_HEADER = prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = WiredServer2.0;
-				"SDKROOT[arch=i386]" = macosx10.6;
-				"SDKROOT[arch=x86_64]" = macosx10.6;
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Test/Universal;
@@ -715,8 +716,6 @@
 				GCC_PREFIX_HEADER = prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = WiredServer2.0;
-				"SDKROOT[arch=i386]" = macosx10.6;
-				"SDKROOT[arch=x86_64]" = macosx10.6;
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Release/Universal;
@@ -743,17 +742,11 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PREPROCESSOR_DEFINITIONS = WPConfigurationTest;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=ppc64]" = 10.5;
-				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
 				SDKROOT = macosx10.6;
-				"SDKROOT[arch=i386]" = macosx10.6;
-				"SDKROOT[arch=ppc64]" = macosx10.5;
-				"SDKROOT[arch=ppc]" = macosx10.4;
-				"SDKROOT[arch=x86_64]" = macosx10.6;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Test/Universal;
@@ -790,20 +783,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BE6D1A0864B5FB00DA5C89 /* WiredServer.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = WPConfigurationDebug;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=ppc64]" = 10.5;
-				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
 				SDKROOT = macosx10.6;
-				"SDKROOT[arch=i386]" = macosx10.6;
-				"SDKROOT[arch=ppc64]" = macosx10.5;
-				"SDKROOT[arch=ppc]" = macosx10.4;
-				"SDKROOT[arch=x86_64]" = macosx10.6;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug/Native;
@@ -814,19 +802,13 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = WPConfigurationRelease;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=ppc64]" = 10.5;
-				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.4;
-				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
 				SDKROOT = macosx10.6;
-				"SDKROOT[arch=i386]" = macosx10.6;
-				"SDKROOT[arch=ppc64]" = macosx10.5;
-				"SDKROOT[arch=ppc]" = macosx10.4;
-				"SDKROOT[arch=x86_64]" = macosx10.6;
 			};
 			name = Release/Universal;
 		};
